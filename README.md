@@ -1,2 +1,2 @@
-After pulling, please rename furniture-system to Project
-Now got a bit problem, but can run d
+After pulling, please rename furniture-system to Project,
+because now got a bit problem, but can run d
