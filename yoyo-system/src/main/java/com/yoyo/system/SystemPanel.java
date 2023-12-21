@@ -1,5 +1,6 @@
 package com.yoyo.system;
 
+import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemProgram.*;
 import java.awt.Dimension;
 import java.awt.CardLayout;
@@ -9,15 +10,17 @@ import javax.swing.JPanel;
 
 public class SystemPanel extends JPanel{
     
+    private final PanelManager panelManager;
+    
     public SystemPanel () throws ParseException, InterruptedException, IOException{
         
         
         setLayout(new CardLayout());
         
-//        panelManager = new PanelManager(this);
-//        
-//        //Setting initial panel
-//        panelManager.showPanel(PanelManager.LOGIN_PANEL);
+        panelManager = new PanelManager(this);
+        
+        //Setting initial panel
+        panelManager.showPanel(PanelManager.LOGIN_PANEL);
         
         //Defining a method to set panel size since windows takes task bar into consideration for size
         setPanelSize();

@@ -8,6 +8,7 @@
     <modules>
         <module>yoyo-system</module>
         <module>yoyo-common</module>
+        <module>yoyo-services</module>
     </modules>
     <properties>
         <java.version>19</java.version>

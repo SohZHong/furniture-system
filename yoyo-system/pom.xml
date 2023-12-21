@@ -21,6 +21,11 @@
             <artifactId>yoyo-common</artifactId>
             <version>${yoyo.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.yoyo</groupId>
+            <artifactId>yoyo-services</artifactId>
+            <version>${yoyo.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
