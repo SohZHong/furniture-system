@@ -1,42 +1,29 @@
 
 package com.yoyo.services.manager;
 
-import com.yoyo.system.gui.LoginPanel;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 
 public class PanelManager {
     
-    //Adding all panels
     private static JPanel mainPanel;
-    private static LoginPanel loginPanel;
     private static CardLayout layout;
-    
-    //Names for all panels
-    public final static String LOGIN_PANEL = "Login Panel";
-//    public final static String DASHBOARD_PANEL = "Dashboard Panel";
-//    public final static String MANAGE_PANEL = "Bookings List";
-//    public final static String LISTINGS_PANEL = "Listings Panel";
-//    public final static String BOOKING_FORM = "Booking Form";
     
     private static String prevPanel, curPanel;
     
-    public PanelManager(JPanel mainPanel) throws ParseException, InterruptedException, IOException{
+    public PanelManager(JPanel mainPanel, ArrayList<JPanel> subPanels) throws ParseException, InterruptedException, IOException{
         this.mainPanel = mainPanel;
         
         //get parent panel layout as card
         layout = (CardLayout) mainPanel.getLayout();
         
-        //Initializing panels
-
         //Adding them all to cardlayout
-        mainPanel.add(loginPanel, LOGIN_PANEL);
-//        mainPanel.add(dashboardPanel, DASHBOARD_PANEL);
-//        mainPanel.add(bookingsPanel, MANAGE_PANEL);
-//        mainPanel.add(roomListingsPanel, LISTINGS_PANEL);
-//        mainPanel.add(bookingForm, BOOKING_FORM);
+        for (JPanel panel : subPanels) {
+            mainPanel.add(panel, panel.getName());
+        }
     }
     
     //Show panel accepted as argument through cardlayout

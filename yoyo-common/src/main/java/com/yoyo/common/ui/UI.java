@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 
 public class UI {
     
-    private static final Color backgroundColor = new Color(245, 204, 160);
+    private static final Color backgroundColor = new Color(255, 233, 221);
     private static final Color inputBackgroundColor = new Color(255, 255, 255);
     private static final Color buttonColor = new Color(240, 207, 189);
     private static final Color fontColor = new Color(41, 41, 41);

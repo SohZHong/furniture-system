@@ -8,10 +8,5 @@
     </parent>
     <artifactId>yoyo-services</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>com.yoyo</groupId>
-            <artifactId>yoyo-system</artifactId>
-            <version>1.0</version>
-        </dependency>
     </dependencies>
 </project>
