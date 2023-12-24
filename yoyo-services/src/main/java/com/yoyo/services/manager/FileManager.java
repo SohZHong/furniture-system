@@ -21,17 +21,31 @@ public class FileManager {
     }
     
     //Create files at designated location
-    public void createFile() throws IOException{
-        File newFile = new File(filePath);
-        newFile.createNewFile();
+    public File createFileIfDoesNotExist() throws IOException {
+        File file = new File(filePath);
+        File parentDirectory = file.getParentFile();
+
+        if (!parentDirectory.exists()) {
+            if (!parentDirectory.mkdirs()) {
+                throw new IOException("Failed to create parent directories");
+            }
+        }
+
+        if (!file.isFile()) {
+            if (!file.createNewFile()) {
+                throw new IOException("Failed to create the file");
+            }
+        }
+
+        return file;
     }
     
     //Truncate file of its contents
-    public void clearFile() {
-        try(PrintWriter writer = new PrintWriter(filePath)){
+    public void clearFile() throws IOException {
+        File file = createFileIfDoesNotExist();
+        try (PrintWriter writer = new PrintWriter(file)) {
             writer.print("");
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -39,7 +53,7 @@ public class FileManager {
     //Method necessary as reading in constructor causes error before writing
     public void readFile() throws IOException{
         String data = "";
-        File file = new File(filePath);
+        File file = createFileIfDoesNotExist();
         //Scanner over BufferedReader as system only handles small txt files
         Scanner reader = new Scanner(file);
         //Reading all lines of the text file
@@ -48,7 +62,7 @@ public class FileManager {
         }
         reader.close();
         //Adding all data into array with each line as an array item
-        content = data.split("\n");
+        content = data.split("\n");   
     }
     
     public String[] readLine(int lineNumber){

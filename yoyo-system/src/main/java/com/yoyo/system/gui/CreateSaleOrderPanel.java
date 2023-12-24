@@ -1,20 +1,35 @@
 package com.yoyo.system.gui;
 
+import com.yoyo.common.constant.DataConstants;
+import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Furniture;
+import com.yoyo.services.entity.Order;
+import com.yoyo.services.manager.FileManager;
 import com.yoyo.services.manager.FurnitureManager;
+import com.yoyo.services.manager.OrderManager;
+import com.yoyo.services.manager.PanelManager;
 import com.yoyo.system.model.FurnitureTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.text.AbstractDocument;
 
 public class CreateSaleOrderPanel extends javax.swing.JPanel {
 
+    private OrderManager orderManager;
     private FurnitureManager furnitureManager;
     private ArrayList<Furniture> furnitures;
+    private Furniture selectedFurniture;
+    private int quantity;
     /**
      * Creates new form CreateSaleOrderPanel
      */
     public CreateSaleOrderPanel() {
+        // Initialize managers
         furnitureManager = new FurnitureManager();
+        orderManager = new OrderManager();
         // Load furnitures
         try {
             furnitureManager.loadBookings();
@@ -24,6 +39,20 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         }
         
         initComponents();
+        
+        // Obtain list item
+        createOrderTable.getSelectionModel().addListSelectionListener((ListSelectionEvent e) -> {
+           if (!e.getValueIsAdjusting()) {
+               // Get the selected row and read values from the model
+               int selectedRow = createOrderTable.getSelectedRow();
+               if (selectedRow != -1) {
+                   selectedFurniture = furnitures.get(selectedRow);
+               }
+           }
+        });
+        
+        // Assign filter to ensure quantity > 0
+        ((AbstractDocument) quantityInputField.getDocument()).setDocumentFilter(FilterUtils.createDigitFilter());
     }
 
     /**
@@ -37,11 +66,45 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
 
         tableScrollPane = new javax.swing.JScrollPane();
         createOrderTable = new javax.swing.JTable();
+        quantityLabel = new javax.swing.JLabel();
+        quantityInputField = new javax.swing.JTextField();
+        cancelBtn = new javax.swing.JButton();
+        confirmBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
         createOrderTable.setModel(new FurnitureTableModel(furnitures));
+        createOrderTable.setAutoscrolls(false);
+        createOrderTable.setRowHeight(68);
+        createOrderTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                createOrderTableMouseClicked(evt);
+            }
+        });
         tableScrollPane.setViewportView(createOrderTable);
+
+        quantityLabel.setText("Quantity: ");
+
+        quantityInputField.setMinimumSize(new java.awt.Dimension(183, 68));
+        quantityInputField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quantityInputFieldActionPerformed(evt);
+            }
+        });
+
+        cancelBtn.setText("Cancel");
+        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelBtnActionPerformed(evt);
+            }
+        });
+
+        confirmBtn.setText("Confirm");
+        confirmBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -49,7 +112,16 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(64, Short.MAX_VALUE)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(quantityLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(quantityInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(567, 567, 567)
+                        .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
@@ -57,13 +129,53 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(240, Short.MAX_VALUE)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(176, 176, 176))
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(quantityLabel)
+                    .addComponent(quantityInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cancelBtn)
+                    .addComponent(confirmBtn))
+                .addGap(108, 108, 108))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void createOrderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createOrderTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createOrderTableMouseClicked
+
+    private void quantityInputFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quantityInputFieldActionPerformed
+        
+    }//GEN-LAST:event_quantityInputFieldActionPerformed
+
+    private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
+        try {
+            quantity = Integer.parseInt(quantityInputField.getText());
+            orderManager.addOrders(
+                new Order(
+                        quantity, 
+                        selectedFurniture.getId(),
+                        "IDK",
+                        "IDK",
+                        selectedFurniture.getPrice() * quantity
+                )
+            );
+            orderManager.saveOrders();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_confirmBtnActionPerformed
+    
+    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
+        PanelManager.previousPanel();
+    }//GEN-LAST:event_cancelBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cancelBtn;
+    private javax.swing.JButton confirmBtn;
     private javax.swing.JTable createOrderTable;
+    private javax.swing.JTextField quantityInputField;
+    private javax.swing.JLabel quantityLabel;
     private javax.swing.JScrollPane tableScrollPane;
     // End of variables declaration//GEN-END:variables
 }

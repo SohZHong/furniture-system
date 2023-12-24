@@ -22,7 +22,7 @@ public class FurnitureManager {
         lines = ExcelUtils.readCsvAndProcessRecords(is, entity -> {
             furnitures.add(entity);
         }, record -> {
-            return new Furniture(Long.parseLong(record[1]), record[2], record[3], Double.parseDouble(record[4]), record[9]);
+            return new Furniture(Long.valueOf(record[1]), record[2], record[3], Double.valueOf(record[4]), record[9]);
         });
         
         // Setting initial capacity for the array list for memory optimization
