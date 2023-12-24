@@ -37,7 +37,6 @@ public class UI {
         UIManager.getLookAndFeelDefaults().put("Button.light", buttonColor.brighter().brighter());
         UIManager.getLookAndFeelDefaults().put("Button.shadow", buttonColor.brighter());
         UIManager.getLookAndFeelDefaults().put("Button.darkShadow", buttonColor.darker().darker());
-        UIManager.getLookAndFeelDefaults().put("Button.margin", new Insets(2, 102, 2, 102));
 
         UIManager.getLookAndFeelDefaults().put("TextField.background", inputBackgroundColor);
         UIManager.getLookAndFeelDefaults().put("TextField.font", inputFont);

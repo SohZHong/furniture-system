@@ -6,15 +6,18 @@ import javax.swing.table.AbstractTableModel;
 
 public class FurnitureTableModel extends AbstractTableModel{
     private final ArrayList<Furniture> furnitures;
+    private ArrayList<Furniture> filteredFurnitures;
+    private ArrayList<Integer> originalIndexMap;
     private Furniture furniture;
    
     public FurnitureTableModel(ArrayList<Furniture> furnitures){
         this.furnitures = furnitures;
+        this.filteredFurnitures = new ArrayList<>(furnitures);
     }
 
     @Override
     public int getRowCount() {
-        return furnitures.size();
+        return filteredFurnitures.size();
     }
 
     @Override
@@ -76,7 +79,7 @@ public class FurnitureTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         //Get furniture entry from array
-        furniture = furnitures.get(rowIndex);
+        furniture = filteredFurnitures.get(rowIndex);
         switch (columnIndex){
             case 0 -> {
                 return furniture.getId();
@@ -99,7 +102,7 @@ public class FurnitureTableModel extends AbstractTableModel{
     
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        furniture = furnitures.get(rowIndex);
+        furniture = filteredFurnitures.get(rowIndex);
         switch (columnIndex){
             case 0 -> furniture.setId((Long)value);
             case 1 -> furniture.setName((String) value);
@@ -107,5 +110,39 @@ public class FurnitureTableModel extends AbstractTableModel{
             case 3 -> furniture.setPrice((Double) value);
             case 4 -> furniture.setDescription((String) value);
         }
+    }
+    
+    public void setFilter(String searchString, int columnIndex) {
+        String query;
+        filteredFurnitures.clear();
+        
+        // Perform search based on column
+        for (Furniture furniture : furnitures) {
+            query = switch (columnIndex) {
+                case 0 -> String.valueOf(furniture.getId());
+                case 1 -> String.valueOf(furniture.getName());
+                case 2 -> furniture.getCategory();
+                case 3 -> String.valueOf(furniture.getPrice());
+                case 4 -> furniture.getDescription();
+                default -> null;
+            };
+            if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
+                filteredFurnitures.add(furniture);
+            }
+        }
+
+        fireTableDataChanged(); // Notify the table that the data has changed
+    }
+    
+    public ArrayList<Furniture> getFilteredData() {
+        return filteredFurnitures;
+    }
+    
+    public String[] getColumnNames() {
+        return new String[]{"Item Code", "Name", "Category", "Price", "Description"};
+    }
+
+    public int[] getColumnIndices() {
+        return new int[]{0, 1, 2, 3, 4};
     }
 }

@@ -21,28 +21,34 @@ public class OrderManager {
         fileManager.readFile();
         
         lines = fileManager.contentLength();
-
         if (orders == null){
             orders = new ArrayList<>(lines); //Assigning capacity based on number of entries
         }
         else {
             orders.clear(); //Delete any existing contents for memory optimization
         }
-        
+
         for (int i = 0; i < lines; i++){
-            String[] content = fileManager.readLine(i);
-            orders.add(
-                new Order(
-                    Integer.parseInt(content[0]), 
+            try {
+                String[] content = fileManager.readLine(i);
+                System.out.println(content);
+                orders.add(
+                    new Order(
+                        Integer.parseInt(content[0]), 
                         Long.valueOf(content[1]), 
                         content[2], 
                         content[3], 
                         Double.valueOf(content[4]),
                         content[5], 
                         Boolean.parseBoolean(content[6])
-                )
-            );
-        }
+                    )
+                );   
+            }
+            // Stop operation if data error occurs
+            catch (NumberFormatException e) {
+                break;
+            }
+        }   
     }
     
     public ArrayList<Order> getOrders(){

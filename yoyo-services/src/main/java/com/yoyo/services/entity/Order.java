@@ -8,7 +8,7 @@ public class Order {
     private String salesPersonName;
     private String customerName;
     private Double totalPrice;
-    private final String creationDate;
+    private String creationDate;
     private boolean status;
 
     public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double totalPrice) {
@@ -75,6 +75,10 @@ public class Order {
         return creationDate;
     }
 
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
+    
     public boolean isStatus() {
         return status;
     }
@@ -83,5 +87,13 @@ public class Order {
         this.status = status;
     }
     
-    
+    public void copyFrom(Order other) {
+        this.setQuantity(other.getQuantity());
+        this.setItemCode(other.getItemCode());
+        this.setSalesPersonName(other.getSalesPersonName());
+        this.setCustomerName(other.getCustomerName());
+        this.setTotalPrice(other.getTotalPrice());
+        this.setCreationDate(other.getCreationDate());
+        this.setStatus(other.isStatus());
+    }
 }

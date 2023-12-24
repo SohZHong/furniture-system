@@ -1,18 +1,15 @@
 package com.yoyo.system.gui;
 
-import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Furniture;
 import com.yoyo.services.entity.Order;
-import com.yoyo.services.manager.FileManager;
 import com.yoyo.services.manager.FurnitureManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.system.model.FurnitureTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.text.AbstractDocument;
 
@@ -22,6 +19,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
     private FurnitureManager furnitureManager;
     private ArrayList<Furniture> furnitures;
     private Furniture selectedFurniture;
+    private FurnitureTableModel tableModel;
     private int quantity;
     /**
      * Creates new form CreateSaleOrderPanel
@@ -32,8 +30,9 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         orderManager = new OrderManager();
         // Load furnitures
         try {
-            furnitureManager.loadBookings();
+            furnitureManager.loadFurnitures();
             furnitures = furnitureManager.getFurnitures();
+            tableModel = new FurnitureTableModel(furnitures);
         } catch (IOException ex) {
             System.err.println("Error loading furniture file");
         }
@@ -46,7 +45,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
                // Get the selected row and read values from the model
                int selectedRow = createOrderTable.getSelectedRow();
                if (selectedRow != -1) {
-                   selectedFurniture = furnitures.get(selectedRow);
+                   selectedFurniture = tableModel.getFilteredData().get(selectedRow);
                }
            }
         });
@@ -70,10 +69,14 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         quantityInputField = new javax.swing.JTextField();
         cancelBtn = new javax.swing.JButton();
         confirmBtn = new javax.swing.JButton();
+        tableColumnBox = new javax.swing.JComboBox<>();
+        searchInput = new javax.swing.JTextField();
+        searchBtn = new javax.swing.JButton();
+        resetBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
-        createOrderTable.setModel(new FurnitureTableModel(furnitures));
+        createOrderTable.setModel(tableModel);
         createOrderTable.setAutoscrolls(false);
         createOrderTable.setRowHeight(68);
         createOrderTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,6 +86,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         });
         tableScrollPane.setViewportView(createOrderTable);
 
+        quantityLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         quantityLabel.setText("Quantity: ");
 
         quantityInputField.setMinimumSize(new java.awt.Dimension(183, 68));
@@ -106,36 +110,77 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
             }
         });
 
+        tableColumnBox.setModel(new javax.swing.DefaultComboBoxModel<>(tableModel.getColumnNames()));
+
+        searchInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchInputActionPerformed(evt);
+            }
+        });
+
+        searchBtn.setText("Search");
+        searchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBtnActionPerformed(evt);
+            }
+        });
+
+        resetBtn.setText("Reset");
+        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(quantityLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(quantityInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(567, 567, 567)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(62, 62, 62))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(240, Short.MAX_VALUE)
+                .addContainerGap(153, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(searchInput)
+                        .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(quantityLabel)
-                    .addComponent(quantityInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cancelBtn)
-                    .addComponent(confirmBtn))
-                .addGap(108, 108, 108))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(quantityInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(quantityLabel)))
+                .addGap(97, 97, 97))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -149,13 +194,17 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
         try {
+            // Show ConfirmCancelDialog to get additional input (replace null with your frame reference)
+            String customerInput = JOptionPane.showInputDialog(null, "Please Enter Customer Name");
+            
             quantity = Integer.parseInt(quantityInputField.getText());
+            orderManager.loadOrders();
             orderManager.addOrders(
                 new Order(
                         quantity, 
                         selectedFurniture.getId(),
                         "IDK",
-                        "IDK",
+                        customerInput,
                         selectedFurniture.getPrice() * quantity
                 )
             );
@@ -163,11 +212,28 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        // Show confirmation message
+        JOptionPane.showMessageDialog(null, "Save successful", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_confirmBtnActionPerformed
     
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         PanelManager.previousPanel();
     }//GEN-LAST:event_cancelBtnActionPerformed
+
+    private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchInputActionPerformed
+
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        String query = searchInput.getText();
+        int index = tableColumnBox.getSelectedIndex();
+
+        tableModel.setFilter(query, index);
+    }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
+        tableModel.setFilter("", 0);
+    }//GEN-LAST:event_resetBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -176,6 +242,10 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
     private javax.swing.JTable createOrderTable;
     private javax.swing.JTextField quantityInputField;
     private javax.swing.JLabel quantityLabel;
+    private javax.swing.JButton resetBtn;
+    private javax.swing.JButton searchBtn;
+    private javax.swing.JTextField searchInput;
+    private javax.swing.JComboBox<String> tableColumnBox;
     private javax.swing.JScrollPane tableScrollPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@ import java.awt.CardLayout;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JPanel;
 
 public class PanelManager {
@@ -14,15 +16,22 @@ public class PanelManager {
     
     private static String prevPanel, curPanel;
     
-    public PanelManager(JPanel mainPanel, ArrayList<JPanel> subPanels) throws ParseException, InterruptedException, IOException{
+    public PanelManager(JPanel mainPanel, HashMap<String, JPanel> subPanels) throws ParseException, InterruptedException, IOException{
         this.mainPanel = mainPanel;
         
         //get parent panel layout as card
         layout = (CardLayout) mainPanel.getLayout();
         
         //Adding them all to cardlayout
-        for (JPanel panel : subPanels) {
-            mainPanel.add(panel, panel.getName());
+//        for (JPanel panel : subPanels) {
+//            mainPanel.add(panel, panel.getName());
+//        }
+        
+        // Adding them all to card layout
+        for (Map.Entry<String, JPanel> entry : subPanels.entrySet()) {
+            String panelName = entry.getKey();
+            JPanel panel = entry.getValue();
+            mainPanel.add(panel, panelName);
         }
     }
     
