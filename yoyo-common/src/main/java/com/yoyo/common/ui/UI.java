@@ -12,9 +12,9 @@ public class UI {
     private static final Color buttonColor = new Color(240, 207, 189);
     private static final Color fontColor = new Color(41, 41, 41);
             
-    private static final Font mainFont = new Font("Martel Sans", Font.PLAIN, 32);
-    private static final Font inputFont = new Font("Martel Sans", Font.PLAIN, 15);
-    private static final Font buttonFont = new Font("STXihei", Font.PLAIN, 15);
+    private static final Font mainFont = new Font("Martel Sans", Font.BOLD, 36);
+    private static final Font inputFont = new Font("Martel Sans", Font.BOLD, 30);
+    private static final Font buttonFont = new Font("STXihei", Font.BOLD, 30);
     
     
     public final void loadUI(){
@@ -45,10 +45,9 @@ public class UI {
         UIManager.getLookAndFeelDefaults().put("TextField.margin", new Insets(0, 2, 0, 2));
         UIManager.getLookAndFeelDefaults().put("TextField.padding", new Insets(0, 2, 0, 2));
         
-        UIManager.getLookAndFeelDefaults().put("Table.rowHeight", 30);
-        UIManager.getLookAndFeelDefaults().put("Table.font", mainFont);
+        UIManager.getLookAndFeelDefaults().put("Table.font", inputFont);
         UIManager.getLookAndFeelDefaults().put("Table.foreground", fontColor);
-        UIManager.getLookAndFeelDefaults().put("TableHeader.font", mainFont);
+        UIManager.getLookAndFeelDefaults().put("TableHeader.font", inputFont);
         UIManager.getLookAndFeelDefaults().put("TableHeader.foreground", fontColor);
 
 

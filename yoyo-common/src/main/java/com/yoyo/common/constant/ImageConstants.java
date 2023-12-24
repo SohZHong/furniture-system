@@ -4,6 +4,6 @@ public class ImageConstants {
     /**
      * Image folder path
      */
-    public static final String FOLDER = "resources";
+    public static final String FOLDER = "./resources/";
             
 }

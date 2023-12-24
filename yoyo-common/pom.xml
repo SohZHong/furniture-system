@@ -7,4 +7,11 @@
         <version>1.0</version>
     </parent>
     <artifactId>yoyo-common</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

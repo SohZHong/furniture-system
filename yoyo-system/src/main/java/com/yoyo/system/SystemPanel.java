@@ -2,6 +2,7 @@ package com.yoyo.system;
 
 import static com.yoyo.common.constant.SystemConstants.*;
 import com.yoyo.services.manager.PanelManager;
+import com.yoyo.system.gui.CreateSaleOrderPanel;
 import com.yoyo.system.gui.LoginPanel;
 import java.awt.Dimension;
 import java.awt.CardLayout;
@@ -16,6 +17,7 @@ public class SystemPanel extends JPanel{
     
     //Initialize all needed panels
     private final LoginPanel loginPanel = new LoginPanel();
+    private final CreateSaleOrderPanel createSaleOrderPanel = new CreateSaleOrderPanel();
     
     private ArrayList<JPanel> subPanels;
     
@@ -24,7 +26,8 @@ public class SystemPanel extends JPanel{
         setLayout(new CardLayout());
         
         subPanels = new ArrayList<>();
-        subPanels.add(loginPanel);
+//        subPanels.add(loginPanel);
+        subPanels.add(createSaleOrderPanel);
         
         panelManager = new PanelManager(this, subPanels);
         
