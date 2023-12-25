@@ -2,6 +2,7 @@ package com.yoyo.system.model;
 
 import com.yoyo.services.entity.Order;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
@@ -12,7 +13,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
-            true, true, true, false, false, false
+            true, true, true, false, false, false, true
     };
     
     public SalesPersonOrderTableModel(ArrayList<Order> orders) {
@@ -27,8 +28,8 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
 
     @Override
     public int getColumnCount() {
-        // Quantity, Item Code, Customer Name, Total Price, Creation Date, Status
-        return 6;
+        // Quantity, Item Code, Customer Name, Total Price, Creation Date, Status, Delete
+        return 7;
     }
 
     @Override
@@ -40,6 +41,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 3: return Double.class;
             case 4: return String.class;
             case 5: return Boolean.class;
+            case 6: return JButton.class;
                 
         }
         return Object.class;
@@ -54,6 +56,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 3: return "Total Price";
             case 4: return "Creation Date";
             case 5: return "Status";
+            case 6: return "Action";
         }
         return null;
     }
@@ -143,13 +146,19 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2, 3, 4, 5};
+        return new int[]{0, 1, 2, 3, 4, 5, 6};
     }
     
     @Override
     public void deleteRow(int rowIndex) {
-        filteredOrders.remove(rowIndex);
-        fireTableRowsDeleted(rowIndex, rowIndex);
+        if (rowIndex >= 0 && rowIndex < filteredOrders.size()) {
+            Order deletedOrder = filteredOrders.remove(rowIndex);
+
+            // Find the corresponding order in the original 'orders' list and remove it
+            orders.removeIf(order -> order.equals(deletedOrder));
+
+            fireTableRowsDeleted(rowIndex, rowIndex);
+        }
     }
 
     @Override

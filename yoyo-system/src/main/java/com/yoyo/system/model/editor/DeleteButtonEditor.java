@@ -12,35 +12,62 @@ import javax.swing.JTable;
 
 public class DeleteButtonEditor extends DefaultCellEditor{
     private final JButton button;
+    private boolean isButtonColumnEditor;
     private final TableModel tableModel;
-    
-    public DeleteButtonEditor(TableModel tableModel){
+    private JTable table;
+
+    public DeleteButtonEditor(TableModel tableModel, JTable table) {
         super(new JCheckBox());
         this.button = new JButton();
         this.tableModel = tableModel;
-        
+        this.table = table;
+        button.setFocusPainted(false);
+        button.addActionListener((ActionEvent e) -> {
+            int confirmed = JOptionPane.showConfirmDialog(
+                    null,
+                    "Are you sure you want to delete this row?",
+                    "Delete row confirmation",
+                    JOptionPane.YES_NO_OPTION);
+            
+            if (confirmed == JOptionPane.YES_OPTION) {
+                stopCellEditing();
+                // Call the delete method in your table model to remove the row
+                tableModel.deleteRow(table.getSelectedRow());
+            } else {
+                fireEditingCanceled();
+            }
+        });
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        
-        button.setText("Delete");
-        
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int confirmed = JOptionPane.showConfirmDialog(null, 
-                    "Are you sure you want to delete this row?", "Delete row confirmation", 
-                    JOptionPane.YES_NO_OPTION);
-
-                if (confirmed == JOptionPane.YES_OPTION) {
-                    // Call the delete method in your table model to remove the row
-                    tableModel.deleteRow(row);
-                }
-            }
-        });
-        
+        if (value == null) {
+            button.setText("");
+        } else {
+            button.setText(value.toString());
+        }
+        isButtonColumnEditor = true;
         return button;
+    }
+
+    @Override
+    public Object getCellEditorValue() {
+        if (isButtonColumnEditor) {
+            return null;
+        } else {
+            return super.getCellEditorValue();
+        }
+    }
+
+    @Override
+    public boolean stopCellEditing() {
+        isButtonColumnEditor = false;
+        return super.stopCellEditing();
+    }
+
+    @Override
+    protected void fireEditingStopped() {
+        super.fireEditingStopped();
     }
 }
 

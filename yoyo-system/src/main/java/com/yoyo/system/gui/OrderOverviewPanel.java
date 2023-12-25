@@ -10,6 +10,8 @@ import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.CREATE_SALE_ORDER_PANEL;
 import com.yoyo.system.model.SalesPersonOrderTableModel;
+import com.yoyo.system.model.editor.DeleteButtonEditor;
+import com.yoyo.system.model.renderer.DeleteButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -38,6 +40,12 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
         }
         
         initComponents();
+        
+        // Setting custom cell renderer for table
+        orderOverviewTable.getColumnModel().getColumn(6).setCellRenderer(new DeleteButtonRenderer());
+        
+        // Setting custom cell editor for table
+        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new DeleteButtonEditor(tableModel,orderOverviewTable));
     }
 
     /**
