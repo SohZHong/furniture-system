@@ -112,12 +112,6 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
 
         tableColumnBox.setModel(new javax.swing.DefaultComboBoxModel<>(tableModel.getColumnNames()));
 
-        searchInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchInputActionPerformed(evt);
-            }
-        });
-
         searchBtn.setText("Search");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,10 +213,6 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         PanelManager.previousPanel();
     }//GEN-LAST:event_cancelBtnActionPerformed
-
-    private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchInputActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         String query = searchInput.getText();

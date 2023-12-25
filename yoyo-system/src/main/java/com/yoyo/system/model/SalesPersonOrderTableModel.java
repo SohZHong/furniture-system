@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.table.AbstractTableModel;
 
-public class SalesPersonOrderTableModel extends AbstractTableModel{
+public class SalesPersonOrderTableModel extends AbstractTableModel implements TableModel{
 
     private final ArrayList<Order> orders;
-    private ArrayList<Order> filteredOrders;
+    private final ArrayList<Order> filteredOrders;
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
@@ -112,6 +112,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel{
         fireTableCellUpdated(rowIndex, columnIndex);
     }
 
+    @Override
     public void setFilter(String searchString, int columnIndex) {
         String query;
         filteredOrders.clear();
@@ -135,16 +136,24 @@ public class SalesPersonOrderTableModel extends AbstractTableModel{
         fireTableDataChanged(); // Notify the table that the data has changed
     }
 
+    @Override
     public String[] getColumnNames() {
         return new String[]{"Quantity", "Item Code", "Customer Name", "Total Price", "Creation Date", "Status"};
     }
 
+    @Override
     public int[] getColumnIndices() {
         return new int[]{0, 1, 2, 3, 4, 5};
     }
     
+    @Override
     public void deleteRow(int rowIndex) {
         filteredOrders.remove(rowIndex);
         fireTableRowsDeleted(rowIndex, rowIndex);
+    }
+
+    @Override
+    public ArrayList<?> getFilteredData() {
+        return null;
     }
 }

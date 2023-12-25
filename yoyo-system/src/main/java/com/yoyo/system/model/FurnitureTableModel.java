@@ -4,10 +4,9 @@ import com.yoyo.services.entity.Furniture;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class FurnitureTableModel extends AbstractTableModel{
+public class FurnitureTableModel extends AbstractTableModel implements TableModel{
     private final ArrayList<Furniture> furnitures;
-    private ArrayList<Furniture> filteredFurnitures;
-    private ArrayList<Integer> originalIndexMap;
+    private final ArrayList<Furniture> filteredFurnitures;
     private Furniture furniture;
    
     public FurnitureTableModel(ArrayList<Furniture> furnitures){
@@ -112,6 +111,7 @@ public class FurnitureTableModel extends AbstractTableModel{
         }
     }
     
+    @Override
     public void setFilter(String searchString, int columnIndex) {
         String query;
         filteredFurnitures.clear();
@@ -134,15 +134,22 @@ public class FurnitureTableModel extends AbstractTableModel{
         fireTableDataChanged(); // Notify the table that the data has changed
     }
     
+    @Override
     public ArrayList<Furniture> getFilteredData() {
         return filteredFurnitures;
     }
     
+    @Override
     public String[] getColumnNames() {
         return new String[]{"Item Code", "Name", "Category", "Price", "Description"};
     }
 
+    @Override
     public int[] getColumnIndices() {
         return new int[]{0, 1, 2, 3, 4};
+    }
+
+    @Override
+    public void deleteRow(int rowIndex) {
     }
 }
