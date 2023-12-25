@@ -41,11 +41,7 @@ public class DeleteButtonEditor extends DefaultCellEditor{
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        if (value == null) {
-            button.setText("");
-        } else {
-            button.setText(value.toString());
-        }
+        button.setText("Delete");
         isButtonColumnEditor = true;
         return button;
     }

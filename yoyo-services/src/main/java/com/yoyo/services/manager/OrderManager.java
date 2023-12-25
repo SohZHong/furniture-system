@@ -4,6 +4,9 @@ import com.yoyo.common.constant.DataConstants;
 import com.yoyo.services.entity.Order;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class OrderManager {
     private final FileManager fileManager = new FileManager(DataConstants.ORDER_QUOTATION_FILE);
@@ -31,7 +34,6 @@ public class OrderManager {
         for (int i = 0; i < lines; i++){
             try {
                 String[] content = fileManager.readLine(i);
-                System.out.println(content);
                 orders.add(
                     new Order(
                         Integer.parseInt(content[0]), 
@@ -59,23 +61,36 @@ public class OrderManager {
         orders.add(newOrders);
     }
     
-    public void saveOrders() throws IOException{
-        //Clear contents of bookings file before writing
-        fileManager.clearFile();
+    public void saveOrders(){
         
-        for (int i = 0; i < orders.size(); i++){
+        try {
+            int confirmed = JOptionPane.showConfirmDialog(
+                    null,
+                    "Save changes made?",
+                    "Saving table changes",
+                    JOptionPane.YES_NO_OPTION);
             
-            Order order = orders.get(i); //Getting bookings instances
-            String[] data = new String[7];
-            
-            data[0] = String.valueOf(order.getQuantity());
-            data[1] = order.getItemCode().toString();
-            data[2] = order.getSalesPersonName();
-            data[3] = order.getCustomerName();
-            data[4] = order.getTotalPrice().toString();
-            data[5] = order.getCreationDate();
-            data[6] = order.isStatus() == true ? "true" : "false";
-            fileManager.writeFile(data, true);
+            if (confirmed == JOptionPane.YES_OPTION) {
+                //Clear contents of bookings file before writing
+                fileManager.clearFile();
+
+                for (int i = 0; i < orders.size(); i++){
+
+                    Order order = orders.get(i); //Getting bookings instances
+                    String[] data = new String[7];
+
+                    data[0] = String.valueOf(order.getQuantity());
+                    data[1] = order.getItemCode().toString();
+                    data[2] = order.getSalesPersonName();
+                    data[3] = order.getCustomerName();
+                    data[4] = order.getUnitPrice().toString();
+                    data[5] = order.getCreationDate();
+                    data[6] = order.isStatus() == true ? "true" : "false";
+                    fileManager.writeFile(data, true);
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(OrderManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

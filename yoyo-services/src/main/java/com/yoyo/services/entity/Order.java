@@ -7,26 +7,26 @@ public class Order {
     private Long itemCode;
     private String salesPersonName;
     private String customerName;
-    private Double totalPrice;
+    private Double unitPrice;
     private String creationDate;
     private boolean status;
 
-    public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double totalPrice) {
+    public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double unitPrice) {
         this.quantity = quantity;
         this.itemCode = itemCode;
         this.salesPersonName = salesPersonName;
         this.customerName = customerName;
-        this.totalPrice = totalPrice;
+        this.unitPrice = unitPrice;
         this.creationDate = DateTimeUtils.getLocalDate();
         this.status = false;
     }
 
-    public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double totalPrice, String creationDate, boolean status) {
+    public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double unitPrice, String creationDate, boolean status) {
         this.quantity = quantity;
         this.itemCode = itemCode;
         this.salesPersonName = salesPersonName;
         this.customerName = customerName;
-        this.totalPrice = totalPrice;
+        this.unitPrice = unitPrice;
         this.creationDate = creationDate;
         this.status = status;
     }
@@ -64,13 +64,17 @@ public class Order {
     }
 
     public Double getTotalPrice() {
-        return totalPrice;
+        return unitPrice * quantity;
     }
 
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice = totalPrice;
+    public Double getUnitPrice() {
+        return unitPrice;
     }
 
+    public void setUnitPrice(Double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+    
     public String getCreationDate() {
         return creationDate;
     }
@@ -92,7 +96,7 @@ public class Order {
         this.setItemCode(other.getItemCode());
         this.setSalesPersonName(other.getSalesPersonName());
         this.setCustomerName(other.getCustomerName());
-        this.setTotalPrice(other.getTotalPrice());
+        this.setUnitPrice(other.getUnitPrice());
         this.setCreationDate(other.getCreationDate());
         this.setStatus(other.isStatus());
     }

@@ -4,16 +4,20 @@
  */
 package com.yoyo.system.gui;
 
+import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Order;
 import com.yoyo.services.manager.FurnitureManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.CREATE_SALE_ORDER_PANEL;
 import com.yoyo.system.model.SalesPersonOrderTableModel;
+import com.yoyo.system.model.editor.CustomTableCellEditor;
 import com.yoyo.system.model.editor.DeleteButtonEditor;
 import com.yoyo.system.model.renderer.DeleteButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -42,10 +46,11 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
         initComponents();
         
         // Setting custom cell renderer for table
-        orderOverviewTable.getColumnModel().getColumn(6).setCellRenderer(new DeleteButtonRenderer());
+        orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new DeleteButtonRenderer());
         
         // Setting custom cell editor for table
-        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new DeleteButtonEditor(tableModel,orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createDigitFilter()));
+        orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new DeleteButtonEditor(tableModel,orderOverviewTable));
     }
 
     /**
@@ -162,11 +167,16 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-
+        try {
+            orderManager.loadOrders();
+            tableModel.setFilter("", 0);
+        } catch (IOException ex) {
+            Logger.getLogger(OrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-
+        orderManager.saveOrders();
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void createOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrderBtnActionPerformed

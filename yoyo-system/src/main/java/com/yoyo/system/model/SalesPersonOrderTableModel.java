@@ -13,7 +13,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
-            true, true, true, false, false, false, true
+            true, true, true, false, false, false, false, true
     };
     
     public SalesPersonOrderTableModel(ArrayList<Order> orders) {
@@ -28,8 +28,8 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
 
     @Override
     public int getColumnCount() {
-        // Quantity, Item Code, Customer Name, Total Price, Creation Date, Status, Delete
-        return 7;
+        // Quantity, Item Code, Customer Name, Unit Price, Total Price, Creation Date, Status, Delete
+        return 8;
     }
 
     @Override
@@ -39,9 +39,10 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 1: return JComboBox.class;
             case 2: return String.class;
             case 3: return Double.class;
-            case 4: return String.class;
-            case 5: return Boolean.class;
-            case 6: return JButton.class;
+            case 4: return Double.class;
+            case 5: return String.class;
+            case 6: return Boolean.class;
+            case 7: return JButton.class;
                 
         }
         return Object.class;
@@ -53,10 +54,11 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 0: return "Quantity";
             case 1: return "Item Code";
             case 2: return "Customer Name";
-            case 3: return "Total Price";
-            case 4: return "Creation Date";
-            case 5: return "Status";
-            case 6: return "Action";
+            case 3: return "Unit Price";
+            case 4: return "Total Price";
+            case 5: return "Creation Date";
+            case 6: return "Status";
+            case 7: return "Action";
         }
         return null;
     }
@@ -68,9 +70,10 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 0: return order.getQuantity();
             case 1: return order.getItemCode();
             case 2: return order.getCustomerName();
-            case 3: return order.getTotalPrice();
-            case 4: return order.getCreationDate();
-            case 5: return order.isStatus();
+            case 3: return order.getUnitPrice();
+            case 4: return order.getQuantity() * order.getUnitPrice();
+            case 5: return order.getCreationDate();
+            case 6: return order.isStatus();
         }
         return null;
     }
@@ -92,12 +95,6 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
                 break;
             case 2: 
                 order.setCustomerName((String) value);
-                break;
-            case 3: 
-                order.setTotalPrice((Double) value);
-                break;
-            case 4:
-                order.setCreationDate((String) value);
                 break;
             case 5:
                 order.setStatus((Boolean) value);
@@ -126,9 +123,10 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
                 case 0 -> String.valueOf(order.getQuantity());
                 case 1 -> String.valueOf(order.getItemCode());
                 case 2 -> order.getCustomerName();
-                case 3 -> String.valueOf(order.getTotalPrice());
-                case 4 -> order.getCreationDate();
-                case 5 -> order.isStatus() ? "true" : "false";
+                case 3 -> String.valueOf(order.getUnitPrice());
+                case 4 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
+                case 5 -> order.getCreationDate();
+                case 6 -> order.isStatus() ? "true" : "false";
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
@@ -141,12 +139,12 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Quantity", "Item Code", "Customer Name", "Total Price", "Creation Date", "Status"};
+        return new String[]{"Quantity", "Item Code", "Customer Name", "Unit Price", "Total Price", "Creation Date", "Status"};
     }
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2, 3, 4, 5, 6};
+        return new int[]{0, 1, 2, 3, 4, 5, 6, 7};
     }
     
     @Override
