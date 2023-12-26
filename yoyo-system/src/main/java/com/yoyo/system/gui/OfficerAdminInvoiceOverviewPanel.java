@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.yoyo.system.gui;
 
 import com.yoyo.services.entity.Order;
@@ -9,20 +5,14 @@ import com.yoyo.services.manager.OrderManager;
 import com.yoyo.system.model.OfficerSalesPersonOrderTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-/**
- *
- * @author User
- */
-public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
+public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
 
     private OrderManager orderManager;
     private ArrayList<Order> orders;
     private OfficerSalesPersonOrderTableModel tableModel;
     
-    public OfficerOrderOverviewPanel() {
+    public OfficerAdminInvoiceOverviewPanel() {
         // Initialize managers
         orderManager = new OrderManager();
         // Load orders
@@ -49,8 +39,6 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
 
         tableScrollPane = new javax.swing.JScrollPane();
         orderOverviewTable = new javax.swing.JTable();
-        cancelBtn = new javax.swing.JButton();
-        confirmBtn = new javax.swing.JButton();
         generateReportBtn = new javax.swing.JButton();
         searchInput = new javax.swing.JTextField();
         tableColumnBox = new javax.swing.JComboBox<>();
@@ -63,20 +51,6 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         orderOverviewTable.setAutoscrolls(false);
         orderOverviewTable.setRowHeight(68);
         tableScrollPane.setViewportView(orderOverviewTable);
-
-        cancelBtn.setText("Reset Changes");
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
-
-        confirmBtn.setText("Save Changes");
-        confirmBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmBtnActionPerformed(evt);
-            }
-        });
 
         generateReportBtn.setText("Generate Report");
         generateReportBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -109,12 +83,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -137,26 +106,10 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(generateReportBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
-                    .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        try {
-            orderManager.loadOrders();
-            tableModel.resetFilter();
-        } catch (IOException ex) {
-            Logger.getLogger(OfficerOrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cancelBtnActionPerformed
-
-    private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        orderManager.saveOrders();
-    }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed
         // Add excel function to read model or whatever
@@ -175,8 +128,6 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelBtn;
-    private javax.swing.JButton confirmBtn;
     private javax.swing.JButton generateReportBtn;
     private javax.swing.JTable orderOverviewTable;
     private javax.swing.JButton refreshBtn;
