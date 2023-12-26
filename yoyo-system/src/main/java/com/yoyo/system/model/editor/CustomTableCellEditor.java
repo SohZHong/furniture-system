@@ -58,7 +58,7 @@ public class CustomTableCellEditor extends AbstractCellEditor implements TableCe
                     return Double.valueOf(text);
                 } else if (originalClass == Float.class) {
                     return Float.valueOf(text);
-                } // Add more checks for other types as needed
+                }
             } catch (NumberFormatException e) {
                 // Handle conversion errors, e.g., show an error message
                 JOptionPane.showMessageDialog(cellField, "Invalid input for " + originalClass.getSimpleName());

@@ -152,4 +152,9 @@ public class FurnitureTableModel extends AbstractTableModel implements TableMode
     @Override
     public void deleteRow(int rowIndex) {
     }
+
+    @Override
+    public void resetFilter() {
+        setFilter("", 0);
+    }
 }

@@ -4,53 +4,40 @@
  */
 package com.yoyo.system.gui;
 
-import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Order;
-import com.yoyo.services.manager.FurnitureManager;
 import com.yoyo.services.manager.OrderManager;
-import com.yoyo.services.manager.PanelManager;
-import static com.yoyo.system.SystemPanel.CREATE_SALE_ORDER_PANEL;
-import com.yoyo.system.model.SalesPersonOrderTableModel;
-import com.yoyo.system.model.editor.CustomTableCellEditor;
-import com.yoyo.system.model.editor.DeleteButtonEditor;
-import com.yoyo.system.model.renderer.DeleteButtonRenderer;
+import com.yoyo.system.model.OfficerSalesPersonOrderTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
 
 /**
  *
  * @author User
  */
-public class OrderOverviewPanel extends javax.swing.JPanel {
+public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
 
     private OrderManager orderManager;
-    private FurnitureManager furnitureManager;
     private ArrayList<Order> orders;
-    private SalesPersonOrderTableModel tableModel;
+    private OfficerSalesPersonOrderTableModel tableModel;
     
-    public OrderOverviewPanel() {
+    public OfficerOrderOverviewPanel() {
         // Initialize managers
-        furnitureManager = new FurnitureManager();
         orderManager = new OrderManager();
         // Load orders
         try {
             orderManager.loadOrders();
             orders = orderManager.getOrders();
-            tableModel = new SalesPersonOrderTableModel(orders);
+            tableModel = new OfficerSalesPersonOrderTableModel(orders);
         } catch (IOException ex) {
             System.err.println("Error loading orders file");
         }
         
         initComponents();
         
-        // Setting custom cell renderer for table
-        orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new DeleteButtonRenderer());
-        
-        // Setting custom cell editor for table
-        orderOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createDigitFilter()));
-        orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new DeleteButtonEditor(tableModel,orderOverviewTable));
     }
 
     /**
@@ -66,11 +53,11 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
         orderOverviewTable = new javax.swing.JTable();
         cancelBtn = new javax.swing.JButton();
         confirmBtn = new javax.swing.JButton();
-        createOrderBtn = new javax.swing.JButton();
+        generateReportBtn = new javax.swing.JButton();
         searchInput = new javax.swing.JTextField();
         tableColumnBox = new javax.swing.JComboBox<>();
         searchBtn = new javax.swing.JButton();
-        resetBtn = new javax.swing.JButton();
+        refreshBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -93,16 +80,10 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
             }
         });
 
-        createOrderBtn.setText("Create Order");
-        createOrderBtn.addActionListener(new java.awt.event.ActionListener() {
+        generateReportBtn.setText("Generate Report");
+        generateReportBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createOrderBtnActionPerformed(evt);
-            }
-        });
-
-        searchInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchInputActionPerformed(evt);
+                generateReportBtnActionPerformed(evt);
             }
         });
 
@@ -115,10 +96,10 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
             }
         });
 
-        resetBtn.setText("Reset");
-        resetBtn.addActionListener(new java.awt.event.ActionListener() {
+        refreshBtn.setText("Refresh");
+        refreshBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetBtnActionPerformed(evt);
+                refreshBtnActionPerformed(evt);
             }
         });
 
@@ -131,7 +112,7 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(createOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -143,7 +124,7 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -153,25 +134,25 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchInput)
                     .addComponent(tableColumnBox)
-                    .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(createOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
+                    .addComponent(generateReportBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         try {
             orderManager.loadOrders();
-            tableModel.setFilter("", 0);
+            tableModel.resetFilter();
         } catch (IOException ex) {
-            Logger.getLogger(OrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OfficerOrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cancelBtnActionPerformed
 
@@ -179,13 +160,9 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
         orderManager.saveOrders();
     }//GEN-LAST:event_confirmBtnActionPerformed
 
-    private void createOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrderBtnActionPerformed
-        PanelManager.showPanel(CREATE_SALE_ORDER_PANEL);
-    }//GEN-LAST:event_createOrderBtnActionPerformed
-
-    private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchInputActionPerformed
+    private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed
+        // Add excel function to read model or whatever
+    }//GEN-LAST:event_generateReportBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         String query = searchInput.getText();
@@ -194,17 +171,17 @@ public class OrderOverviewPanel extends javax.swing.JPanel {
         tableModel.setFilter(query, index);
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    private void resetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetBtnActionPerformed
-        tableModel.setFilter("", 0);
-    }//GEN-LAST:event_resetBtnActionPerformed
+    private void refreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshBtnActionPerformed
+        tableModel.resetFilter();
+    }//GEN-LAST:event_refreshBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton confirmBtn;
-    private javax.swing.JButton createOrderBtn;
+    private javax.swing.JButton generateReportBtn;
     private javax.swing.JTable orderOverviewTable;
-    private javax.swing.JButton resetBtn;
+    private javax.swing.JButton refreshBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;
     private javax.swing.JComboBox<String> tableColumnBox;

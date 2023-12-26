@@ -6,6 +6,8 @@ public interface TableModel{
 
     public void setFilter(String searchString, int columnIndex);
 
+    public void resetFilter();
+    
     public ArrayList<?> getFilteredData();
     
     public String[] getColumnNames();
