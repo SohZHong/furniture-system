@@ -1,0 +1,3 @@
+john, 123, admin
+david, 234, salesperson
+honghong, 333, officer
