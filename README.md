@@ -1,2 +1,1 @@
-After pulling, please rename furniture-system to Project,
-because now got a bit problem, but can run d
+After pulling, go to "FurnitureManager" and change the absolute path to your excel file's path.
