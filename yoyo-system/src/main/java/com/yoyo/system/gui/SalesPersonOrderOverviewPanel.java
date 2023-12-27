@@ -6,7 +6,6 @@ package com.yoyo.system.gui;
 
 import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Order;
-import com.yoyo.services.manager.FurnitureManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.CREATE_SALE_ORDER_PANEL;

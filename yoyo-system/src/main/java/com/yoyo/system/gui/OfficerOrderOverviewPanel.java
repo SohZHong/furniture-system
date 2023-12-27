@@ -1,16 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.yoyo.system.gui;
 
+import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Order;
 import com.yoyo.services.manager.OrderManager;
-import com.yoyo.system.model.OfficerSalesPersonOrderTableModel;
+import com.yoyo.system.model.OfficerOrderTableModel;
+import com.yoyo.system.model.editor.AcceptOrderButtonEditor;
+import com.yoyo.system.model.renderer.AcceptOrderButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -20,7 +22,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
 
     private OrderManager orderManager;
     private ArrayList<Order> orders;
-    private OfficerSalesPersonOrderTableModel tableModel;
+    private OfficerOrderTableModel tableModel;
     
     public OfficerOrderOverviewPanel() {
         // Initialize managers
@@ -29,13 +31,23 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         try {
             orderManager.loadOrders();
             orders = orderManager.getOrders();
-            tableModel = new OfficerSalesPersonOrderTableModel(orders);
+            tableModel = new OfficerOrderTableModel(orders);
         } catch (IOException ex) {
             System.err.println("Error loading orders file");
         }
         
         initComponents();
         
+        // Apply row filter for pending status
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+        sorter.setRowFilter(RowFilter.regexFilter(StatusConstants.PENDING_ORDER, 6));
+        orderOverviewTable.setRowSorter(sorter);
+        
+        // Setting custom cell renderer for table        
+        orderOverviewTable.getColumnModel().getColumn(6).setCellRenderer(new AcceptOrderButtonRenderer());
+        
+        // Setting custom cell editor for table
+        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
     }
 
     /**
@@ -155,7 +167,14 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        orderManager.saveOrders();
+        
+        try {
+            orderManager.saveOrders();
+            orderManager.loadOrders();
+            tableModel.resetFilter();
+        } catch (IOException ex) {
+            Logger.getLogger(OfficerOrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed

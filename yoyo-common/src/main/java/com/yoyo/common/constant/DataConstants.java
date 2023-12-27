@@ -7,4 +7,5 @@ public class DataConstants {
     public static final String DATA_FOLDER = new File("src\\main\\resources\\data\\").getAbsolutePath();
     
     public static final String ORDER_QUOTATION_FILE = "orders";
+    public static final String INVOICE_FILE = "invoices";
 }

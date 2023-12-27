@@ -2,7 +2,7 @@ package com.yoyo.system.model;
 
 import java.util.ArrayList;
 
-public interface TableModel{
+public interface CustomTableModel{
 
     public void setFilter(String searchString, int columnIndex);
 

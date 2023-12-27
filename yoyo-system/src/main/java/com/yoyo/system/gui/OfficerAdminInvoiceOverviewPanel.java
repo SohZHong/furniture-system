@@ -2,7 +2,7 @@ package com.yoyo.system.gui;
 
 import com.yoyo.services.entity.Order;
 import com.yoyo.services.manager.OrderManager;
-import com.yoyo.system.model.OfficerSalesPersonOrderTableModel;
+import com.yoyo.system.model.OfficerOrderTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
 
     private OrderManager orderManager;
     private ArrayList<Order> orders;
-    private OfficerSalesPersonOrderTableModel tableModel;
+    private OfficerOrderTableModel tableModel;
     
     public OfficerAdminInvoiceOverviewPanel() {
         // Initialize managers
@@ -19,7 +19,7 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
         try {
             orderManager.loadOrders();
             orders = orderManager.getOrders();
-            tableModel = new OfficerSalesPersonOrderTableModel(orders);
+            tableModel = new OfficerOrderTableModel(orders);
         } catch (IOException ex) {
             System.err.println("Error loading orders file");
         }

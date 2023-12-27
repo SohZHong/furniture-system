@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-public class SalesPersonOrderTableModel extends AbstractTableModel implements TableModel{
+public class SalesPersonOrderTableModel extends AbstractTableModel implements CustomTableModel{
 
     private final ArrayList<Order> orders;
     private final ArrayList<Order> filteredOrders;
@@ -40,7 +40,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 3: return Double.class;
             case 4: return Double.class;
             case 5: return String.class;
-            case 6: return Boolean.class;
+            case 6: return String.class;
             case 7: return JButton.class;
                 
         }
@@ -72,7 +72,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
             case 3: return order.getUnitPrice();
             case 4: return order.getQuantity() * order.getUnitPrice();
             case 5: return order.getCreationDate();
-            case 6: return order.isStatus();
+            case 6: return order.getStatus();
         }
         return null;
     }
@@ -96,7 +96,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
                 order.setCustomerName((String) value);
                 break;
             case 5:
-                order.setStatus((Boolean) value);
+                order.setStatus((String) value);
                 break;
         }
         
@@ -125,7 +125,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Ta
                 case 3 -> String.valueOf(order.getUnitPrice());
                 case 4 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
                 case 5 -> order.getCreationDate();
-                case 6 -> order.isStatus() ? "true" : "false";
+                case 6 -> order.getStatus();
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
