@@ -3,10 +3,10 @@ package com.yoyo.services.entity;
 import com.yoyo.common.constant.StatusConstants;
 
 public class Invoice {
-    private final String invoiceNo;
-    private final Double totalPrice;
-    private final String salesPersonName;
-    private final String customerName;
+    private String invoiceNo;
+    private Double totalPrice;
+    private String salesPersonName;
+    private String customerName;
     private String status;
 
     public Invoice(String invoiceNo, Double totalPrice, String salesPersonName, String customerName) {
@@ -48,6 +48,28 @@ public class Invoice {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setInvoiceNo(String invoiceNo) {
+        this.invoiceNo = invoiceNo;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void setSalesPersonName(String salesPersonName) {
+        this.salesPersonName = salesPersonName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
     
-    
+    public void copyFrom(Invoice other) {
+        this.setInvoiceNo(other.getInvoiceNo());
+        this.setTotalPrice(other.getTotalPrice());
+        this.setSalesPersonName(other.getSalesPersonName());
+        this.setCustomerName(other.getCustomerName());
+        this.setStatus(other.getStatus());
+    }
 }

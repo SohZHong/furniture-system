@@ -1,27 +1,27 @@
 package com.yoyo.system.gui;
 
-import com.yoyo.services.entity.Order;
-import com.yoyo.services.manager.OrderManager;
-import com.yoyo.system.model.OfficerOrderTableModel;
+import com.yoyo.services.entity.Invoice;
+import com.yoyo.services.manager.InvoiceManager;
+import com.yoyo.system.model.OfficerInvoiceTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
 
-    private OrderManager orderManager;
-    private ArrayList<Order> orders;
-    private OfficerOrderTableModel tableModel;
+    private InvoiceManager invoiceManager;
+    private ArrayList<Invoice> invoices;
+    private OfficerInvoiceTableModel tableModel;
     
     public OfficerAdminInvoiceOverviewPanel() {
         // Initialize managers
-        orderManager = new OrderManager();
+        invoiceManager = new InvoiceManager();
         // Load orders
         try {
-            orderManager.loadOrders();
-            orders = orderManager.getOrders();
-            tableModel = new OfficerOrderTableModel(orders);
+            invoiceManager.loadInvoices();
+            invoices = invoiceManager.getInvoices();
+            tableModel = new OfficerInvoiceTableModel(invoices);
         } catch (IOException ex) {
-            System.err.println("Error loading orders file");
+            System.err.println("Error loading invoices file");
         }
         
         initComponents();
