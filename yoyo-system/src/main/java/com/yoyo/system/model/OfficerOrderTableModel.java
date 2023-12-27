@@ -1,11 +1,12 @@
 package com.yoyo.system.model;
 
+import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Order;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implements TableModel{
+public class OfficerOrderTableModel extends AbstractTableModel implements CustomTableModel{
      private final ArrayList<Order> orders;
     private final ArrayList<Order> filteredOrders;
     private Order order;
@@ -14,7 +15,7 @@ public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implem
             false, false, false, false, false, false, true
     };
     
-    public OfficerSalesPersonOrderTableModel(ArrayList<Order> orders) {
+    public OfficerOrderTableModel(ArrayList<Order> orders) {
         this.orders = orders;
         this.filteredOrders = new ArrayList<>(orders);
     }
@@ -39,8 +40,7 @@ public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implem
             case 3: return Double.class;
             case 4: return Double.class;
             case 5: return String.class;
-            case 6: return Boolean.class;
-                
+            case 6: return JButton.class;
         }
         return Object.class;
     }
@@ -69,7 +69,7 @@ public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implem
             case 3: return order.getUnitPrice();
             case 4: return order.getQuantity() * order.getUnitPrice();
             case 5: return order.getCreationDate();
-            case 6: return order.isStatus();
+            case 6: return order.getStatus();
         }
         return null;
     }
@@ -84,7 +84,7 @@ public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implem
         order = filteredOrders.get(rowIndex);
         switch (columnIndex){
             case 6:
-                order.setStatus( (Boolean) value );
+                order.setStatus( (String) value );
                 break;
         }
         
@@ -113,7 +113,7 @@ public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implem
                 case 3 -> String.valueOf(order.getUnitPrice());
                 case 4 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
                 case 5 -> order.getCreationDate();
-                case 6 -> order.isStatus() ? "true" : "false";
+                case 6 -> order.getStatus();
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
@@ -146,5 +146,10 @@ public class OfficerSalesPersonOrderTableModel extends AbstractTableModel implem
     @Override
     public void resetFilter() {
         setFilter("", 0);
+    }
+    
+    public void acceptOrderAndGenerateInvoice(int rowIndex) {
+        Order acceptedOrder = filteredOrders.get(rowIndex);
+        acceptedOrder.setStatus(StatusConstants.ACCEPTED_ORDER);
     }
 }

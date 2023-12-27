@@ -42,7 +42,7 @@ public class OrderManager {
                         content[3], 
                         Double.valueOf(content[4]),
                         content[5], 
-                        Boolean.parseBoolean(content[6])
+                        content[6]
                     )
                 );   
             }
@@ -85,7 +85,7 @@ public class OrderManager {
                     data[3] = order.getCustomerName();
                     data[4] = order.getUnitPrice().toString();
                     data[5] = order.getCreationDate();
-                    data[6] = order.isStatus() == true ? "true" : "false";
+                    data[6] = order.getStatus();
                     fileManager.writeFile(data, true);
                 }
             }

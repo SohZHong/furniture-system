@@ -1,9 +1,8 @@
 package com.yoyo.system.model.editor;
 
-import com.yoyo.system.model.TableModel;
+import com.yoyo.system.model.CustomTableModel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -13,14 +12,10 @@ import javax.swing.JTable;
 public class DeleteButtonEditor extends DefaultCellEditor{
     private final JButton button;
     private boolean isButtonColumnEditor;
-    private final TableModel tableModel;
-    private JTable table;
 
-    public DeleteButtonEditor(TableModel tableModel, JTable table) {
+    public DeleteButtonEditor(CustomTableModel tableModel, JTable table) {
         super(new JCheckBox());
         this.button = new JButton();
-        this.tableModel = tableModel;
-        this.table = table;
         button.setFocusPainted(false);
         button.addActionListener((ActionEvent e) -> {
             int confirmed = JOptionPane.showConfirmDialog(

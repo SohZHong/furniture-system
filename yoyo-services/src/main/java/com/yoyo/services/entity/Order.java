@@ -1,5 +1,6 @@
 package com.yoyo.services.entity;
 
+import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.common.utils.DateTimeUtils;
 
 public class Order {
@@ -9,7 +10,7 @@ public class Order {
     private String customerName;
     private Double unitPrice;
     private String creationDate;
-    private boolean status;
+    private String status;
 
     public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double unitPrice) {
         this.quantity = quantity;
@@ -18,10 +19,10 @@ public class Order {
         this.customerName = customerName;
         this.unitPrice = unitPrice;
         this.creationDate = DateTimeUtils.getLocalDate();
-        this.status = false;
+        this.status = StatusConstants.PENDING_ORDER;
     }
 
-    public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double unitPrice, String creationDate, boolean status) {
+    public Order(int quantity, Long itemCode, String salesPersonName, String customerName, Double unitPrice, String creationDate, String status) {
         this.quantity = quantity;
         this.itemCode = itemCode;
         this.salesPersonName = salesPersonName;
@@ -83,11 +84,11 @@ public class Order {
         this.creationDate = creationDate;
     }
     
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     
@@ -98,6 +99,6 @@ public class Order {
         this.setCustomerName(other.getCustomerName());
         this.setUnitPrice(other.getUnitPrice());
         this.setCreationDate(other.getCreationDate());
-        this.setStatus(other.isStatus());
+        this.setStatus(other.getStatus());
     }
 }

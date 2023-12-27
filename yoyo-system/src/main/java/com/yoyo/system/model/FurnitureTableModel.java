@@ -4,7 +4,7 @@ import com.yoyo.services.entity.Furniture;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-public class FurnitureTableModel extends AbstractTableModel implements TableModel{
+public class FurnitureTableModel extends AbstractTableModel implements CustomTableModel{
     private final ArrayList<Furniture> furnitures;
     private final ArrayList<Furniture> filteredFurnitures;
     private Furniture furniture;
