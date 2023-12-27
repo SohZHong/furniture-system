@@ -160,7 +160,7 @@ public class LoginPanel extends javax.swing.JPanel {
                       credentials = true;
 
                       switch (content[2]) {
-                          case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(SystemPanel.OFFICER_INVOICE_OVERVIEW_PANEL);
+                          case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(SystemPanel.ADMIN_USER_OVERVIEW_PANEL);
                           case RoleConstants.SALESPERSON_ROLE -> PanelManager.showPanel(SystemPanel.SALES_ORDER_OVERVIEW_PANEL);
                           case RoleConstants.OFFICE_ROLE -> PanelManager.showPanel(SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL);
                           default -> {

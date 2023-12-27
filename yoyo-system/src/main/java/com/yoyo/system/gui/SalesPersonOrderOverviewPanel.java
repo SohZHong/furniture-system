@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -167,7 +168,17 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-        orderManager.saveOrders();
+        
+        int result = JOptionPane.showConfirmDialog(
+            this,
+            "Are you sure you want to create this order?",
+            "Confirmation",
+            JOptionPane.YES_NO_OPTION
+        );
+
+        if (result == JOptionPane.YES_OPTION) {
+            orderManager.saveOrders();
+        }
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void createOrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrderBtnActionPerformed
