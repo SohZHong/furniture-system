@@ -5,11 +5,8 @@ com\yoyo\common\utils\DateTimeUtils.class
 com\yoyo\common\utils\ExcelUtils$RecordMapper.class
 com\yoyo\common\utils\FilterUtils.class
 com\yoyo\common\utils\UUID.class
-<<<<<<< HEAD
 com\yoyo\common\constant\RoleConstants.class
-=======
 com\yoyo\common\constant\StatusConstants.class
->>>>>>> ad1ca877cbf20325d1d7acb450dd2d6dc089e94d
 com\yoyo\common\constant\SystemConstants.class
 com\yoyo\common\utils\ExcelUtils.class
 com\yoyo\common\constant\DateConstants.class

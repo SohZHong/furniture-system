@@ -1,7 +1,9 @@
 package com.yoyo.services.manager;
 
+import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.utils.ExcelUtils;
 import com.yoyo.services.entity.Furniture;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class FurnitureManager {
     
     public void loadFurnitures() throws IOException{
         //Load Contents into array
-        is = new FileInputStream("C:\\projects\\Project\\yoyo-system\\src\\main\\resources\\IKEA_SA_Furniture_Web_Scrapings_sss.csv");
+        is = new FileInputStream(DataConstants.ASSET_FOLDER + File.separator + DataConstants.FURNITURE_FILE);
         
         lines = ExcelUtils.readCsvAndProcessRecords(is, entity -> {
             furnitures.add(entity);

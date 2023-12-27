@@ -4,18 +4,13 @@ import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.constant.RoleConstants;
 import com.yoyo.services.manager.FileManager;
 import com.yoyo.services.manager.PanelManager;
+import com.yoyo.system.SystemPanel;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class LoginPanel extends javax.swing.JPanel {
-
-    public static final String OFFICER_ORDER_OVERVIEW_PANEL = "Officer Order Overview";
-
-    public static final String SALES_ORDER_OVERVIEW_PANEL = "Salesperson Order Overview";
-    
-    public static final String ADMIN_INVOICE_OVERVIEW_PANEL = "Admin Invoice Overview";
     
     public LoginPanel() {
         initComponents();
@@ -164,9 +159,9 @@ public class LoginPanel extends javax.swing.JPanel {
                   if(name.equals(content[0]) && passwrd.equals(content[1])){
                       credentials = true;
                       switch (content[2]) {
-                          case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(ADMIN_INVOICE_OVERVIEW_PANEL);
-                          case RoleConstants.SALESPERSON_ROLE -> PanelManager.showPanel(SALES_ORDER_OVERVIEW_PANEL);
-                          case RoleConstants.OFFICE_ROLE -> PanelManager.showPanel(OFFICER_ORDER_OVERVIEW_PANEL);
+                          case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(SystemPanel.ADMIN_INVOICE_OVERVIEW_PANEL);
+                          case RoleConstants.SALESPERSON_ROLE -> PanelManager.showPanel(SystemPanel.SALES_ORDER_OVERVIEW_PANEL);
+                          case RoleConstants.OFFICE_ROLE -> PanelManager.showPanel(SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL);
                           default -> {
                               JOptionPane.showMessageDialog(this, "Incorrect user role.");
                           }
