@@ -4,6 +4,9 @@ import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.system.model.OfficerOrderTableModel;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,7 +26,11 @@ public class AcceptOrderButtonEditor extends DefaultCellEditor{
             
             if (confirmed == JOptionPane.YES_OPTION) {
                 stopCellEditing();
-                tableModel.acceptOrderAndGenerateInvoice(table.getSelectedRow());
+                try {
+                    tableModel.acceptOrder(table.getSelectedRow());
+                } catch (IOException ex) {
+                    Logger.getLogger(AcceptOrderButtonEditor.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 fireEditingCanceled();
             }

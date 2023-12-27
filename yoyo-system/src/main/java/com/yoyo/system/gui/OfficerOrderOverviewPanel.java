@@ -2,6 +2,7 @@ package com.yoyo.system.gui;
 
 import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Order;
+import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.system.model.OfficerOrderTableModel;
 import com.yoyo.system.model.editor.AcceptOrderButtonEditor;
@@ -23,10 +24,12 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     private OrderManager orderManager;
     private ArrayList<Order> orders;
     private OfficerOrderTableModel tableModel;
+    private InvoiceManager invoiceManager;
     
     public OfficerOrderOverviewPanel() {
         // Initialize managers
         orderManager = new OrderManager();
+        invoiceManager = new InvoiceManager();
         // Load orders
         try {
             orderManager.loadOrders();
@@ -160,7 +163,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
         try {
             orderManager.loadOrders();
-            tableModel.resetFilter();
+            tableModel.resetTable();
         } catch (IOException ex) {
             Logger.getLogger(OfficerOrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -172,6 +175,8 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
             orderManager.saveOrders();
             orderManager.loadOrders();
             tableModel.resetFilter();
+            // Get all the accepted orders from the table
+            invoiceManager.generateInvoices(tableModel.getAcceptedOrders());
         } catch (IOException ex) {
             Logger.getLogger(OfficerOrderOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
         }

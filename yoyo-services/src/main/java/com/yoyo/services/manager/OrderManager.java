@@ -62,32 +62,23 @@ public class OrderManager {
     }
     
     public void saveOrders(){
-        
         try {
-            int confirmed = JOptionPane.showConfirmDialog(
-                    null,
-                    "Save changes made?",
-                    "Saving table changes",
-                    JOptionPane.YES_NO_OPTION);
-            
-            if (confirmed == JOptionPane.YES_OPTION) {
-                //Clear contents of bookings file before writing
-                fileManager.clearFile();
+            //Clear contents of file before writing
+            fileManager.clearFile();
 
-                for (int i = 0; i < orders.size(); i++){
+            for (int i = 0; i < orders.size(); i++){
 
-                    Order order = orders.get(i); //Getting bookings instances
-                    String[] data = new String[7];
+                Order order = orders.get(i);
+                String[] data = new String[7];
 
-                    data[0] = String.valueOf(order.getQuantity());
-                    data[1] = order.getItemCode().toString();
-                    data[2] = order.getSalesPersonName();
-                    data[3] = order.getCustomerName();
-                    data[4] = order.getUnitPrice().toString();
-                    data[5] = order.getCreationDate();
-                    data[6] = order.getStatus();
-                    fileManager.writeFile(data, true);
-                }
+                data[0] = String.valueOf(order.getQuantity());
+                data[1] = order.getItemCode().toString();
+                data[2] = order.getSalesPersonName();
+                data[3] = order.getCustomerName();
+                data[4] = order.getUnitPrice().toString();
+                data[5] = order.getCreationDate();
+                data[6] = order.getStatus();
+                fileManager.writeFile(data, true);
             }
         } catch (IOException ex) {
             Logger.getLogger(OrderManager.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,4 +88,5 @@ public class OrderManager {
     public void overwriteOrdersList(ArrayList<Order> newOrders) throws IOException{
         this.orders = newOrders;
     }
+    
 }

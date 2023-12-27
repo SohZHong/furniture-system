@@ -1,21 +1,26 @@
 package com.yoyo.services.entity;
 
+import com.yoyo.common.constant.StatusConstants;
+
 public class Invoice {
     private final String invoiceNo;
-    private final Long totalPrice;
+    private final Double totalPrice;
     private final String salesPersonName;
-    private boolean status;
+    private final String customerName;
+    private String status;
 
-    public Invoice(String invoiceNo, Long totalPrice, String salesPersonName) {
+    public Invoice(String invoiceNo, Double totalPrice, String salesPersonName, String customerName) {
         this.invoiceNo = invoiceNo;
         this.totalPrice = totalPrice;
         this.salesPersonName = salesPersonName;
-        this.status = false;
+        this.customerName = customerName;
+        this.status = StatusConstants.INVOICE_IN_PROGRESS;
     }
     
-    public Invoice(String invoiceNo, Long totalPrice, String salesPersonName, boolean status) {
+    public Invoice(String invoiceNo, Double totalPrice, String salesPersonName, String customerName, String status) {
         this.invoiceNo = invoiceNo;
         this.totalPrice = totalPrice;
+        this.customerName = customerName;
         this.salesPersonName = salesPersonName;
         this.status = status;
     }
@@ -24,7 +29,7 @@ public class Invoice {
         return invoiceNo;
     }
 
-    public Long getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
@@ -32,11 +37,15 @@ public class Invoice {
         return salesPersonName;
     }
 
-    public boolean isStatus() {
+    public String getCustomerName() {
+        return customerName;
+    }
+    
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     

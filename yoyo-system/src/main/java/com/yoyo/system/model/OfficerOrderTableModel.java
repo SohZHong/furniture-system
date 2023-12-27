@@ -2,13 +2,15 @@ package com.yoyo.system.model;
 
 import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Order;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 public class OfficerOrderTableModel extends AbstractTableModel implements CustomTableModel{
-     private final ArrayList<Order> orders;
+    private final ArrayList<Order> orders;
     private final ArrayList<Order> filteredOrders;
+    private ArrayList<Order> acceptedOrders;
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
@@ -18,6 +20,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     public OfficerOrderTableModel(ArrayList<Order> orders) {
         this.orders = orders;
         this.filteredOrders = new ArrayList<>(orders);
+        this.acceptedOrders = new ArrayList<>();
     }
     
     @Override
@@ -126,7 +129,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Quantity", "Item Code", "SalesPerson", "Unit Price", "Total Price", "Creation Date", "Status"};
+        return new String[]{"Quantity", "Item Code", "SalesPerson", "Unit Price", "Total Price", "Creation Date"};
     }
 
     @Override
@@ -148,8 +151,20 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
         setFilter("", 0);
     }
     
-    public void acceptOrderAndGenerateInvoice(int rowIndex) {
+    public void acceptOrder(int rowIndex) throws IOException{
         Order acceptedOrder = filteredOrders.get(rowIndex);
         acceptedOrder.setStatus(StatusConstants.ACCEPTED_ORDER);
+        
+        acceptedOrders.add(acceptedOrder);
     }
+    
+    public ArrayList<Order> getAcceptedOrders(){
+        return acceptedOrders;
+    }
+
+    public void resetTable() {
+        acceptedOrders.clear();
+        resetFilter();
+    }
+    
 }
