@@ -26,7 +26,7 @@ public final class AddUserDialog extends JDialog {
         roleField = new JComboBox();
 
         // Assigning values to combobox
-        ArrayList<String> rolesList = new ArrayList<>();
+        ArrayList<String> rolesList = userManager.getRoles();
         roleField.setModel(new DefaultComboBoxModel<>(rolesList.toArray(new String[rolesList.size()])));
         
         Object[] message = {

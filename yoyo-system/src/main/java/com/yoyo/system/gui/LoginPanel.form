@@ -118,9 +118,6 @@
           <Dimension value="[570, 40]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passwordActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="UsernameLabel">
       <Properties>
@@ -168,9 +165,6 @@
           <Dimension value="[570, 40]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="usernameActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="forgotPasswordBtn">
       <Properties>

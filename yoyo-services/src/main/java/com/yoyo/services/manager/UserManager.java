@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class UserManager {
     private final FileManager fileManager = new FileManager(DataConstants.USER_CREDENTIAL_FILE);
@@ -85,5 +86,16 @@ public class UserManager {
         roles.add(RoleConstants.SALESPERSON_ROLE);
         
         return roles;
+    }
+    
+    public User login(String username, String password){
+        for (User user: users){
+            if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+            // Successful login
+                return user;
+            }
+        }
+        // Failed login
+        return null;
     }
 }

@@ -2,17 +2,26 @@ package com.yoyo.system.gui;
 
 import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.constant.RoleConstants;
+import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.FileManager;
 import com.yoyo.services.manager.PanelManager;
+import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.SystemPanel;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class LoginPanel extends javax.swing.JPanel {
     
+    private final UserManager userManager;
+    
     public LoginPanel() {
+        userManager = new UserManager();
+        try {
+            userManager.loadUsers();
+        } catch (IOException ex) {
+            System.err.println("Error loading user file");
+        }
+        
         initComponents();
     }
 
@@ -48,11 +57,6 @@ public class LoginPanel extends javax.swing.JPanel {
         });
 
         password.setMaximumSize(new java.awt.Dimension(570, 40));
-        password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordActionPerformed(evt);
-            }
-        });
 
         UsernameLabel.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
         UsernameLabel.setText("Username:");
@@ -69,11 +73,6 @@ public class LoginPanel extends javax.swing.JPanel {
         Title.setText("FURNITURE SALE ORDERING MANAGEMENT SYSTEM");
 
         username.setMaximumSize(new java.awt.Dimension(570, 40));
-        username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameActionPerformed(evt);
-            }
-        });
 
         forgotPasswordBtn.setBackground(new java.awt.Color(255, 233, 221));
         forgotPasswordBtn.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
@@ -145,45 +144,27 @@ public class LoginPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        String name, passwrd, textfile;
-        int lines;
-        boolean credentials = false;
+        String name, passwrd;
         name = username.getText();
         passwrd = password.getText();
-        FileManager fileManager = new FileManager(DataConstants.USER_CREDENTIAL_FILE);
-        try {
-            fileManager.readFile();
-            lines = fileManager.contentLength();
-            for(int i=0; i<lines; i++){
-                  String[] content = fileManager.readLine(i);
-                  if(name.equals(content[0]) && passwrd.equals(content[1])){
-                      credentials = true;
 
-                      switch (content[2]) {
-                          case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(SystemPanel.ADMIN_USER_OVERVIEW_PANEL);
-                          case RoleConstants.SALESPERSON_ROLE -> PanelManager.showPanel(SystemPanel.SALES_ORDER_OVERVIEW_PANEL);
-                          case RoleConstants.OFFICE_ROLE -> PanelManager.showPanel(SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL);
-                          default -> {
-                              JOptionPane.showMessageDialog(this, "Incorrect user role.");
-                          }
-                      }
-                  }                
+        User loginUser = userManager.login(name, passwrd);
+        
+        // If login successful
+        if (loginUser != null){
+            switch (loginUser.getRole()) {
+                    case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(SystemPanel.ADMIN_USER_OVERVIEW_PANEL);
+                    case RoleConstants.SALESPERSON_ROLE -> PanelManager.showPanel(SystemPanel.SALES_ORDER_OVERVIEW_PANEL);
+                    case RoleConstants.OFFICE_ROLE -> PanelManager.showPanel(SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL);
+                    default -> {
+                        JOptionPane.showMessageDialog(this, "Incorrect user role.");
+                }
             }
-            if(!credentials){
-                JOptionPane.showMessageDialog(this, "Incorrect credentials. Please try again.");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Incorrect credentials. Please try again.");
         }
     }//GEN-LAST:event_loginBtnActionPerformed
-
-    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_passwordActionPerformed
-
-    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_usernameActionPerformed
 
     private void forgotPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPasswordBtnActionPerformed
         // TODO add your handling code here:

@@ -7,6 +7,9 @@ import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.dialog.AddUserDialog;
 import com.yoyo.system.model.AdminUserTableModel;
 import com.yoyo.system.model.editor.CustomTableCellEditor;
+import com.yoyo.system.model.editor.DeleteButtonEditor;
+import com.yoyo.system.model.editor.UserRoleCellEditor;
+import com.yoyo.system.model.renderer.DeleteButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -39,6 +42,12 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         userOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.USERNAME_REGEX)));
         userOverviewTable.getColumnModel().getColumn(1).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PASSWORD_REGEX)));
 
+        // Setting custom cell renderer for table
+        userOverviewTable.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
+        
+        // Setting custom cell editor for table
+        userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new UserRoleCellEditor(userManager));
+        userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
     }
 
     /**
