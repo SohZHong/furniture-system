@@ -1,6 +1,7 @@
 package com.yoyo.services.manager;
 
 import com.yoyo.common.constant.DataConstants;
+import com.yoyo.common.constant.FilterConstants;
 import com.yoyo.common.constant.RoleConstants;
 import com.yoyo.services.entity.User;
 import java.io.IOException;
@@ -57,6 +58,28 @@ public class UserManager {
         users.add(newUser);
     }
     
+    public void updateUsers(User updatedUser){
+        try {
+            fileManager.clearFile();
+            for (int i = 0; i < users.size(); i++){
+                User user = users.get(i);
+                String[] data = new String[3];
+                if(i == findUserIndex()){
+                    System.out.print(updatedUser.getName());
+                    data[0] = updatedUser.getName();
+                    data[1] = updatedUser.getPassword();
+                    data[2] = updatedUser.getRole();
+                }else{
+                    data[0] = user.getName();
+                    data[1] = user.getPassword();
+                    data[2] = user.getRole();
+                }
+                fileManager.writeFile(data, true);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     public void saveUsers(){
         try {
             //Clear contents of file before writing
@@ -96,4 +119,36 @@ public class UserManager {
         // Failed login
         return null;
     }
+
+     public String changeCredentials(String username, String password) {
+        // Check whether username has been repeated
+        for (User user : users) {
+            if (username.equals(user.getName())) {
+                return "Username has been used. Please try another one.";
+            }
+        }
+
+        // Check username and password against regex
+        if (username.matches(FilterConstants.USERNAME_REGEX) && password.matches(FilterConstants.PASSWORD_REGEX)) {
+            return "true";
+        } else if (!username.matches(FilterConstants.USERNAME_REGEX)) {
+            return "Please make sure there's no number in username.";
+        } else if (!password.matches(FilterConstants.PASSWORD_REGEX)) {
+            return "Please make sure the password is longer than 6 characters.";
+        } else {
+            return "Please make sure there's no number in username and the password is longer than 6 characters.";
+        }
+    }
+    
+    public int findUserIndex(){
+        User loginUser = ApplicationContext.getLoginUser();
+        for(int i=0; i<users.size(); i++){
+            if(users.get(i).getName().equals(loginUser.getName())){
+//                System.out.print(i);
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
