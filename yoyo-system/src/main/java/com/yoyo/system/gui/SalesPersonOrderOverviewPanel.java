@@ -6,9 +6,12 @@ package com.yoyo.system.gui;
 
 import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Order;
+import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.CREATE_SALE_ORDER_PANEL;
+import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.SALES_ORDER_OVERVIEW_PANEL;
 import com.yoyo.system.model.SalesPersonOrderTableModel;
 import com.yoyo.system.model.editor.CustomTableCellEditor;
 import com.yoyo.system.model.editor.DeleteButtonEditor;
@@ -18,6 +21,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -44,11 +50,16 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         initComponents();
         
         // Setting custom cell renderer for table
-        orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new DeleteButtonRenderer());
+        orderOverviewTable.getColumnModel().getColumn(8).setCellRenderer(new DeleteButtonRenderer());
         
         // Setting custom cell editor for table
         orderOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createDigitFilter()));
-        orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new DeleteButtonEditor(tableModel,orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(8).setCellEditor(new DeleteButtonEditor(tableModel,orderOverviewTable));
+        
+        // Row filter for specifying saleperson's own sales
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+        sorter.setRowFilter(RowFilter.regexFilter(ApplicationContext.getLoginUser().getName(), 2));
+        orderOverviewTable.setRowSorter(sorter);
     }
 
     /**
@@ -69,6 +80,9 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         tableColumnBox = new javax.swing.JComboBox<>();
         searchBtn = new javax.swing.JButton();
         refreshBtn = new javax.swing.JButton();
+        companyIcon = new javax.swing.JLabel();
+        orderNavBtn = new javax.swing.JButton();
+        invoiceNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -114,6 +128,22 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
             }
         });
 
+        companyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/YOYO.png"))); // NOI18N
+
+        orderNavBtn.setText("Order");
+        orderNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderNavBtnActionPerformed(evt);
+            }
+        });
+
+        invoiceNavBtn.setText("Invoice");
+        invoiceNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceNavBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,12 +158,20 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
                         .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(companyIcon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(63, Short.MAX_VALUE))
@@ -141,7 +179,13 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(companyIcon)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchInput)
                     .addComponent(tableColumnBox)
@@ -154,7 +198,7 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
                     .addComponent(createOrderBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,11 +240,22 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         tableModel.resetFilter();
     }//GEN-LAST:event_refreshBtnActionPerformed
 
+    private void orderNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderNavBtnActionPerformed
+        PanelManager.showPanel(SALES_ORDER_OVERVIEW_PANEL);
+    }//GEN-LAST:event_orderNavBtnActionPerformed
+
+    private void invoiceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceNavBtnActionPerformed
+        PanelManager.showPanel(SALES_INVOICE_OVERVIEW_PANEL);
+    }//GEN-LAST:event_invoiceNavBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JLabel companyIcon;
     private javax.swing.JButton confirmBtn;
     private javax.swing.JButton createOrderBtn;
+    private javax.swing.JButton invoiceNavBtn;
+    private javax.swing.JButton orderNavBtn;
     private javax.swing.JTable orderOverviewTable;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JButton searchBtn;

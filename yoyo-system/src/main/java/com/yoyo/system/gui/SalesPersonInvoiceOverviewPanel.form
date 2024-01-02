@@ -25,20 +25,29 @@
               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="generateReportBtn" min="-2" pref="350" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="386" max="-2" attributes="0"/>
                       <Component id="confirmBtn3" min="-2" pref="280" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cancelBtn" min="-2" pref="280" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="tableScrollPane" alignment="1" min="-2" pref="1314" max="-2" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <Component id="searchInput" min="-2" pref="510" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="tableColumnBox" min="-2" pref="191" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="searchBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="companyIcon" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="orderNavBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="invoiceNavBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="searchInput" min="-2" pref="510" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="tableColumnBox" min="-2" pref="191" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="searchBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="refreshBtn" min="-2" pref="200" max="-2" attributes="0"/>
                       </Group>
@@ -51,7 +60,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="companyIcon" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="invoiceNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="orderNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="searchInput" max="32767" attributes="0"/>
                   <Component id="tableColumnBox" max="32767" attributes="0"/>
@@ -62,8 +79,7 @@
               <Component id="tableScrollPane" min="-2" pref="544" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="generateReportBtn" pref="68" max="32767" attributes="0"/>
-                  <Component id="confirmBtn3" alignment="1" max="32767" attributes="0"/>
+                  <Component id="confirmBtn3" alignment="1" pref="68" max="32767" attributes="0"/>
                   <Component id="cancelBtn" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="90" max="32767" attributes="0"/>
@@ -93,14 +109,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="generateReportBtn">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Generate Report"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="generateReportBtnActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JTextField" name="searchInput">
     </Component>
     <Component class="javax.swing.JComboBox" name="tableColumnBox">
@@ -143,6 +151,29 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="companyIcon">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/YOYO.png"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="orderNavBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Order"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderNavBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="invoiceNavBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Invoice"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invoiceNavBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

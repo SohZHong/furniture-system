@@ -4,6 +4,10 @@ import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Order;
 import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.services.manager.OrderManager;
+import com.yoyo.services.manager.PanelManager;
+import static com.yoyo.system.SystemPanel.OFFICER_INVOICE_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import com.yoyo.system.model.OfficerOrderTableModel;
 import com.yoyo.system.model.editor.AcceptOrderButtonEditor;
 import com.yoyo.system.model.renderer.AcceptOrderButtonRenderer;
@@ -71,6 +75,9 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         tableColumnBox = new javax.swing.JComboBox<>();
         searchBtn = new javax.swing.JButton();
         refreshBtn = new javax.swing.JButton();
+        companyIcon = new javax.swing.JLabel();
+        orderNavBtn1 = new javax.swing.JButton();
+        invoiceNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -116,6 +123,22 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
             }
         });
 
+        companyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/YOYO.png"))); // NOI18N
+
+        orderNavBtn1.setText("Order");
+        orderNavBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderNavBtn1ActionPerformed(evt);
+            }
+        });
+
+        invoiceNavBtn.setText("Invoice");
+        invoiceNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceNavBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,12 +153,20 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                         .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(companyIcon)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(orderNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(63, Short.MAX_VALUE))
@@ -143,7 +174,13 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(companyIcon)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchInput)
                     .addComponent(tableColumnBox)
@@ -197,11 +234,23 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         tableModel.resetFilter();
     }//GEN-LAST:event_refreshBtnActionPerformed
 
+    private void invoiceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceNavBtnActionPerformed
+        PanelManager.showPanel(OFFICER_INVOICE_OVERVIEW_PANEL);
+    }//GEN-LAST:event_invoiceNavBtnActionPerformed
+
+    private void orderNavBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderNavBtn1ActionPerformed
+        PanelManager.showPanel(OFFICER_ORDER_OVERVIEW_PANEL);
+    }//GEN-LAST:event_orderNavBtn1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
+    private javax.swing.JLabel companyIcon;
     private javax.swing.JButton confirmBtn;
     private javax.swing.JButton generateReportBtn;
+    private javax.swing.JButton invoiceNavBtn;
+    private javax.swing.JButton orderNavBtn;
+    private javax.swing.JButton orderNavBtn1;
     private javax.swing.JTable orderOverviewTable;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JButton searchBtn;

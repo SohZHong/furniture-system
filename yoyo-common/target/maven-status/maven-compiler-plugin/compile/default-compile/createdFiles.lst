@@ -1,5 +1,7 @@
 com\yoyo\common\constant\ImageConstants.class
 com\yoyo\common\utils\FilterUtils$DigitFilter.class
+com\yoyo\common\constant\FilterConstants.class
+com\yoyo\common\utils\FilterUtils$RegexFilter.class
 com\yoyo\common\ui\UI.class
 com\yoyo\common\utils\DateTimeUtils.class
 com\yoyo\common\utils\ExcelUtils$RecordMapper.class
