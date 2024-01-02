@@ -22,12 +22,13 @@ public class SystemPanel extends JPanel{
     
     //Initialize all needed panels
     private final LoginPanel loginPanel = new LoginPanel();
-    private final OfficerOrderOverviewPanel officerOrderOverviewPanel = new OfficerOrderOverviewPanel();
-    private final OfficerAdminInvoiceOverviewPanel officerAdminInvoiceOverviewPanel = new OfficerAdminInvoiceOverviewPanel();
-    private final AdminUserTablePanel adminUserTablePanel = new AdminUserTablePanel();
-    private final SalesPersonOrderOverviewPanel salesOrderOverviewPanel = new SalesPersonOrderOverviewPanel();
-    private final CreateSaleOrderPanel createSaleOrderPanel = new CreateSaleOrderPanel();
-    private final SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel = new SalesPersonInvoiceOverviewPanel();
+    private OfficerOrderOverviewPanel officerOrderOverviewPanel;
+    private OfficerAdminInvoiceOverviewPanel officerAdminInvoiceOverviewPanel;
+    private AdminUserTablePanel adminUserTablePanel;
+    private SalesPersonOrderOverviewPanel salesOrderOverviewPanel;
+    private CreateSaleOrderPanel createSaleOrderPanel;
+    private SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel;
+    // General Panel
     public static final String LOGIN_PANEL = "Login";
     // Panel for Officer
     public static final String OFFICER_ORDER_OVERVIEW_PANEL = "Officer Order Overview";
@@ -47,30 +48,58 @@ public class SystemPanel extends JPanel{
         
         subPanels = new HashMap<>();
         subPanels.put(LOGIN_PANEL, loginPanel);
-        subPanels.put(OFFICER_ORDER_OVERVIEW_PANEL, officerOrderOverviewPanel);
-        subPanels.put(OFFICER_INVOICE_OVERVIEW_PANEL,officerAdminInvoiceOverviewPanel);
-        subPanels.put(ADMIN_USER_OVERVIEW_PANEL, adminUserTablePanel);
-        subPanels.put(SALES_ORDER_OVERVIEW_PANEL, salesOrderOverviewPanel);
-        subPanels.put(CREATE_SALE_ORDER_PANEL, createSaleOrderPanel);
-        subPanels.put(SALES_INVOICE_OVERVIEW_PANEL, salesPersonInvoiceOverviewPanel);
-        
+
         panelManager = new PanelManager(this, subPanels);
         
         //Setting initial panel
-        PanelManager.showPanel(LOGIN_PANEL);
+        showInitialPanel();
         
         //Defining a method to set panel size since windows takes task bar into consideration for size
         setPanelSize();
         
     }
 
+    private void showInitialPanel() {
+        PanelManager.showPanel(LOGIN_PANEL);
+    }
+    
     private void setPanelSize() {
-        
         //JPanel only accepts dimension
         Dimension size = new Dimension(SYSTEM_WIDTH, SYSTEM_HEIGHT); 
         
         setPreferredSize(size);
-        
     }
     
+    public void loadAdminProfile(){
+        adminUserTablePanel = new AdminUserTablePanel();
+        
+        subPanels.put(ADMIN_USER_OVERVIEW_PANEL, adminUserTablePanel);
+        
+        panelManager.updateSubPanels(subPanels);
+        PanelManager.showPanel(ADMIN_USER_OVERVIEW_PANEL);
+    }
+    
+    public void loadOfficerProfile(){
+        officerOrderOverviewPanel = new OfficerOrderOverviewPanel();
+        officerAdminInvoiceOverviewPanel = new OfficerAdminInvoiceOverviewPanel();
+        
+        subPanels.put(OFFICER_ORDER_OVERVIEW_PANEL, officerOrderOverviewPanel);
+        subPanels.put(OFFICER_INVOICE_OVERVIEW_PANEL,officerAdminInvoiceOverviewPanel);
+        
+        panelManager.updateSubPanels(subPanels);
+        PanelManager.showPanel(OFFICER_ORDER_OVERVIEW_PANEL);
+    }
+    
+    public void loadSalesPersonProfile(){
+        salesOrderOverviewPanel = new SalesPersonOrderOverviewPanel();
+        createSaleOrderPanel = new CreateSaleOrderPanel();
+        salesPersonInvoiceOverviewPanel = new SalesPersonInvoiceOverviewPanel();
+        
+        subPanels.put(SALES_ORDER_OVERVIEW_PANEL, salesOrderOverviewPanel);
+        subPanels.put(CREATE_SALE_ORDER_PANEL, createSaleOrderPanel);
+        subPanels.put(SALES_INVOICE_OVERVIEW_PANEL, salesPersonInvoiceOverviewPanel);
+        
+        panelManager.updateSubPanels(subPanels);
+        PanelManager.showPanel(SALES_ORDER_OVERVIEW_PANEL);
+    }
 }

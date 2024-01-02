@@ -3,6 +3,7 @@ package com.yoyo.system.gui;
 import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.Furniture;
 import com.yoyo.services.entity.Order;
+import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.FurnitureManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
@@ -197,7 +198,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
                 new Order(
                         quantity, 
                         selectedFurniture.getId(),
-                        "IDK",
+                        ApplicationContext.getLoginUser().getName(),
                         customerInput,
                         selectedFurniture.getPrice() * quantity
                 )

@@ -12,27 +12,19 @@ import javax.swing.JPanel;
 public class PanelManager {
     
     private static JPanel mainPanel;
+    private static HashMap<String, JPanel> subPanels;
     private static CardLayout layout;
     
     private static String prevPanel, curPanel;
     
     public PanelManager(JPanel mainPanel, HashMap<String, JPanel> subPanels) throws ParseException, InterruptedException, IOException{
         this.mainPanel = mainPanel;
-        
+        this.subPanels = subPanels;
         //get parent panel layout as card
-        layout = (CardLayout) mainPanel.getLayout();
-        
-        //Adding them all to cardlayout
-//        for (JPanel panel : subPanels) {
-//            mainPanel.add(panel, panel.getName());
-//        }
+        this.layout = (CardLayout) mainPanel.getLayout();
         
         // Adding them all to card layout
-        for (Map.Entry<String, JPanel> entry : subPanels.entrySet()) {
-            String panelName = entry.getKey();
-            JPanel panel = entry.getValue();
-            mainPanel.add(panel, panelName);
-        }
+        addPanels(subPanels);
     }
     
     //Show panel accepted as argument through cardlayout
@@ -45,7 +37,31 @@ public class PanelManager {
     
     public static void previousPanel(){
         layout.show(mainPanel, prevPanel);
-        
         curPanel = prevPanel;
+    }
+    
+    // Update subPanels dynamically
+    public void updateSubPanels(HashMap<String, JPanel> newSubPanels) {
+        // Remove existing panels
+        for (JPanel panel : subPanels.values()) {
+            mainPanel.remove(panel);
+        }
+
+        // Update subPanels with new panels
+        subPanels = newSubPanels;
+
+        addPanels(subPanels);
+
+        // Repaint the main panel to reflect the changes
+        mainPanel.revalidate();
+        mainPanel.repaint();
+    }
+    
+    private void addPanels(HashMap<String, JPanel> subPanels){
+        for (Map.Entry<String, JPanel> entry : subPanels.entrySet()) {
+            String panelName = entry.getKey();
+            JPanel panel = entry.getValue();
+            mainPanel.add(panel, panelName);
+        }
     }
 }

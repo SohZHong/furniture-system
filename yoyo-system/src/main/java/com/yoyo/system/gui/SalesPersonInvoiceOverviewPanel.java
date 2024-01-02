@@ -1,10 +1,9 @@
 package com.yoyo.system.gui;
 
-import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Invoice;
+import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.system.model.SalesPersonInvoiceTableModel;
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -45,7 +44,7 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
             }
         };
         // Row filter for specifying saleperson's own sales
-        RowFilter<Object, Object> nameFilter = RowFilter.regexFilter("IDK", 2); // Change with function to retrieve salesperson's own name
+        RowFilter<Object, Object> nameFilter = RowFilter.regexFilter(ApplicationContext.getLoginUser().getName(), 2);
         
         // Create a list to hold the filters
         ArrayList<RowFilter<Object, Object>> filters = new ArrayList<>();

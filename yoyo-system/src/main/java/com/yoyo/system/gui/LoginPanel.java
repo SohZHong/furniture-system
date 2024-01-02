@@ -1,9 +1,8 @@
 package com.yoyo.system.gui;
 
-import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.constant.RoleConstants;
 import com.yoyo.services.entity.User;
-import com.yoyo.services.manager.FileManager;
+import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.SystemPanel;
@@ -149,13 +148,15 @@ public class LoginPanel extends javax.swing.JPanel {
         passwrd = password.getText();
 
         User loginUser = userManager.login(name, passwrd);
-        
         // If login successful
         if (loginUser != null){
+            // Assign value for global access
+            ApplicationContext.setLoginUser(loginUser);
+            SystemPanel systemPanel = ((SystemPanel) getParent());
             switch (loginUser.getRole()) {
-                    case RoleConstants.ADMINISTRATOR_ROLE -> PanelManager.showPanel(SystemPanel.ADMIN_USER_OVERVIEW_PANEL);
-                    case RoleConstants.SALESPERSON_ROLE -> PanelManager.showPanel(SystemPanel.SALES_ORDER_OVERVIEW_PANEL);
-                    case RoleConstants.OFFICE_ROLE -> PanelManager.showPanel(SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL);
+                    case RoleConstants.ADMINISTRATOR_ROLE -> systemPanel.loadAdminProfile();
+                    case RoleConstants.SALESPERSON_ROLE -> systemPanel.loadSalesPersonProfile();
+                    case RoleConstants.OFFICE_ROLE -> systemPanel.loadOfficerProfile();
                     default -> {
                         JOptionPane.showMessageDialog(this, "Incorrect user role.");
                 }

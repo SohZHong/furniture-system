@@ -3,6 +3,7 @@ package com.yoyo.system.gui;
 import com.yoyo.common.constant.FilterConstants;
 import com.yoyo.common.utils.FilterUtils;
 import com.yoyo.services.entity.User;
+import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.dialog.AddUserDialog;
 import com.yoyo.system.model.AdminUserTableModel;
@@ -15,6 +16,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
+import javax.swing.RowFilter.Entry;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class AdminUserTablePanel extends javax.swing.JPanel {
 
@@ -48,6 +53,18 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         // Setting custom cell editor for table
         userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new UserRoleCellEditor(userManager));
         userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
+
+        // Setting a RowFilter to exclude the row with the login user name
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
+            @Override
+            public boolean include(Entry<? extends Object, ? extends Object> entry) {
+                String userName = (String) entry.getValue(0);
+                return !userName.equals(ApplicationContext.getLoginUser().getName());
+            }
+        };
+        sorter.setRowFilter(rowFilter);
+        userOverviewTable.setRowSorter(sorter);
     }
 
     /**

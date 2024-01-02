@@ -5,10 +5,8 @@ import com.yoyo.common.constant.RoleConstants;
 import com.yoyo.services.entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 public class UserManager {
     private final FileManager fileManager = new FileManager(DataConstants.USER_CREDENTIAL_FILE);
