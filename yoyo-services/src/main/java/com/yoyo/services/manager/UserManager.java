@@ -65,7 +65,6 @@ public class UserManager {
                 User user = users.get(i);
                 String[] data = new String[3];
                 if(i == findUserIndex()){
-                    System.out.print(updatedUser.getName());
                     data[0] = updatedUser.getName();
                     data[1] = updatedUser.getPassword();
                     data[2] = updatedUser.getRole();
