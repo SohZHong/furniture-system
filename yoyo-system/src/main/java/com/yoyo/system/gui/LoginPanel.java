@@ -3,7 +3,6 @@ package com.yoyo.system.gui;
 import com.yoyo.common.constant.RoleConstants;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
-import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.SystemPanel;
 import java.io.IOException;
