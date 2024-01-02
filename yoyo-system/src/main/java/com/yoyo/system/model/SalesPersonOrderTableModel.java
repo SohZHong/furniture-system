@@ -12,7 +12,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
-            true, false, true, false, false, false, false, true
+            true, false, false, true, false, false, false, false, true
     };
     
     public SalesPersonOrderTableModel(ArrayList<Order> orders) {
@@ -27,8 +27,8 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
 
     @Override
     public int getColumnCount() {
-        // Quantity, Item Code, Customer Name, Unit Price, Total Price, Creation Date, Status, Delete
-        return 8;
+        // Quantity, Item Code, SalesPerson, Customer Name, Unit Price, Total Price, Creation Date, Status, Delete
+        return 9;
     }
 
     @Override
@@ -37,11 +37,12 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
             case 0: return Integer.class;
             case 1: return Long.class;
             case 2: return String.class;
-            case 3: return Double.class;
+            case 3: return String.class;
             case 4: return Double.class;
-            case 5: return String.class;
+            case 5: return Double.class;
             case 6: return String.class;
-            case 7: return JButton.class;
+            case 7: return String.class;
+            case 8: return JButton.class;
                 
         }
         return Object.class;
@@ -52,12 +53,13 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
         switch (columnIndex) {
             case 0: return "Quantity";
             case 1: return "Item Code";
-            case 2: return "Customer Name";
-            case 3: return "Unit Price";
-            case 4: return "Total Price";
-            case 5: return "Creation Date";
-            case 6: return "Status";
-            case 7: return "Action";
+            case 2: return "SalesPerson";
+            case 3: return "Customer Name";
+            case 4: return "Unit Price";
+            case 5: return "Total Price";
+            case 6: return "Creation Date";
+            case 7: return "Status";
+            case 8: return "Action";
         }
         return null;
     }
@@ -68,11 +70,12 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
         switch (columnIndex){
             case 0: return order.getQuantity();
             case 1: return order.getItemCode();
-            case 2: return order.getCustomerName();
-            case 3: return order.getUnitPrice();
-            case 4: return order.getQuantity() * order.getUnitPrice();
-            case 5: return order.getCreationDate();
-            case 6: return order.getStatus();
+            case 2: return order.getSalesPersonName();
+            case 3: return order.getCustomerName();
+            case 4: return order.getUnitPrice();
+            case 5: return order.getQuantity() * order.getUnitPrice();
+            case 6: return order.getCreationDate();
+            case 7: return order.getStatus();
         }
         return null;
     }
@@ -88,9 +91,6 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
         switch (columnIndex){
             case 0: 
                 order.setQuantity((Integer) value);
-                break;
-            case 1: 
-                order.setItemCode((Long) value);
                 break;
             case 2: 
                 order.setCustomerName((String) value);
@@ -121,11 +121,12 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
             query = switch (columnIndex) {
                 case 0 -> String.valueOf(order.getQuantity());
                 case 1 -> String.valueOf(order.getItemCode());
-                case 2 -> order.getCustomerName();
-                case 3 -> String.valueOf(order.getUnitPrice());
-                case 4 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
-                case 5 -> order.getCreationDate();
-                case 6 -> order.getStatus();
+                case 2 -> order.getSalesPersonName();
+                case 3 -> order.getCustomerName();
+                case 4 -> String.valueOf(order.getUnitPrice());
+                case 5 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
+                case 6 -> order.getCreationDate();
+                case 7 -> order.getStatus();
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
@@ -143,7 +144,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2, 3, 4, 5, 6, 7};
+        return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     }
     
     @Override
