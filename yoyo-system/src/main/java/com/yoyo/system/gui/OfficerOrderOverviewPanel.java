@@ -7,6 +7,7 @@ import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.OFFICER_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import com.yoyo.system.model.OfficerOrderTableModel;
 import com.yoyo.system.model.editor.AcceptOrderButtonEditor;
@@ -78,6 +79,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         companyIcon = new javax.swing.JLabel();
         orderNavBtn1 = new javax.swing.JButton();
         invoiceNavBtn = new javax.swing.JButton();
+        profileNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -139,6 +141,13 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
             }
         });
 
+        profileNavBtn.setText("Profile");
+        profileNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileNavBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -168,7 +177,9 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,7 +190,8 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                     .addComponent(companyIcon)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(orderNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(orderNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchInput)
@@ -242,6 +254,10 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         PanelManager.showPanel(OFFICER_ORDER_OVERVIEW_PANEL);
     }//GEN-LAST:event_orderNavBtn1ActionPerformed
 
+    private void profileNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileNavBtnActionPerformed
+        PanelManager.showPanel(PROFILE_PANEL);
+    }//GEN-LAST:event_profileNavBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
@@ -249,9 +265,10 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     private javax.swing.JButton confirmBtn;
     private javax.swing.JButton generateReportBtn;
     private javax.swing.JButton invoiceNavBtn;
-    private javax.swing.JButton orderNavBtn;
     private javax.swing.JButton orderNavBtn1;
     private javax.swing.JTable orderOverviewTable;
+    private javax.swing.JButton profileNavBtn;
+    private javax.swing.JButton profileNavBtn1;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;

@@ -4,6 +4,7 @@ import com.yoyo.services.entity.Invoice;
 import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.services.manager.PanelManager;
+import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_ORDER_OVERVIEW_PANEL;
 import com.yoyo.system.model.SalesPersonInvoiceTableModel;
@@ -80,6 +81,7 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
         companyIcon = new javax.swing.JLabel();
         orderNavBtn = new javax.swing.JButton();
         invoiceNavBtn = new javax.swing.JButton();
+        profileNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -134,6 +136,13 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
             }
         });
 
+        profileNavBtn.setText("Profile");
+        profileNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileNavBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -162,7 +171,9 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -171,9 +182,11 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(companyIcon)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(profileNavBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(62, 62, 62)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(searchInput)
@@ -237,6 +250,10 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
         PanelManager.showPanel(SALES_INVOICE_OVERVIEW_PANEL);
     }//GEN-LAST:event_invoiceNavBtnActionPerformed
 
+    private void profileNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileNavBtnActionPerformed
+        PanelManager.showPanel(PROFILE_PANEL);
+    }//GEN-LAST:event_profileNavBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
@@ -245,6 +262,7 @@ public class SalesPersonInvoiceOverviewPanel extends javax.swing.JPanel {
     private javax.swing.JButton invoiceNavBtn;
     private javax.swing.JTable invoiceOverviewTable;
     private javax.swing.JButton orderNavBtn;
+    private javax.swing.JButton profileNavBtn;
     private javax.swing.JButton refreshBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;

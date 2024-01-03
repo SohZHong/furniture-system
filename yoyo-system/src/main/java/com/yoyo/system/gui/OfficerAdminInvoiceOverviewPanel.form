@@ -44,7 +44,10 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="refreshBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="refreshBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                          <Component id="profileNavBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="63" max="32767" attributes="0"/>
@@ -60,6 +63,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="invoiceNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                       <Component id="orderNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="profileNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
@@ -157,6 +161,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invoiceNavBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="profileNavBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Profile"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileNavBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

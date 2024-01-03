@@ -7,6 +7,7 @@ import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.FurnitureManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
+import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_ORDER_OVERVIEW_PANEL;
 import com.yoyo.system.model.FurnitureTableModel;
@@ -79,6 +80,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         invoiceNavBtn = new javax.swing.JButton();
         orderNavBtn = new javax.swing.JButton();
         companyIcon = new javax.swing.JLabel();
+        profileNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -148,6 +150,13 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
 
         companyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/YOYO.png"))); // NOI18N
 
+        profileNavBtn.setText("Profile");
+        profileNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileNavBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,7 +179,10 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
                                     .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -192,9 +204,10 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(companyIcon))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(searchInput)
@@ -271,6 +284,10 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         PanelManager.showPanel(SALES_ORDER_OVERVIEW_PANEL);
     }//GEN-LAST:event_orderNavBtnActionPerformed
 
+    private void profileNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileNavBtnActionPerformed
+        PanelManager.showPanel(PROFILE_PANEL);
+    }//GEN-LAST:event_profileNavBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
@@ -279,6 +296,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
     private javax.swing.JTable createOrderTable;
     private javax.swing.JButton invoiceNavBtn;
     private javax.swing.JButton orderNavBtn;
+    private javax.swing.JButton profileNavBtn;
     private javax.swing.JTextField quantityInputField;
     private javax.swing.JLabel quantityLabel;
     private javax.swing.JButton resetBtn;

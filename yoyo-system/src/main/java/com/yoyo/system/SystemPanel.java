@@ -9,6 +9,7 @@ import com.yoyo.system.gui.OfficerAdminInvoiceOverviewPanel;
 import com.yoyo.system.gui.OfficerOrderOverviewPanel;
 import com.yoyo.system.gui.SalesPersonInvoiceOverviewPanel;
 import com.yoyo.system.gui.SalesPersonOrderOverviewPanel;
+import com.yoyo.system.gui.UserProfileSettingsPanel;
 import java.awt.Dimension;
 import java.awt.CardLayout;
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class SystemPanel extends JPanel{
     
     //Initialize all needed panels
     private final LoginPanel loginPanel = new LoginPanel();
+    private UserProfileSettingsPanel userProfileSettingsPanel;
     private OfficerOrderOverviewPanel officerOrderOverviewPanel;
     private OfficerAdminInvoiceOverviewPanel officerAdminInvoiceOverviewPanel;
     private AdminUserTablePanel adminUserTablePanel;
@@ -30,6 +32,7 @@ public class SystemPanel extends JPanel{
     private SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel;
     // General Panel
     public static final String LOGIN_PANEL = "Login";
+    public static final String PROFILE_PANEL = "Profile";
     // Panel for Officer
     public static final String OFFICER_ORDER_OVERVIEW_PANEL = "Officer Order Overview";
     public static final String OFFICER_INVOICE_OVERVIEW_PANEL = "Officer Invoice Overview";
@@ -72,8 +75,10 @@ public class SystemPanel extends JPanel{
     
     public void loadAdminProfile(){
         adminUserTablePanel = new AdminUserTablePanel();
+        userProfileSettingsPanel = new UserProfileSettingsPanel();
         
         subPanels.put(ADMIN_USER_OVERVIEW_PANEL, adminUserTablePanel);
+        subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         
         panelManager.updateSubPanels(subPanels);
         PanelManager.showPanel(ADMIN_USER_OVERVIEW_PANEL);
@@ -82,7 +87,10 @@ public class SystemPanel extends JPanel{
     public void loadOfficerProfile(){
         officerOrderOverviewPanel = new OfficerOrderOverviewPanel();
         officerAdminInvoiceOverviewPanel = new OfficerAdminInvoiceOverviewPanel();
+        userProfileSettingsPanel = new UserProfileSettingsPanel();
         
+        
+        subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         subPanels.put(OFFICER_ORDER_OVERVIEW_PANEL, officerOrderOverviewPanel);
         subPanels.put(OFFICER_INVOICE_OVERVIEW_PANEL,officerAdminInvoiceOverviewPanel);
         
@@ -94,7 +102,9 @@ public class SystemPanel extends JPanel{
         salesOrderOverviewPanel = new SalesPersonOrderOverviewPanel();
         createSaleOrderPanel = new CreateSaleOrderPanel();
         salesPersonInvoiceOverviewPanel = new SalesPersonInvoiceOverviewPanel();
+        userProfileSettingsPanel = new UserProfileSettingsPanel();
         
+        subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         subPanels.put(SALES_ORDER_OVERVIEW_PANEL, salesOrderOverviewPanel);
         subPanels.put(CREATE_SALE_ORDER_PANEL, createSaleOrderPanel);
         subPanels.put(SALES_INVOICE_OVERVIEW_PANEL, salesPersonInvoiceOverviewPanel);
