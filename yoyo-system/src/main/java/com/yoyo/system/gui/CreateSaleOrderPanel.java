@@ -242,18 +242,30 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
             // Show ConfirmCancelDialog to get additional input (replace null with your frame reference)
             String customerInput = JOptionPane.showInputDialog(null, "Please Enter Customer Name");
             
-            quantity = Integer.parseInt(quantityInputField.getText());
-            orderManager.loadOrders();
-            orderManager.addOrders(
-                new Order(
-                        quantity, 
-                        selectedFurniture.getId(),
-                        ApplicationContext.getLoginUser().getName(),
-                        customerInput,
-                        selectedFurniture.getPrice() * quantity
-                )
-            );
-            orderManager.saveOrders();
+            // Check if customerInput is not null (user didn't click Cancel) and not empty
+            if (customerInput != null && !customerInput.trim().isEmpty()) {
+                quantity = Integer.parseInt(quantityInputField.getText());
+                orderManager.loadOrders();
+                orderManager.addOrders(
+                    new Order(
+                            quantity, 
+                            selectedFurniture.getId(),
+                            ApplicationContext.getLoginUser().getName(),
+                            customerInput,
+                            selectedFurniture.getPrice() * quantity
+                    )
+                );
+                orderManager.saveOrders();
+
+                // Show confirmation message
+                JOptionPane.showMessageDialog(null, "Save successful", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+            } else if (customerInput == null) {
+                // Show message when user clicks Cancel
+                JOptionPane.showMessageDialog(null, "Action cancelled", "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                // Show error message if input is empty
+                JOptionPane.showMessageDialog(null, "Please enter a valid customer name", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
