@@ -73,22 +73,7 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
     
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-//        order = filteredOrders.get(rowIndex);
-//        switch (columnIndex){
-//            case 6:
-//                order.setStatus( (String) value );
-//                break;
-//        }
-//        
-//        // Now, find the corresponding order in the original 'orders' list and update it
-//        for (Order originalOrder : orders) {
-//            if (originalOrder.equals(order)) {
-//                originalOrder.copyFrom(order);
-//                break;
-//            }
-//        }
-//        
-//        fireTableCellUpdated(rowIndex, columnIndex);
+
     }
 
     @Override

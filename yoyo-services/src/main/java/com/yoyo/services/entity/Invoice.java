@@ -49,19 +49,19 @@ public class Invoice {
         this.status = status;
     }
 
-    public void setInvoiceNo(String invoiceNo) {
+    private void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
     }
 
-    public void setTotalPrice(Double totalPrice) {
+    private void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-    public void setSalesPersonName(String salesPersonName) {
+    private void setSalesPersonName(String salesPersonName) {
         this.salesPersonName = salesPersonName;
     }
 
-    public void setCustomerName(String customerName) {
+    private void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
     

@@ -101,14 +101,7 @@ public class FurnitureTableModel extends AbstractTableModel implements CustomTab
     
     @Override
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
-        furniture = filteredFurnitures.get(rowIndex);
-        switch (columnIndex){
-            case 0 -> furniture.setId((Long)value);
-            case 1 -> furniture.setName((String) value);
-            case 2 -> furniture.setCategory((String) value);
-            case 3 -> furniture.setPrice((Double) value);
-            case 4 -> furniture.setDescription((String) value);
-        }
+        
     }
     
     @Override
