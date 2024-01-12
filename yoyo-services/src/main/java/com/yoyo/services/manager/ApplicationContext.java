@@ -13,4 +13,7 @@ public class ApplicationContext {
         ApplicationContext.loginUser = loginUser;
     }
     
+    public static void removeLoginUser(){
+        loginUser=null;
+    }
 }

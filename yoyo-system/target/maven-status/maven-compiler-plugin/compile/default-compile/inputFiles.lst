@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\CustomTableModel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemProgram.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel.java
@@ -8,6 +7,7 @@ C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\Sales
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\CustomTableCellEditor.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\dialog\AddUserDialog.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\AcceptOrderButtonEditor.java
+C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\SalesPersonSalesOverviewPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\LoginPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\AdminUserTablePanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\SalesPersonOrderTableModel.java
@@ -20,34 +20,8 @@ C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\Sales
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemWindow.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\AdminUserTableModel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\OfficerOrderTableModel.java
+C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\UserProfileSettingsPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\DeleteButtonEditor.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\renderer\AcceptOrderButtonRenderer.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\renderer\DeleteButtonRenderer.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\UserRoleCellEditor.java
-=======
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemWindow.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\SalesPersonOrderOverviewPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\CustomTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\YoyoSystem.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\FurnitureTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\LoginPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\AcceptOrderButtonEditor.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemProgram.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\renderer\AcceptOrderButtonRenderer.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\AdminUserTablePanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\CreateSaleOrderPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\CustomTableCellEditor.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\OfficerInvoiceTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\UserRoleCellEditor.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\dialog\AddUserDialog.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\OfficerOrderTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\SalesPersonInvoiceTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\renderer\DeleteButtonRenderer.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\OfficerOrderOverviewPanel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\SalesPersonOrderTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\AdminUserTableModel.java
-C:\Users\User\Desktop\APU\Degree Year 2 Sem 1\Object Oriented Development with Java\Assignment\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\DeleteButtonEditor.java
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb

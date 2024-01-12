@@ -122,8 +122,11 @@ public class UserManager {
      public String changeCredentials(String username, String password) {
         // Check whether username has been repeated
         for (User user : users) {
+            String[] currentCredentials = fileManager.readLine(findUserIndex());
             if (username.equals(user.getName())) {
                 return "Username has been used. Please try another one.";
+            }else if (username.equals(currentCredentials[0])){
+                return "true";
             }
         }
 
