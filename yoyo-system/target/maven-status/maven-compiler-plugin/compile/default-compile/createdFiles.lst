@@ -3,11 +3,11 @@ com\yoyo\system\gui\AdminUserTablePanel$2.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$6.class
 com\yoyo\system\model\OfficerInvoiceTableModel.class
 com\yoyo\system\SystemPanel.class
+com\yoyo\system\gui\LoginPanel$2.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$4.class
 com\yoyo\system\gui\AdminUserTablePanel.class
 com\yoyo\system\gui\CreateSaleOrderPanel$2.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$6.class
-com\yoyo\system\gui\SalesPersonSalesOverviewPanel.class
 com\yoyo\system\model\editor\UserRoleCellEditor.class
 com\yoyo\system\SystemProgram.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$8.class
@@ -23,6 +23,7 @@ com\yoyo\system\gui\SalesPersonOrderOverviewPanel.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$2.class
 com\yoyo\system\model\CustomTableModel.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$5.class
+com\yoyo\system\privtae.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$7.class
 com\yoyo\system\YoyoSystem.class
 com\yoyo\system\gui\AdminUserTablePanel$1.class
@@ -36,10 +37,10 @@ com\yoyo\system\gui\UserProfileSettingsPanel$1.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$4.class
 com\yoyo\system\gui\CreateSaleOrderPanel.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$4.class
+com\yoyo\system\gui\UserForgetPasswordPanel$2.class
 com\yoyo\system\gui\UserProfileSettingsPanel.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$1.class
 com\yoyo\system\gui\CreateSaleOrderPanel$8.class
-com\yoyo\system\gui\SalesPersonSalesOverviewPanel$1.class
 com\yoyo\system\gui\CreateSaleOrderPanel$5.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$1.class
 com\yoyo\system\gui\CreateSaleOrderPanel$4.class
@@ -59,6 +60,7 @@ com\yoyo\system\gui\CreateSaleOrderPanel$1.class
 com\yoyo\system\model\SalesPersonInvoiceTableModel.class
 com\yoyo\system\gui\LoginPanel.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$5.class
+com\yoyo\system\gui\UserForgetPasswordPanel.class
 com\yoyo\system\gui\AdminUserTablePanel$7.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$7.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$5.class
@@ -75,6 +77,7 @@ com\yoyo\system\model\AdminUserTableModel.class
 com\yoyo\system\model\SalesPersonOrderTableModel.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$7.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$6.class
+com\yoyo\system\gui\UserForgetPasswordPanel$1.class
 com\yoyo\system\gui\UserProfileSettingsPanel$2.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$3.class
 com\yoyo\system\gui\AdminUserTablePanel$6.class

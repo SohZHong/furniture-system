@@ -81,7 +81,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         invoiceNavBtn = new javax.swing.JButton();
         profileNavBtn = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(1440, 960));
+        setPreferredSize(new java.awt.Dimension(1440, 700));
 
         orderOverviewTable.setModel(tableModel);
         orderOverviewTable.setAutoscrolls(false);
@@ -199,8 +199,8 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                     .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(191, 191, 191)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(generateReportBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

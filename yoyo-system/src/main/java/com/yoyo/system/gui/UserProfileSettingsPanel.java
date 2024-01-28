@@ -1,5 +1,6 @@
 package com.yoyo.system.gui;
 
+import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
@@ -30,7 +31,7 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
 
     public UserProfileSettingsPanel() {
         username = loginUser.getName();
-        password = loginUser.getPassword();
+        password = SecurityUtils.decodeBase64Format(loginUser.getPassword());
         userManager = new UserManager();
         try {
             userManager.loadUsers();
@@ -191,8 +192,8 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
         );
         if (result == JOptionPane.YES_OPTION) {
             newName = usernameTxt.getText();
-            newPasswrd = passwordTxt.getText();
-            User updatedUser = new User(newName,newPasswrd,loginUser.getRole());
+            newPasswrd = SecurityUtils.decodeBase64Format(passwordTxt.getText());
+            User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
             String credentials = userManager.changeCredentials(newName,newPasswrd);
             if(credentials.equals("true")){
                 userManager.updateUsers(updatedUser);

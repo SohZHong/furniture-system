@@ -2,7 +2,7 @@ package com.yoyo.services.manager;
 
 import com.yoyo.services.entity.User;
 
-public class ApplicationContext {
+    public class ApplicationContext {
     private static User loginUser;
 
     public static User getLoginUser() {

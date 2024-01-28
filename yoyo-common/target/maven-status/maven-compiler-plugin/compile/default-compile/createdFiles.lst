@@ -8,6 +8,7 @@ com\yoyo\common\utils\ExcelUtils$RecordMapper.class
 com\yoyo\common\utils\FilterUtils.class
 com\yoyo\common\utils\UUID.class
 com\yoyo\common\constant\RoleConstants.class
+com\yoyo\common\utils\SecurityUtils.class
 com\yoyo\common\constant\StatusConstants.class
 com\yoyo\common\constant\SystemConstants.class
 com\yoyo\common\utils\ExcelUtils.class

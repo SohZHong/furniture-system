@@ -1,3 +1,4 @@
+C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\UserForgetPasswordPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\CustomTableModel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemProgram.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel.java
@@ -7,7 +8,6 @@ C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\Sales
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\CustomTableCellEditor.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\dialog\AddUserDialog.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\AcceptOrderButtonEditor.java
-C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\SalesPersonSalesOverviewPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\LoginPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\AdminUserTablePanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\SalesPersonOrderTableModel.java
@@ -20,6 +20,7 @@ C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\Sales
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\SystemWindow.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\AdminUserTableModel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\OfficerOrderTableModel.java
+C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\privtae.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\gui\UserProfileSettingsPanel.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\editor\DeleteButtonEditor.java
 C:\projects\furniture-system\yoyo-system\src\main\java\com\yoyo\system\model\renderer\AcceptOrderButtonRenderer.java
