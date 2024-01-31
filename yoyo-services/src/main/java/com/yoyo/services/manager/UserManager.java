@@ -67,7 +67,6 @@ public class UserManager {
                 User user = users.get(i);
                 String[] data = new String[4];
                 if(i == findUserIndex(updatedUser)){
-                    System.out.print("true");
                     data[0] = updatedUser.getName();
                     data[1] = updatedUser.getPassword();
                     data[2] = updatedUser.getPhoneNumber();
@@ -118,7 +117,6 @@ public class UserManager {
         for (User user: users){
             // decrypt base64 password
             decryptedPassword = SecurityUtils.decodeBase64Format(user.getPassword());
-            System.out.print(decryptedPassword);
             if (username.equals(user.getName()) && password.equals(decryptedPassword)) {
             // Successful login
                 return user;
@@ -138,12 +136,23 @@ public class UserManager {
         // when user does not exist
         return null;
     }
+    
+    public String checkIfDataExists(String username,String mobileNumber){
+        
+        for (User user : users) {
+            if(username.equals(user.getName()) ){
+                return "Username has been used. Please try another one.";
+            }else if(mobileNumber.equals(user.getPhoneNumber())){
+                return "Mobile Number has been used. Please try another one.";
+            }
+        }
+        return "true";
+    }
 
      public String changeCredentials(String username, String password) {
         // Check whether username has been repeated
         User loginUser = ApplicationContext.getLoginUser();
         for (User user : users) {
-            String[] currentCredentials = fileManager.readLine(findUserIndex(loginUser));
             if (username.equals(loginUser.getName())){
                 // if the current login user hasn't change name, set as true
                 return "true";

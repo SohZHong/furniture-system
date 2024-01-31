@@ -5,13 +5,8 @@ import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
-import com.yoyo.system.SystemPanel;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -192,7 +187,7 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
         );
         if (result == JOptionPane.YES_OPTION) {
             newName = usernameTxt.getText();
-            newPasswrd = SecurityUtils.decodeBase64Format(passwordTxt.getText());
+            newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
             User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
             String credentials = userManager.changeCredentials(newName,newPasswrd);
             if(credentials.equals("true")){

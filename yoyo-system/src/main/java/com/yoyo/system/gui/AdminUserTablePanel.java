@@ -18,10 +18,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
-import javax.swing.RowFilter.Entry;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 public class AdminUserTablePanel extends javax.swing.JPanel {
 
@@ -48,25 +44,25 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         // Assign filter to ensure input consistency
         userOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.USERNAME_REGEX)));
         userOverviewTable.getColumnModel().getColumn(1).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PASSWORD_REGEX)));
-
+        userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PHONE_NUMBER_REGEX)));
         // Setting custom cell renderer for table
-        userOverviewTable.getColumnModel().getColumn(3).setCellRenderer(new DeleteButtonRenderer());
+        userOverviewTable.getColumnModel().getColumn(4).setCellRenderer(new DeleteButtonRenderer());
         
         // Setting custom cell editor for table
-        userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new UserRoleCellEditor(userManager));
-        userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
+        userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new UserRoleCellEditor(userManager));
+        userOverviewTable.getColumnModel().getColumn(4).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
 
         // Setting a RowFilter to exclude the row with the login user name
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
-        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
-            @Override
-            public boolean include(Entry<? extends Object, ? extends Object> entry) {
-                String userName = (String) entry.getValue(0);
-                return !userName.equals(ApplicationContext.getLoginUser().getName());
-            }
-        };
-        sorter.setRowFilter(rowFilter);
-        userOverviewTable.setRowSorter(sorter);
+//        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+//        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
+//            @Override
+//            public boolean include(Entry<? extends Object, ? extends Object> entry) {
+//                String userName = (String) entry.getValue(0);
+//                return !userName.equals(ApplicationContext.getLoginUser().getName());
+//            }
+//        };
+//        sorter.setRowFilter(rowFilter);
+//        userOverviewTable.setRowSorter(sorter);
     }
 
     /**

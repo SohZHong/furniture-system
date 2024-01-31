@@ -22,17 +22,28 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
 
     @Override
     public int getColumnCount() {
-        // Username, Password, Role, Action
-        return 4;
+        // Username, Password, PhoneNumber,  Role, Action
+        return 5;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex){
         switch (columnIndex) {
-            case 0: return String.class;
-            case 1: return String.class;
-            case 2: return String.class;
-            case 3: return JButton.class;
+            case 0 -> {
+                return String.class;
+            }
+            case 1 -> {
+                return String.class;
+            }
+            case 2 -> {
+                return String.class;
+            }
+            case 3 -> {
+                return String.class;
+            }
+            case 4 -> {
+                return JButton.class;
+            }
                 
         }
         return Object.class;
@@ -41,10 +52,21 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case 0: return "Username";
-            case 1: return "Password";
-            case 2: return "Role";
-            case 3: return "Action";
+            case 0 -> {
+                return "Username";
+            }
+            case 1 -> {
+                return "Password";     
+            }
+            case 2 -> {
+                return "Phone Number";
+            }
+            case 3 -> {
+                return "Role";
+            }
+            case 4 -> {
+                return "Action";
+            }
         }
         return null;
     }
@@ -60,6 +82,9 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
                 return user.getPassword();
             }
             case 2 -> {
+                return user.getPhoneNumber();
+            }
+            case 3 -> {
                 return user.getRole();
             }
         }
@@ -77,7 +102,8 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
         switch (columnIndex){
             case 0 -> user.setName((String) value);
             case 1 -> user.setPassword((String) value);
-            case 2 -> user.setRole((String) value);
+            case 2 -> user.setPhoneNumber((String) value);
+            case 3 -> user.setRole((String) value);
         }
         
         // Find the corresponding user in the original 'users' list and update it
@@ -100,7 +126,8 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
         for (User user : users) {
             query = switch (columnIndex) {
                 case 0 -> user.getName();
-                case 2 -> user.getRole();
+                case 2 -> user.getPhoneNumber();
+                case 3 -> user.getRole();
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {

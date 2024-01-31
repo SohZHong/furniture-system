@@ -27,7 +27,6 @@ com\yoyo\system\privtae.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$7.class
 com\yoyo\system\YoyoSystem.class
 com\yoyo\system\gui\AdminUserTablePanel$1.class
-com\yoyo\system\gui\AdminUserTablePanel$8.class
 com\yoyo\system\model\editor\CustomTableCellEditor.class
 com\yoyo\system\gui\UserProfileSettingsPanel$4.class
 com\yoyo\system\gui\LoginPanel$1.class
