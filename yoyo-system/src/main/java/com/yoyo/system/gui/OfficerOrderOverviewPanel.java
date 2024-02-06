@@ -57,7 +57,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new RedButtonRenderer("Decline"));
         
         // Setting custom cell editor for table
-        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
         orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new DeclineOrderButtonEditor(tableModel, orderOverviewTable));
     }
 

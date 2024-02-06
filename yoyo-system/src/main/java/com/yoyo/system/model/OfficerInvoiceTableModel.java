@@ -2,6 +2,7 @@ package com.yoyo.system.model;
 
 import com.yoyo.services.entity.Invoice;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 public class OfficerInvoiceTableModel extends AbstractTableModel implements CustomTableModel{
@@ -10,7 +11,7 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
     private Invoice invoice;
     
     private final boolean[] canEdit = new boolean[]{
-            false, false, false, false, false
+            false, false, false, false, false, true
     };
     
     public OfficerInvoiceTableModel(ArrayList<Invoice> invoices) {
@@ -26,7 +27,7 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
     @Override
     public int getColumnCount() {
         // invoiceNo, totalPrice, salesPersonName, customerName, status
-        return 5;
+        return 6;
     }
 
     @Override
@@ -37,6 +38,7 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
             case 2: return String.class;
             case 3: return String.class;
             case 4: return String.class;
+            case 5: return JButton.class;
         }
         return Object.class;
     }
@@ -111,6 +113,14 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
     
     @Override
     public void deleteRow(int rowIndex) {
+        if (rowIndex >= 0 && rowIndex < filteredInvoices.size()) {
+            Invoice deletedInvoice = filteredInvoices.remove(rowIndex);
+
+            // Find the corresponding order in the original 'invoice' list and remove it
+            invoices.removeIf(invoice -> invoice.equals(deletedInvoice));
+
+            fireTableRowsDeleted(rowIndex, rowIndex);
+        }
     }
 
     @Override
