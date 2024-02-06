@@ -16,7 +16,7 @@ import static com.yoyo.system.SystemPanel.SALES_ORDER_OVERVIEW_PANEL;
 import com.yoyo.system.model.SalesPersonOrderTableModel;
 import com.yoyo.system.model.editor.CustomTableCellEditor;
 import com.yoyo.system.model.editor.DeleteButtonEditor;
-import com.yoyo.system.model.renderer.DeleteButtonRenderer;
+import com.yoyo.system.model.renderer.RedButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -51,7 +51,7 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         initComponents();
         
         // Setting custom cell renderer for table
-        orderOverviewTable.getColumnModel().getColumn(8).setCellRenderer(new DeleteButtonRenderer());
+        orderOverviewTable.getColumnModel().getColumn(8).setCellRenderer(new RedButtonRenderer("Delete"));
         
         // Setting custom cell editor for table
         orderOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createDigitFilter()));

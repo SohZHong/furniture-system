@@ -8,10 +8,11 @@ import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.OFFICER_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
-import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import com.yoyo.system.model.OfficerOrderTableModel;
 import com.yoyo.system.model.editor.AcceptOrderButtonEditor;
-import com.yoyo.system.model.renderer.AcceptOrderButtonRenderer;
+import com.yoyo.system.model.editor.DeclineOrderButtonEditor;
+import com.yoyo.system.model.renderer.GreenButtonRenderer;
+import com.yoyo.system.model.renderer.RedButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -52,10 +53,12 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         orderOverviewTable.setRowSorter(sorter);
         
         // Setting custom cell renderer for table        
-        orderOverviewTable.getColumnModel().getColumn(6).setCellRenderer(new AcceptOrderButtonRenderer());
+        orderOverviewTable.getColumnModel().getColumn(6).setCellRenderer(new GreenButtonRenderer("Accept"));
+        orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new RedButtonRenderer("Decline"));
         
         // Setting custom cell editor for table
-        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new DeclineOrderButtonEditor(tableModel, orderOverviewTable));
     }
 
     /**

@@ -14,7 +14,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
-            false, false, false, false, false, false, true
+            false, false, false, false, false, false, true, true
     };
     
     public OfficerOrderTableModel(ArrayList<Order> orders) {
@@ -31,7 +31,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     @Override
     public int getColumnCount() {
         // Quantity, Item Code, SalesPerson, Unit Price, Total Price, Creation Date, Status
-        return 7;
+        return 8;
     }
 
     @Override
@@ -44,6 +44,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
             case 4: return Double.class;
             case 5: return String.class;
             case 6: return JButton.class;
+            case 7: return JButton.class;
         }
         return Object.class;
     }
@@ -86,7 +87,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         order = filteredOrders.get(rowIndex);
         switch (columnIndex){
-            case 6:
+            case 6, 7:
                 order.setStatus( (String) value );
                 break;
         }
@@ -134,7 +135,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2, 3, 4, 5, 6};
+        return new int[]{0, 1, 2, 3, 4, 5, 6, 7};
     }
     
     @Override

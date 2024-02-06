@@ -6,21 +6,23 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-public class DeleteButtonRenderer implements TableCellRenderer {
+public class RedButtonRenderer implements TableCellRenderer {
     
     private final JButton button;
+    private String btnText;
     
-    public DeleteButtonRenderer() {
+    public RedButtonRenderer(String btnText) {
         
-        button = new JButton();
-        button.setOpaque(true);
+        this.button = new JButton();
+        this.button.setOpaque(true);
+        this.btnText = btnText;
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value,
         boolean isSelected, boolean hasFocus, int row, int column) {
         
-        button.setText("Delete");
+        button.setText(btnText);
 
         //Button select animation
         button.setForeground(new Color(215,76,76));
