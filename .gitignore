@@ -23,3 +23,5 @@
 hs_err_pid*
 replay_pid*
 /yoyo-services/target/
+/yoyo-common/target/
+/yoyo-system/target/
