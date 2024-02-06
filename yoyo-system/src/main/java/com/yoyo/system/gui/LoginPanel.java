@@ -8,6 +8,8 @@ import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.SystemPanel;
 import static com.yoyo.system.SystemPanel.FORGET_PASSWORD_PANEL;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class LoginPanel extends javax.swing.JPanel {
@@ -143,26 +145,30 @@ public class LoginPanel extends javax.swing.JPanel {
         String name, passwrd;
         name = username.getText();
         passwrd = new String(password.getPassword());
-
-        User loginUser = userManager.login(name, passwrd);
-        
-        // If login successful
-        if (loginUser != null){
-            // Assign value for global access
-            ApplicationContext.setLoginUser(loginUser);
-            SystemPanel systemPanel = ((SystemPanel) getParent());
-            switch (loginUser.getRole()) {
-                    case RoleConstants.ADMINISTRATOR_ROLE -> systemPanel.loadAdminProfile();
-                    case RoleConstants.SALESPERSON_ROLE -> systemPanel.loadSalesPersonProfile();
-                    case RoleConstants.OFFICE_ROLE -> systemPanel.loadOfficerProfile();
-                    default -> {
-                        JOptionPane.showMessageDialog(this, "Incorrect user role.");
+        try {
+            userManager.loadUsers();
+            User loginUser = userManager.login(name, passwrd);
+            // If login successful
+            if (loginUser != null){
+                // Assign value for global access
+                ApplicationContext.setLoginUser(loginUser);
+                SystemPanel systemPanel = ((SystemPanel) getParent());
+                switch (loginUser.getRole()) {
+                        case RoleConstants.ADMINISTRATOR_ROLE -> systemPanel.loadAdminProfile();
+                        case RoleConstants.SALESPERSON_ROLE -> systemPanel.loadSalesPersonProfile();
+                        case RoleConstants.OFFICE_ROLE -> systemPanel.loadOfficerProfile();
+                        default -> {
+                            JOptionPane.showMessageDialog(this, "Incorrect user role.");
+                    }
                 }
             }
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Incorrect credentials. Please try again.");
-        }
+            else {
+                JOptionPane.showMessageDialog(this, "Incorrect credentials. Please try again.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+       
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void forgetPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgetPasswordBtnActionPerformed

@@ -6,6 +6,8 @@ import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -186,15 +188,22 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
             JOptionPane.YES_NO_OPTION
         );
         if (result == JOptionPane.YES_OPTION) {
-            newName = usernameTxt.getText();
-            newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
-            User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
-            String credentials = userManager.changeCredentials(newName,newPasswrd);
-            if(credentials.equals("true")){
-                userManager.updateUsers(updatedUser);
-            }else{
-                JOptionPane.showMessageDialog(this, credentials);
+            
+            try {
+                newName = usernameTxt.getText();
+                newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
+                User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
+                    userManager.loadUsers();
+                    String credentials = userManager.changeCredentials(newName,newPasswrd);
+                if(credentials.equals("true")){
+                    userManager.updateUsers(updatedUser);
+                }else{
+                    JOptionPane.showMessageDialog(this, credentials);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(UserProfileSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
