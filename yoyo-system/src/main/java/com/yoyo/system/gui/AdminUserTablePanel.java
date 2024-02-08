@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
 public class AdminUserTablePanel extends javax.swing.JPanel {
 
     private UserManager userManager;
@@ -41,10 +42,11 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         
         initComponents();
         
+        
         // Assign filter to ensure input consistency
         userOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.USERNAME_REGEX)));
-        userOverviewTable.getColumnModel().getColumn(1).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PASSWORD_REGEX)));
         userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PHONE_NUMBER_REGEX)));
+        
         // Setting custom cell renderer for table
         userOverviewTable.getColumnModel().getColumn(4).setCellRenderer(new DeleteButtonRenderer());
         

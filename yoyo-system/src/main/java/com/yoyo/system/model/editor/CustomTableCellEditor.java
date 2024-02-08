@@ -1,8 +1,10 @@
 package com.yoyo.system.model.editor;
 
+
 import java.awt.Component;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
+import javax.swing.InputVerifier;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -14,11 +16,13 @@ public class CustomTableCellEditor extends AbstractCellEditor implements TableCe
 
     private TableCellEditor editor;
     private final JTextField cellField;
+    private final InputVerifier verifier;
     private Object originalValue;
     
-    public CustomTableCellEditor(DocumentFilter documentFilter){
+    public CustomTableCellEditor(InputVerifier verifier){
+        this.verifier = verifier;
         this.cellField = new JTextField();
-        ((AbstractDocument) cellField.getDocument()).setDocumentFilter(documentFilter);
+        cellField.setInputVerifier(verifier);
     }
     
     @Override
@@ -33,8 +37,7 @@ public class CustomTableCellEditor extends AbstractCellEditor implements TableCe
 
     @Override
     public boolean stopCellEditing(){
-        if (cellField.getText().isBlank()){
-            JOptionPane.showMessageDialog(cellField, "Invalid Input");
+        if (!verifier.verify(cellField)){
             cellField.setText(String.valueOf( originalValue)); //Restore original value if failed validation
             return false;
         }
@@ -69,4 +72,6 @@ public class CustomTableCellEditor extends AbstractCellEditor implements TableCe
         // Default case: return the text as a String
         return text;
     }
+    
+
 }

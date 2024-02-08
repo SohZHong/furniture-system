@@ -56,7 +56,7 @@ public class CreateSaleOrderPanel extends javax.swing.JPanel {
         });
         
         // Assign filter to ensure quantity > 0
-        ((AbstractDocument) quantityInputField.getDocument()).setDocumentFilter(FilterUtils.createDigitFilter());
+        quantityInputField.setInputVerifier(FilterUtils.createDigitFilter());
     }
 
     /**

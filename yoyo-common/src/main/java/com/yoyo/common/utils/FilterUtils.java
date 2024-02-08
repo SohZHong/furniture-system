@@ -1,26 +1,38 @@
 package com.yoyo.common.utils;
 
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 
 public class FilterUtils {
-    public static DocumentFilter createDigitFilter() {
+    public static InputVerifier createDigitFilter() {
         return new DigitFilter();
     }
     
-    public static DocumentFilter createRegexFilter(String regex) {
+    public static InputVerifier createRegexFilter(String regex) {
         return new RegexFilter(regex);
     }
     
-    private static class DigitFilter extends DocumentFilter {
-        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-            String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-            currentText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+    private static class DigitFilter extends InputVerifier {
+        @Override
+        public boolean verify(JComponent input) {
+            //Get the input of textfield
+            String text = ((JTextField) input).getText();
 
-            if (isValidInput(currentText)) {
-                super.replace(fb, offset, length, text, attrs);
+            boolean isValid = isValidInput(text);
+            if (isValid && !text.isBlank()) {
+                return true;
             }
+            else {
+               JOptionPane.showMessageDialog(input, "Invalid digit format");
+            }
+
+            return isValid;
         }
 
         private boolean isValidInput(String input) {
@@ -33,25 +45,30 @@ public class FilterUtils {
         }
     }
     
-     private static class RegexFilter extends DocumentFilter {
+     private static class RegexFilter extends InputVerifier {
         private final String regex;
 
         public RegexFilter(String regex) {
             this.regex = regex;
         }
 
-        public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
-                throws BadLocationException {
-            String currentText = fb.getDocument().getText(0, fb.getDocument().getLength());
-            currentText = currentText.substring(0, offset) + text + currentText.substring(offset + length);
+        @Override
+        public boolean verify(JComponent input) {
+            //Get the input of textfield
+            String text = ((JTextField) input).getText();
 
-            if (isValidInput(currentText, regex)) {
-                super.replace(fb, offset, length, text, attrs);
+            boolean isValid = text.matches(regex);
+
+            if (isValid && !text.isBlank()) {
+                return true;
             }
+            else {
+               JOptionPane.showMessageDialog(input, "Invalid format");
+            }
+
+            return isValid;
         }
 
-        private boolean isValidInput(String input, String regex) {
-            return input.matches(regex);
-        }
+       
     }
 }

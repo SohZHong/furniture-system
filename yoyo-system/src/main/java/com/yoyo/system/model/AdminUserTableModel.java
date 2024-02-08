@@ -93,6 +93,9 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
+        if(columnIndex == 1){
+            return false;
+        }
         return true;
     }
     
@@ -145,7 +148,7 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2};
+        return new int[]{0, 1, 2, 3};
     }
     
     @Override
