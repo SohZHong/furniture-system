@@ -139,7 +139,7 @@ public class SalesPersonOrderTableModel extends AbstractTableModel implements Cu
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Quantity", "Item Code", "Customer Name", "Unit Price", "Total Price", "Creation Date", "Status"};
+        return new String[]{"Quantity", "Item Code", "Sales Person Name", "Customer Name", "Unit Price", "Total Price", "Creation Date", "Status"};
     }
 
     @Override

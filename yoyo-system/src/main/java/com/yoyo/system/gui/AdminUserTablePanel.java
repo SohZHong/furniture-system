@@ -57,18 +57,6 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         // Setting custom cell editor for table
         userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new UserRoleCellEditor(userManager));
         userOverviewTable.getColumnModel().getColumn(4).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
-
-        // Setting a RowFilter to exclude the row with the login user name
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
-        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
-            @Override
-            public boolean include(Entry<? extends Object, ? extends Object> entry) {
-                String userName = (String) entry.getValue(0);
-                return !userName.equals(ApplicationContext.getLoginUser().getName());
-            }
-        };
-        sorter.setRowFilter(rowFilter);
-        userOverviewTable.setRowSorter(sorter);
     }
 
     /**

@@ -125,7 +125,6 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     public void setFilter(String searchString, int columnIndex) {
         String query;
         filteredUsers.clear();
-        
         // Perform search based on column
         for (User user : users) {
             query = switch (columnIndex) {
@@ -144,7 +143,7 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Username", "Phone Number", "Role"};
+        return new String[]{"Username", "Password", "Phone Number", "Role"};
     }
 
     @Override
@@ -156,8 +155,7 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     public void deleteRow(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < filteredUsers.size()) {
             User deletedUser = filteredUsers.remove(rowIndex);
-
-            // Find the corresponding order in the original 'orders' list and remove it
+            // Find the corresponding order in the original 'users' list and remove it
             users.removeIf(user -> user.equals(deletedUser));
 
             fireTableRowsDeleted(rowIndex, rowIndex);

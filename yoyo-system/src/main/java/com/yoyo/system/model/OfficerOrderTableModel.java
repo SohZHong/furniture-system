@@ -130,7 +130,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Quantity", "Item Code", "SalesPerson", "Unit Price", "Total Price", "Creation Date"};
+        return new String[]{"Quantity", "Item Code", "SalesPerson", "Unit Price", "Total Price", "Creation Date", "Status"};
     }
 
     @Override
