@@ -8,7 +8,7 @@ import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
-import static com.yoyo.system.gui.UserProfileSettingsPanel.LOGIN_PANEL;
+import com.yoyo.system.SystemPanel;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -157,7 +157,7 @@ public class UserForgetPasswordPanel extends javax.swing.JPanel {
                 userManager.updateUsers(updatedPassword);
                 userManager.loadUsers();
                 JOptionPane.showMessageDialog(this,"Password has been updated!");
-                PanelManager.showPanel(LOGIN_PANEL);
+                PanelManager.showPanel(SystemPanel.LOGIN_PANEL);
 
             } catch (IOException ex) {
                 Logger.getLogger(UserForgetPasswordPanel.class.getName()).log(Level.SEVERE, null, ex);
