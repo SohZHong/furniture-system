@@ -1,11 +1,14 @@
 package com.yoyo.system.gui;
 
+import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
+import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,10 +24,11 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
     private String newName, newPasswrd;
     private final UserManager userManager;
     private final User loginUser = ApplicationContext.getLoginUser();
+    public static final String LOGIN_PANEL = "Login";
 
     public UserProfileSettingsPanel() {
         username = loginUser.getName();
-        password = loginUser.getPassword();
+        password = SecurityUtils.decodeBase64Format(loginUser.getPassword());
         userManager = new UserManager();
         try {
             userManager.loadUsers();
@@ -53,6 +57,9 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
         usernameTxt = new javax.swing.JTextField();
         passwordTxt = new javax.swing.JTextField();
         saveChangesBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
+        backBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel3.setText("Password:");
 
@@ -93,6 +100,23 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
             }
         });
 
+        logoutBtn.setText("Logout");
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+
+        backBtn.setText("Back");
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backBtnActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel5.setText("Profile Settings");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,16 +131,28 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel5))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(595, 595, 595)
-                        .addComponent(saveChangesBtn)))
-                .addContainerGap(358, Short.MAX_VALUE))
+                        .addGap(473, 473, 473)
+                        .addComponent(saveChangesBtn)
+                        .addGap(142, 142, 142)
+                        .addComponent(logoutBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(backBtn)))
+                .addContainerGap(357, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(455, Short.MAX_VALUE)
+                .addContainerGap(194, Short.MAX_VALUE)
+                .addComponent(backBtn)
+                .addGap(48, 48, 48)
+                .addComponent(jLabel5)
+                .addGap(126, 126, 126)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(usernameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -125,7 +161,9 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
                     .addComponent(passwordTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(92, 92, 92)
-                .addComponent(saveChangesBtn)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveChangesBtn)
+                    .addComponent(logoutBtn))
                 .addGap(225, 225, 225))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -150,24 +188,43 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
             JOptionPane.YES_NO_OPTION
         );
         if (result == JOptionPane.YES_OPTION) {
-            newName = usernameTxt.getText();
-            newPasswrd = passwordTxt.getText();
-            User updatedUser = new User(newName,newPasswrd,loginUser.getRole());
-            String credentials = userManager.changeCredentials(newName,newPasswrd);
-            if(credentials.equals("true")){
-                userManager.updateUsers(updatedUser);
-            }else{
-                JOptionPane.showMessageDialog(this, credentials);
+            
+            try {
+                newName = usernameTxt.getText();
+                newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
+                User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
+                    userManager.loadUsers();
+                    String credentials = userManager.changeCredentials(newName,newPasswrd);
+                if(credentials.equals("true")){
+                    userManager.updateUsers(updatedUser);
+                }else{
+                    JOptionPane.showMessageDialog(this, credentials);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(UserProfileSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
+        ApplicationContext.removeLoginUser();
+        PanelManager.showPanel(LOGIN_PANEL);
+    }//GEN-LAST:event_logoutBtnActionPerformed
+
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
+        PanelManager.previousPanel();
+    }//GEN-LAST:event_backBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField passwordTxt;
     private javax.swing.JButton saveChangesBtn;
     private javax.swing.JTextField usernameTxt;

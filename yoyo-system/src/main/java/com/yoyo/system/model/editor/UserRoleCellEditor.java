@@ -2,10 +2,7 @@ package com.yoyo.system.model.editor;
 
 import com.yoyo.services.manager.UserManager;
 import java.awt.Component;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;

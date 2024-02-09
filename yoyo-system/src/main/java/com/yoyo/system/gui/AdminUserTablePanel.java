@@ -18,10 +18,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.RowFilter;
-import javax.swing.RowFilter.Entry;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
+
 
 public class AdminUserTablePanel extends javax.swing.JPanel {
 
@@ -45,28 +42,29 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         
         initComponents();
         
+        
         // Assign filter to ensure input consistency
         userOverviewTable.getColumnModel().getColumn(0).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.USERNAME_REGEX)));
-        userOverviewTable.getColumnModel().getColumn(1).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PASSWORD_REGEX)));
-
+        userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PHONE_NUMBER_REGEX)));
+        
         // Setting custom cell renderer for table
         userOverviewTable.getColumnModel().getColumn(3).setCellRenderer(new RedButtonRenderer("Delete"));
         
         // Setting custom cell editor for table
-        userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new UserRoleCellEditor(userManager));
-        userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
+        userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new UserRoleCellEditor(userManager));
+        userOverviewTable.getColumnModel().getColumn(4).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
 
         // Setting a RowFilter to exclude the row with the login user name
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
-        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
-            @Override
-            public boolean include(Entry<? extends Object, ? extends Object> entry) {
-                String userName = (String) entry.getValue(0);
-                return !userName.equals(ApplicationContext.getLoginUser().getName());
-            }
-        };
-        sorter.setRowFilter(rowFilter);
-        userOverviewTable.setRowSorter(sorter);
+//        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+//        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
+//            @Override
+//            public boolean include(Entry<? extends Object, ? extends Object> entry) {
+//                String userName = (String) entry.getValue(0);
+//                return !userName.equals(ApplicationContext.getLoginUser().getName());
+//            }
+//        };
+//        sorter.setRowFilter(rowFilter);
+//        userOverviewTable.setRowSorter(sorter);
     }
 
     /**
@@ -90,7 +88,7 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         createUserBtn = new javax.swing.JButton();
         profileNavBtn = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(1440, 960));
+        setPreferredSize(new java.awt.Dimension(1440, 700));
 
         companyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/YOYO.png"))); // NOI18N
 
@@ -183,7 +181,7 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(companyIcon)
                     .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(searchInput)
@@ -192,13 +190,13 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
                         .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(searchBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(createUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(97, 97, 97))
+                    .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(210, 210, 210))
         );
     }// </editor-fold>//GEN-END:initComponents
 

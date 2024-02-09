@@ -3,6 +3,7 @@ package com.yoyo.services.manager;
 import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.constant.FilterConstants;
 import com.yoyo.common.constant.RoleConstants;
+import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +40,8 @@ public class UserManager {
                     new User(
                         content[0], 
                         content[1], 
-                        content[2]
+                        content[2],
+                        content[3]
                     )
                 );   
             }
@@ -63,15 +65,17 @@ public class UserManager {
             fileManager.clearFile();
             for (int i = 0; i < users.size(); i++){
                 User user = users.get(i);
-                String[] data = new String[3];
-                if(i == findUserIndex()){
+                String[] data = new String[4];
+                if(i == findUserIndex(updatedUser)){
                     data[0] = updatedUser.getName();
                     data[1] = updatedUser.getPassword();
-                    data[2] = updatedUser.getRole();
+                    data[2] = updatedUser.getPhoneNumber();
+                    data[3] = updatedUser.getRole();
                 }else{
                     data[0] = user.getName();
                     data[1] = user.getPassword();
-                    data[2] = user.getRole();
+                    data[2] = user.getPhoneNumber();
+                    data[3] = user.getRole();
                 }
                 fileManager.writeFile(data, true);
             }
@@ -87,11 +91,11 @@ public class UserManager {
             for (int i = 0; i < users.size(); i++){
 
                 User user = users.get(i);
-                String[] data = new String[3];
-
+                String[] data = new String[4];
                 data[0] = user.getName();
                 data[1] = user.getPassword();
-                data[2] = user.getRole();
+                data[2] = user.getPhoneNumber();
+                data[3] = user.getRole();
                 fileManager.writeFile(data, true);
             }
         } catch (IOException ex) {
@@ -109,8 +113,11 @@ public class UserManager {
     }
     
     public User login(String username, String password){
+        String decryptedPassword;
         for (User user: users){
-            if (username.equals(user.getName()) && password.equals(user.getPassword())) {
+            // decrypt base64 password
+            decryptedPassword = SecurityUtils.decodeBase64Format(user.getPassword());
+            if (username.equals(user.getName()) && password.equals(decryptedPassword)) {
             // Successful login
                 return user;
             }
@@ -118,11 +125,38 @@ public class UserManager {
         // Failed login
         return null;
     }
+    
+    public User validateUser(String username, String phoneNumber){
+        for (User user: users){
+            if (username.equals(user.getName()) && phoneNumber.equals(user.getPhoneNumber())) {
+            // User found
+                return user;
+            }
+        }
+        // when user does not exist
+        return null;
+    }
+    
+    public String checkIfDataExists(String username,String mobileNumber){
+        
+        for (User user : users) {
+            if(username.equals(user.getName()) ){
+                return "Username has been used. Please try another one.";
+            }else if(mobileNumber.equals(user.getPhoneNumber())){
+                return "Mobile Number has been used. Please try another one.";
+            }
+        }
+        return "true";
+    }
 
      public String changeCredentials(String username, String password) {
         // Check whether username has been repeated
+        User loginUser = ApplicationContext.getLoginUser();
         for (User user : users) {
-            if (username.equals(user.getName())) {
+            if (username.equals(loginUser.getName())){
+                // if the current login user hasn't change name, set as true
+                return "true";
+            }else if(username.equals(user.getName()) ){
                 return "Username has been used. Please try another one.";
             }
         }
@@ -139,11 +173,9 @@ public class UserManager {
         }
     }
     
-    public int findUserIndex(){
-        User loginUser = ApplicationContext.getLoginUser();
-        for(int i=0; i<users.size(); i++){
-            if(users.get(i).getName().equals(loginUser.getName())){
-//                System.out.print(i);
+    public int findUserIndex(User user){
+        for(int i=0; i<users.size(); i++){      
+            if(users.get(i).getName().equals(user.getName())){
                 return i;
             }
         }
