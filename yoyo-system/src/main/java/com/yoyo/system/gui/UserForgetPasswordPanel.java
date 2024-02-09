@@ -151,19 +151,11 @@ public class UserForgetPasswordPanel extends javax.swing.JPanel {
         // Check whether user exists
         User userExist = userManager.validateUser(name,phoneNumber);
         if(userExist != null){
-            try {
-                encryptedNewPasswrd = SecurityUtils.encodeBase64Format(newPasswrd);
-                User updatedPassword = new User(name, encryptedNewPasswrd, phoneNumber, userExist.getRole());
-                userManager.updateUsers(updatedPassword);
-                userManager.loadUsers();
-                JOptionPane.showMessageDialog(this,"Password has been updated!");
-                PanelManager.showPanel(SystemPanel.LOGIN_PANEL);
-
-            } catch (IOException ex) {
-                Logger.getLogger(UserForgetPasswordPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            
+            encryptedNewPasswrd = SecurityUtils.encodeBase64Format(newPasswrd);
+            User updatedPassword = new User(name, encryptedNewPasswrd, phoneNumber, userExist.getRole());
+            userManager.updateUsers(updatedPassword);
+            JOptionPane.showMessageDialog(this,"Password has been updated!");
+            PanelManager.showPanel(SystemPanel.LOGIN_PANEL);
         }else{
             JOptionPane.showMessageDialog(this,"User does not exist!");
         }

@@ -14,23 +14,22 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author User
  */
-public class GreenButtonRenderer extends DefaultTableCellRenderer{
-    private final JButton button;
-    private String btnText;
+public class GreenButtonRenderer extends ButtonRenderer {
 
     public GreenButtonRenderer(String btnText) {
-        this.button = new JButton();
-        this.button.setOpaque(true);
-        this.btnText = btnText;
+        super(btnText);
     }
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    public Component getTableCellRendererComponent(
+            JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+
         button.setText(btnText);
 
-        //Button select animation
-        button.setForeground(new Color(5,169,92));
-        button.setBackground(new Color(5,169,92));
+        // Button select animation
+        button.setForeground(new Color(5, 169, 92));
+        button.setBackground(new Color(5, 169, 92));
+
         return button;
     }
 }

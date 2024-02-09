@@ -188,22 +188,15 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
             JOptionPane.YES_NO_OPTION
         );
         if (result == JOptionPane.YES_OPTION) {
-            
-            try {
-                newName = usernameTxt.getText();
-                newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
-                User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
-                    userManager.loadUsers();
-                    String credentials = userManager.changeCredentials(newName,newPasswrd);
-                if(credentials.equals("true")){
-                    userManager.updateUsers(updatedUser);
-                }else{
-                    JOptionPane.showMessageDialog(this, credentials);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(UserProfileSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            newName = usernameTxt.getText();
+            newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
+            User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
+            String credentials = userManager.changeCredentials(newName,newPasswrd);
+            if(credentials.equals("true")){
+                userManager.updateUsers(updatedUser);
+            }else{
+                JOptionPane.showMessageDialog(this, credentials);
             }
-            
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed
 
