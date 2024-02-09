@@ -24,11 +24,11 @@ public class SystemPanel extends JPanel{
     
     //Initialize all needed panels
     private final LoginPanel loginPanel = new LoginPanel();
+    private UserForgetPasswordPanel userForgetPasswordPanel = new UserForgetPasswordPanel();;
     private UserProfileSettingsPanel userProfileSettingsPanel;
     private OfficerOrderOverviewPanel officerOrderOverviewPanel;
     private OfficerAdminInvoiceOverviewPanel officerAdminInvoiceOverviewPanel;
     private AdminUserTablePanel adminUserTablePanel;
-    private UserForgetPasswordPanel userForgetPasswordPanel;
     private SalesPersonOrderOverviewPanel salesOrderOverviewPanel;
     private CreateSaleOrderPanel createSaleOrderPanel;
     private SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel;
@@ -56,7 +56,7 @@ public class SystemPanel extends JPanel{
         
         subPanels = new HashMap<>();
         subPanels.put(LOGIN_PANEL, loginPanel);
-
+        subPanels.put(FORGET_PASSWORD_PANEL, userForgetPasswordPanel);
         panelManager = new PanelManager(this, subPanels);
         
         //Setting initial panel
@@ -68,9 +68,6 @@ public class SystemPanel extends JPanel{
     }
 
     private void showInitialPanel() {
-        userForgetPasswordPanel = new UserForgetPasswordPanel();
-        subPanels.put(FORGET_PASSWORD_PANEL, userForgetPasswordPanel);
-        panelManager.updateSubPanels(subPanels);
         PanelManager.showPanel(LOGIN_PANEL);
     }
     

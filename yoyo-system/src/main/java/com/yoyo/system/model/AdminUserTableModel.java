@@ -10,6 +10,10 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     private final ArrayList<User> filteredUsers;
     private User user;
     
+    private final boolean[] canEdit = new boolean[]{
+            true, false, true, true, true
+    };
+    
     public AdminUserTableModel(ArrayList<User> users) {
         this.users = users;
         this.filteredUsers = new ArrayList<>(users);
@@ -93,10 +97,7 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if(columnIndex == 1){
-            return false;
-        }
-        return true;
+        return canEdit[columnIndex];
     }
     
     @Override
@@ -143,7 +144,7 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Username", "Role"};
+        return new String[]{"Username", "Phone Number", "Role"};
     }
 
     @Override

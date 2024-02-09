@@ -5,6 +5,7 @@ import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
+import com.yoyo.system.SystemPanel;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +25,6 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
     private String newName, newPasswrd;
     private final UserManager userManager;
     private final User loginUser = ApplicationContext.getLoginUser();
-    public static final String LOGIN_PANEL = "Login";
 
     public UserProfileSettingsPanel() {
         username = loginUser.getName();
@@ -209,7 +209,7 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         ApplicationContext.removeLoginUser();
-        PanelManager.showPanel(LOGIN_PANEL);
+        PanelManager.showPanel(SystemPanel.LOGIN_PANEL);
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
