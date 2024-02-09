@@ -12,6 +12,7 @@ public abstract class ButtonRenderer extends DefaultTableCellRenderer{
     public ButtonRenderer(String btnText) {
         
         this.button = new JButton();
+        this.btnText = btnText;
         initializeButton();
     }
 
