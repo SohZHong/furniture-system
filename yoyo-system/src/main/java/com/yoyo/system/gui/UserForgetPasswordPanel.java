@@ -4,6 +4,7 @@
  */
 package com.yoyo.system.gui;
 
+import com.yoyo.common.constant.SecurityConstants;
 import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.PanelManager;
@@ -151,11 +152,15 @@ public class UserForgetPasswordPanel extends javax.swing.JPanel {
         // Check whether user exists
         User userExist = userManager.validateUser(name,phoneNumber);
         if(userExist != null){
-            encryptedNewPasswrd = SecurityUtils.encodeBase64Format(newPasswrd);
-            User updatedPassword = new User(name, encryptedNewPasswrd, phoneNumber, userExist.getRole());
-            userManager.updateUsers(updatedPassword);
-            JOptionPane.showMessageDialog(this,"Password has been updated!");
-            PanelManager.showPanel(SystemPanel.LOGIN_PANEL);
+            try {
+                encryptedNewPasswrd = SecurityUtils.encodeAESAndBase64Format(newPasswrd, SecurityConstants.SECRET_KEY);
+                User updatedPassword = new User(name, encryptedNewPasswrd, phoneNumber, userExist.getRole());
+                userManager.updateUsers(updatedPassword);
+                JOptionPane.showMessageDialog(this,"Password has been updated!");
+                PanelManager.showPanel(SystemPanel.LOGIN_PANEL);
+            } catch (Exception ex) {
+                Logger.getLogger(UserForgetPasswordPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
             JOptionPane.showMessageDialog(this,"User does not exist!");
         }

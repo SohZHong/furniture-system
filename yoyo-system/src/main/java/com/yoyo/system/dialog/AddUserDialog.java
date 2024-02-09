@@ -1,12 +1,15 @@
 package com.yoyo.system.dialog;
 
 import com.yoyo.common.constant.FilterConstants;
+import com.yoyo.common.constant.SecurityConstants;
 import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.UserManager;
 import java.awt.Frame;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -42,14 +45,19 @@ public final class AddUserDialog extends JDialog {
 
         if (option == JOptionPane.OK_OPTION) {
             if (isValidInput(userManager).equals("true")) {
-                String encryptedPassword = SecurityUtils.encodeBase64Format(getPassword());
-                userManager.addUsers(new User(
+                String encryptedPassword;
+                try {
+                    encryptedPassword = SecurityUtils.encodeAESAndBase64Format(getPassword(),SecurityConstants.SECRET_KEY);
+                    userManager.addUsers(new User(
                         getUsername(),
                         encryptedPassword,
                         getPhoneNumber(),
                         getRole()   
-                ));
-                userManager.saveUsers();
+                    ));
+                    userManager.saveUsers();
+                } catch (Exception ex) {
+                    Logger.getLogger(AddUserDialog.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 JOptionPane.showMessageDialog(null, isValidInput(userManager));
             }

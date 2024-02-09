@@ -1,5 +1,6 @@
 package com.yoyo.system.gui;
 
+import com.yoyo.common.constant.SecurityConstants;
 import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
@@ -28,11 +29,11 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
 
     public UserProfileSettingsPanel() {
         username = loginUser.getName();
-        password = SecurityUtils.decodeBase64Format(loginUser.getPassword());
         userManager = new UserManager();
         try {
+            password = SecurityUtils.decodeAESAndBase64Format(loginUser.getPassword(),SecurityConstants.SECRET_KEY);
             userManager.loadUsers();
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             System.err.println("Error loading user file");
         }
         initComponents();
@@ -188,14 +189,19 @@ public class UserProfileSettingsPanel extends javax.swing.JPanel {
             JOptionPane.YES_NO_OPTION
         );
         if (result == JOptionPane.YES_OPTION) {
-            newName = usernameTxt.getText();
-            newPasswrd = SecurityUtils.encodeBase64Format(passwordTxt.getText());
-            User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
-            String credentials = userManager.changeCredentials(newName,newPasswrd);
-            if(credentials.equals("true")){
-                userManager.updateUsers(updatedUser);
-            }else{
-                JOptionPane.showMessageDialog(this, credentials);
+            
+                newName = usernameTxt.getText();
+            try {
+                newPasswrd = SecurityUtils.encodeAESAndBase64Format(passwordTxt.getText(),SecurityConstants.SECRET_KEY);
+                User updatedUser = new User(newName, newPasswrd, loginUser.getPhoneNumber(), loginUser.getRole());
+                String credentials = userManager.changeCredentials(newName,newPasswrd);
+                if(credentials.equals("true")){
+                    userManager.updateUsers(updatedUser);
+                }else{
+                    JOptionPane.showMessageDialog(this, credentials);
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(UserProfileSettingsPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_saveChangesBtnActionPerformed

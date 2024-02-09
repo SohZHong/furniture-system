@@ -3,6 +3,7 @@ package com.yoyo.services.manager;
 import com.yoyo.common.constant.DataConstants;
 import com.yoyo.common.constant.FilterConstants;
 import com.yoyo.common.constant.RoleConstants;
+import com.yoyo.common.constant.SecurityConstants;
 import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import java.io.IOException;
@@ -115,11 +116,15 @@ public class UserManager {
     public User login(String username, String password){
         String decryptedPassword;
         for (User user: users){
-            // decrypt base64 password
-            decryptedPassword = SecurityUtils.decodeBase64Format(user.getPassword());
-            if (username.equals(user.getName()) && password.equals(decryptedPassword)) {
-            // Successful login
-                return user;
+            try {
+                // decrypt base64 password
+                decryptedPassword = SecurityUtils.decodeAESAndBase64Format(user.getPassword(),SecurityConstants.SECRET_KEY);
+                if (username.equals(user.getName()) && password.equals(decryptedPassword)) {
+                // Successful login
+                    return user;
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(UserManager.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         // Failed login
