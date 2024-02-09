@@ -4,11 +4,12 @@
  */
 package com.yoyo.system.gui;
 
+import com.yoyo.common.constant.SecurityConstants;
 import com.yoyo.common.utils.SecurityUtils;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
-import static com.yoyo.system.gui.UserProfileSettingsPanel.LOGIN_PANEL;
+import static com.yoyo.system.SystemPanel.LOGIN_PANEL;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -152,18 +153,17 @@ public class UserForgetPasswordPanel extends javax.swing.JPanel {
         User userExist = userManager.validateUser(name,phoneNumber);
         if(userExist != null){
             try {
-                encryptedNewPasswrd = SecurityUtils.encodeBase64Format(newPasswrd);
+                encryptedNewPasswrd = SecurityUtils.encodeAESAndBase64Format(newPasswrd,SecurityConstants.SECRET_KEY);
                 User updatedPassword = new User(name, encryptedNewPasswrd, phoneNumber, userExist.getRole());
                 userManager.updateUsers(updatedPassword);
                 userManager.loadUsers();
                 JOptionPane.showMessageDialog(this,"Password has been updated!");
                 PanelManager.showPanel(LOGIN_PANEL);
-
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 Logger.getLogger(UserForgetPasswordPanel.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            
+        
         }else{
             JOptionPane.showMessageDialog(this,"User does not exist!");
         }

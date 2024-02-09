@@ -48,7 +48,7 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         userOverviewTable.getColumnModel().getColumn(2).setCellEditor(new CustomTableCellEditor(FilterUtils.createRegexFilter(FilterConstants.PHONE_NUMBER_REGEX)));
         
         // Setting custom cell renderer for table
-        userOverviewTable.getColumnModel().getColumn(3).setCellRenderer(new RedButtonRenderer("Delete"));
+        userOverviewTable.getColumnModel().getColumn(4).setCellRenderer(new RedButtonRenderer("Delete"));
         
         // Setting custom cell editor for table
         userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new UserRoleCellEditor(userManager));
