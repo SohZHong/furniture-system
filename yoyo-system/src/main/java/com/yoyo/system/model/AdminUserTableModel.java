@@ -10,6 +10,10 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     private final ArrayList<User> filteredUsers;
     private User user;
     
+    private final boolean[] canEdit = new boolean[]{
+            true, false, true, true, true
+    };
+    
     public AdminUserTableModel(ArrayList<User> users) {
         this.users = users;
         this.filteredUsers = new ArrayList<>(users);
@@ -22,17 +26,28 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
 
     @Override
     public int getColumnCount() {
-        // Username, Password, Role, Action
-        return 4;
+        // Username, Password, PhoneNumber,  Role, Action
+        return 5;
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex){
         switch (columnIndex) {
-            case 0: return String.class;
-            case 1: return String.class;
-            case 2: return String.class;
-            case 3: return JButton.class;
+            case 0 -> {
+                return String.class;
+            }
+            case 1 -> {
+                return String.class;
+            }
+            case 2 -> {
+                return String.class;
+            }
+            case 3 -> {
+                return String.class;
+            }
+            case 4 -> {
+                return JButton.class;
+            }
                 
         }
         return Object.class;
@@ -41,10 +56,21 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case 0: return "Username";
-            case 1: return "Password";
-            case 2: return "Role";
-            case 3: return "Action";
+            case 0 -> {
+                return "Username";
+            }
+            case 1 -> {
+                return "Password";     
+            }
+            case 2 -> {
+                return "Phone Number";
+            }
+            case 3 -> {
+                return "Role";
+            }
+            case 4 -> {
+                return "Action";
+            }
         }
         return null;
     }
@@ -60,6 +86,9 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
                 return user.getPassword();
             }
             case 2 -> {
+                return user.getPhoneNumber();
+            }
+            case 3 -> {
                 return user.getRole();
             }
         }
@@ -68,7 +97,7 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return true;
+        return canEdit[columnIndex];
     }
     
     @Override
@@ -77,7 +106,8 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
         switch (columnIndex){
             case 0 -> user.setName((String) value);
             case 1 -> user.setPassword((String) value);
-            case 2 -> user.setRole((String) value);
+            case 2 -> user.setPhoneNumber((String) value);
+            case 3 -> user.setRole((String) value);
         }
         
         // Find the corresponding user in the original 'users' list and update it
@@ -95,12 +125,12 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
     public void setFilter(String searchString, int columnIndex) {
         String query;
         filteredUsers.clear();
-        
         // Perform search based on column
         for (User user : users) {
             query = switch (columnIndex) {
                 case 0 -> user.getName();
-                case 2 -> user.getRole();
+                case 2 -> user.getPhoneNumber();
+                case 3 -> user.getRole();
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
@@ -113,20 +143,19 @@ public class AdminUserTableModel extends AbstractTableModel implements CustomTab
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Username", "Role"};
+        return new String[]{"Username", "Password", "Phone Number", "Role"};
     }
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2};
+        return new int[]{0, 1, 2, 3};
     }
     
     @Override
     public void deleteRow(int rowIndex) {
         if (rowIndex >= 0 && rowIndex < filteredUsers.size()) {
             User deletedUser = filteredUsers.remove(rowIndex);
-
-            // Find the corresponding order in the original 'orders' list and remove it
+            // Find the corresponding order in the original 'users' list and remove it
             users.removeIf(user -> user.equals(deletedUser));
 
             fireTableRowsDeleted(rowIndex, rowIndex);

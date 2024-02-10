@@ -105,4 +105,5 @@ public class InvoiceManager {
     public void overwriteInvoicesList(ArrayList<Invoice> newInvoices) throws IOException{
         this.invoices = newInvoices;
     }
+    
 }

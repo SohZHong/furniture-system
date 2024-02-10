@@ -3,9 +3,13 @@ package com.yoyo.system.gui;
 import com.yoyo.common.constant.RoleConstants;
 import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
+import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.SystemPanel;
+import static com.yoyo.system.SystemPanel.FORGET_PASSWORD_PANEL;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class LoginPanel extends javax.swing.JPanel {
@@ -21,6 +25,8 @@ public class LoginPanel extends javax.swing.JPanel {
         }
         
         initComponents();
+        username.setText("");
+        password.setText("");
     }
 
     /**
@@ -33,13 +39,13 @@ public class LoginPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         loginBtn = new javax.swing.JButton();
-        password = new javax.swing.JTextField();
         UsernameLabel = new javax.swing.JLabel();
         PasswordLabel = new javax.swing.JLabel();
         companyLogo = new javax.swing.JLabel();
         Title = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        forgotPasswordBtn = new javax.swing.JButton();
+        password = new javax.swing.JPasswordField();
+        forgetPasswordBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 233, 221));
         setMaximumSize(new java.awt.Dimension(1440, 960));
@@ -53,8 +59,6 @@ public class LoginPanel extends javax.swing.JPanel {
                 loginBtnActionPerformed(evt);
             }
         });
-
-        password.setMaximumSize(new java.awt.Dimension(570, 40));
 
         UsernameLabel.setFont(new java.awt.Font("Rockwell", 0, 36)); // NOI18N
         UsernameLabel.setText("Username:");
@@ -72,14 +76,12 @@ public class LoginPanel extends javax.swing.JPanel {
 
         username.setMaximumSize(new java.awt.Dimension(570, 40));
 
-        forgotPasswordBtn.setBackground(new java.awt.Color(255, 233, 221));
-        forgotPasswordBtn.setFont(new java.awt.Font("Rockwell", 0, 24)); // NOI18N
-        forgotPasswordBtn.setText("Forgot Password?");
-        forgotPasswordBtn.setBorder(null);
-        forgotPasswordBtn.setOpaque(true);
-        forgotPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
+        forgetPasswordBtn.setBackground(new java.awt.Color(255, 233, 221));
+        forgetPasswordBtn.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
+        forgetPasswordBtn.setText("Forget Password?");
+        forgetPasswordBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                forgotPasswordBtnActionPerformed(evt);
+                forgetPasswordBtnActionPerformed(evt);
             }
         });
 
@@ -90,27 +92,30 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(249, 249, 249)
                 .addComponent(Title)
-                .addContainerGap(563, Short.MAX_VALUE))
+                .addContainerGap(205, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(565, 565, 565)
                 .addComponent(companyLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(609, 609, 609)
+                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(forgotPasswordBtn)
+                    .addComponent(forgetPasswordBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(UsernameLabel)
                             .addComponent(PasswordLabel))
-                        .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(611, 611, 611)
-                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(82, 82, 82)
+                                .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,57 +123,57 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addComponent(companyLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(Title)
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UsernameLabel))
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(Title)
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(UsernameLabel))
-                                .addGap(53, 53, 53)
-                                .addComponent(PasswordLabel))
-                            .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(142, 142, 142))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 330, Short.MAX_VALUE)
-                        .addComponent(forgotPasswordBtn)
-                        .addGap(87, 87, 87)))
+                    .addComponent(PasswordLabel)
+                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(forgetPasswordBtn)
+                .addGap(24, 24, 24)
                 .addComponent(loginBtn)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         String name, passwrd;
         name = username.getText();
-        passwrd = password.getText();
-
-        User loginUser = userManager.login(name, passwrd);
-        // If login successful
-        if (loginUser != null){
-            // Assign value for global access
-            ApplicationContext.setLoginUser(loginUser);
-            SystemPanel systemPanel = ((SystemPanel) getParent());
-            switch (loginUser.getRole()) {
-                    case RoleConstants.ADMINISTRATOR_ROLE -> systemPanel.loadAdminProfile();
-                    case RoleConstants.SALESPERSON_ROLE -> systemPanel.loadSalesPersonProfile();
-                    case RoleConstants.OFFICE_ROLE -> systemPanel.loadOfficerProfile();
-                    default -> {
-                        JOptionPane.showMessageDialog(this, "Incorrect user role.");
+        passwrd = new String(password.getPassword());
+        try {
+            userManager.loadUsers();
+            User loginUser = userManager.login(name, passwrd);
+            // If login successful
+            if (loginUser != null){
+                // Assign value for global access
+                ApplicationContext.setLoginUser(loginUser);
+                SystemPanel systemPanel = ((SystemPanel) getParent());
+                switch (loginUser.getRole()) {
+                        case RoleConstants.ADMINISTRATOR_ROLE -> systemPanel.loadAdminProfile();
+                        case RoleConstants.SALESPERSON_ROLE -> systemPanel.loadSalesPersonProfile();
+                        case RoleConstants.OFFICE_ROLE -> systemPanel.loadOfficerProfile();
+                        default -> {
+                            JOptionPane.showMessageDialog(this, "Incorrect user role.");
+                    }
                 }
             }
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Incorrect credentials. Please try again.");
-        }
+            else {
+                JOptionPane.showMessageDialog(this, "Incorrect credentials. Please try again.");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+       
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void forgotPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgotPasswordBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_forgotPasswordBtnActionPerformed
+    private void forgetPasswordBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forgetPasswordBtnActionPerformed
+         PanelManager.showPanel(FORGET_PASSWORD_PANEL);
+    }//GEN-LAST:event_forgetPasswordBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -176,9 +181,9 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel Title;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JLabel companyLogo;
-    private javax.swing.JButton forgotPasswordBtn;
+    private javax.swing.JButton forgetPasswordBtn;
     private javax.swing.JButton loginBtn;
-    private javax.swing.JTextField password;
+    private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

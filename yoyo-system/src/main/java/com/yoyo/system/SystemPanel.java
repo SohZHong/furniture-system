@@ -9,6 +9,7 @@ import com.yoyo.system.gui.OfficerAdminInvoiceOverviewPanel;
 import com.yoyo.system.gui.OfficerOrderOverviewPanel;
 import com.yoyo.system.gui.SalesPersonInvoiceOverviewPanel;
 import com.yoyo.system.gui.SalesPersonOrderOverviewPanel;
+import com.yoyo.system.gui.UserForgetPasswordPanel;
 import com.yoyo.system.gui.UserProfileSettingsPanel;
 import java.awt.Dimension;
 import java.awt.CardLayout;
@@ -23,6 +24,7 @@ public class SystemPanel extends JPanel{
     
     //Initialize all needed panels
     private final LoginPanel loginPanel = new LoginPanel();
+    private UserForgetPasswordPanel userForgetPasswordPanel = new UserForgetPasswordPanel();;
     private UserProfileSettingsPanel userProfileSettingsPanel;
     private OfficerOrderOverviewPanel officerOrderOverviewPanel;
     private OfficerAdminInvoiceOverviewPanel officerAdminInvoiceOverviewPanel;
@@ -32,7 +34,8 @@ public class SystemPanel extends JPanel{
     private SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel;
     // General Panel
     public static final String LOGIN_PANEL = "Login";
-    public static final String PROFILE_PANEL = "Profile";
+    public static final String PROFILE_PANEL = "Profile"; 
+    public static final String FORGET_PASSWORD_PANEL = "Forget Password";
     // Panel for Officer
     public static final String OFFICER_ORDER_OVERVIEW_PANEL = "Officer Order Overview";
     public static final String OFFICER_INVOICE_OVERVIEW_PANEL = "Officer Invoice Overview";
@@ -43,6 +46,8 @@ public class SystemPanel extends JPanel{
     public static final String CREATE_SALE_ORDER_PANEL = "Saleperson Create Order";
     public static final String SALES_INVOICE_OVERVIEW_PANEL = "Salesperson Invoice Overview";
     
+    public static final String SALES_TOTAL_SALES_OVERVIEW_PANEL = "Salesperson Sales Overview";
+    
     private HashMap<String, JPanel> subPanels;
     
     public SystemPanel () throws ParseException, InterruptedException, IOException{
@@ -51,7 +56,7 @@ public class SystemPanel extends JPanel{
         
         subPanels = new HashMap<>();
         subPanels.put(LOGIN_PANEL, loginPanel);
-
+        subPanels.put(FORGET_PASSWORD_PANEL, userForgetPasswordPanel);
         panelManager = new PanelManager(this, subPanels);
         
         //Setting initial panel
@@ -103,12 +108,10 @@ public class SystemPanel extends JPanel{
         createSaleOrderPanel = new CreateSaleOrderPanel();
         salesPersonInvoiceOverviewPanel = new SalesPersonInvoiceOverviewPanel();
         userProfileSettingsPanel = new UserProfileSettingsPanel();
-        
         subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         subPanels.put(SALES_ORDER_OVERVIEW_PANEL, salesOrderOverviewPanel);
         subPanels.put(CREATE_SALE_ORDER_PANEL, createSaleOrderPanel);
         subPanels.put(SALES_INVOICE_OVERVIEW_PANEL, salesPersonInvoiceOverviewPanel);
-        
         panelManager.updateSubPanels(subPanels);
         PanelManager.showPanel(SALES_ORDER_OVERVIEW_PANEL);
     }
