@@ -2,10 +2,12 @@ package com.yoyo.system;
 
 import static com.yoyo.common.constant.SystemConstants.*;
 import com.yoyo.services.manager.PanelManager;
+import com.yoyo.system.gui.AdminInvoiceOverviewPanel;
+import com.yoyo.system.gui.AdminOrderOverviewPanel;
 import com.yoyo.system.gui.AdminUserTablePanel;
 import com.yoyo.system.gui.CreateSaleOrderPanel;
 import com.yoyo.system.gui.LoginPanel;
-import com.yoyo.system.gui.OfficerAdminInvoiceOverviewPanel;
+import com.yoyo.system.gui.OfficerInvoiceOverviewPanel;
 import com.yoyo.system.gui.OfficerOrderOverviewPanel;
 import com.yoyo.system.gui.SalesPersonInvoiceOverviewPanel;
 import com.yoyo.system.gui.SalesPersonOrderOverviewPanel;
@@ -27,8 +29,10 @@ public class SystemPanel extends JPanel{
     private UserForgetPasswordPanel userForgetPasswordPanel = new UserForgetPasswordPanel();;
     private UserProfileSettingsPanel userProfileSettingsPanel;
     private OfficerOrderOverviewPanel officerOrderOverviewPanel;
-    private OfficerAdminInvoiceOverviewPanel officerAdminInvoiceOverviewPanel;
+    private OfficerInvoiceOverviewPanel officerInvoiceOverviewPanel;
     private AdminUserTablePanel adminUserTablePanel;
+    private AdminInvoiceOverviewPanel adminInvoiceOverviewPanel;
+    private AdminOrderOverviewPanel adminOrderOverviewPanel;
     private SalesPersonOrderOverviewPanel salesOrderOverviewPanel;
     private CreateSaleOrderPanel createSaleOrderPanel;
     private SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel;
@@ -40,6 +44,8 @@ public class SystemPanel extends JPanel{
     public static final String OFFICER_ORDER_OVERVIEW_PANEL = "Officer Order Overview";
     public static final String OFFICER_INVOICE_OVERVIEW_PANEL = "Officer Invoice Overview";
     // Panel for Admin
+    public static final String ADMIN_ORDER_OVERVIEW_PANEL = "Admin Order Overview";
+    public static final String ADMIN_INVOICE_OVERVIEW_PANEL = "Admin Invoice Overview";
     public static final String ADMIN_USER_OVERVIEW_PANEL = "Admin User Overview";
     // Panel for SalesPerson
     public static final String SALES_ORDER_OVERVIEW_PANEL = "Salesperson Order Overview";
@@ -80,9 +86,13 @@ public class SystemPanel extends JPanel{
     
     public void loadAdminProfile(){
         adminUserTablePanel = new AdminUserTablePanel();
+        adminOrderOverviewPanel = new AdminOrderOverviewPanel();
+        adminInvoiceOverviewPanel = new AdminInvoiceOverviewPanel();
         userProfileSettingsPanel = new UserProfileSettingsPanel();
         
         subPanels.put(ADMIN_USER_OVERVIEW_PANEL, adminUserTablePanel);
+        subPanels.put(ADMIN_ORDER_OVERVIEW_PANEL, adminOrderOverviewPanel);
+        subPanels.put(ADMIN_INVOICE_OVERVIEW_PANEL, adminInvoiceOverviewPanel);
         subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         
         panelManager.updateSubPanels(subPanels);
@@ -91,13 +101,12 @@ public class SystemPanel extends JPanel{
     
     public void loadOfficerProfile(){
         officerOrderOverviewPanel = new OfficerOrderOverviewPanel();
-        officerAdminInvoiceOverviewPanel = new OfficerAdminInvoiceOverviewPanel();
+        officerInvoiceOverviewPanel = new OfficerInvoiceOverviewPanel();
         userProfileSettingsPanel = new UserProfileSettingsPanel();
-        
         
         subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         subPanels.put(OFFICER_ORDER_OVERVIEW_PANEL, officerOrderOverviewPanel);
-        subPanels.put(OFFICER_INVOICE_OVERVIEW_PANEL,officerAdminInvoiceOverviewPanel);
+        subPanels.put(OFFICER_INVOICE_OVERVIEW_PANEL,officerInvoiceOverviewPanel);
         
         panelManager.updateSubPanels(subPanels);
         PanelManager.showPanel(OFFICER_ORDER_OVERVIEW_PANEL);
@@ -108,6 +117,7 @@ public class SystemPanel extends JPanel{
         createSaleOrderPanel = new CreateSaleOrderPanel();
         salesPersonInvoiceOverviewPanel = new SalesPersonInvoiceOverviewPanel();
         userProfileSettingsPanel = new UserProfileSettingsPanel();
+        
         subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         subPanels.put(SALES_ORDER_OVERVIEW_PANEL, salesOrderOverviewPanel);
         subPanels.put(CREATE_SALE_ORDER_PANEL, createSaleOrderPanel);

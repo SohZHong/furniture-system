@@ -27,7 +27,7 @@ public class DeleteButtonEditor extends DefaultCellEditor{
             if (confirmed == JOptionPane.YES_OPTION) {
                 stopCellEditing();
                 // Call the delete method in your table model to remove the row
-                tableModel.deleteRow(table.getSelectedRow());
+                tableModel.deleteRow(table.getRowSorter().convertRowIndexToModel(table.getSelectedRow()));
             } else {
                 fireEditingCanceled();
             }

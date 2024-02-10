@@ -6,6 +6,9 @@ import com.yoyo.services.entity.User;
 import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
+import static com.yoyo.system.SystemPanel.ADMIN_INVOICE_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.ADMIN_ORDER_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.ADMIN_USER_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import com.yoyo.system.dialog.AddUserDialog;
 import com.yoyo.system.model.AdminUserTableModel;
@@ -57,6 +60,18 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         // Setting custom cell editor for table
         userOverviewTable.getColumnModel().getColumn(3).setCellEditor(new UserRoleCellEditor(userManager));
         userOverviewTable.getColumnModel().getColumn(4).setCellEditor(new DeleteButtonEditor(tableModel,userOverviewTable));
+        
+        // Setting a RowFilter to exclude the row with the login user name
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
+        RowFilter<Object, Object> rowFilter = new RowFilter<Object, Object>() {
+            @Override
+            public boolean include(Entry<? extends Object, ? extends Object> entry) {
+                String userName = (String) entry.getValue(0);
+                return !userName.equals(ApplicationContext.getLoginUser().getName());
+            }
+        };
+        sorter.setRowFilter(rowFilter);
+        userOverviewTable.setRowSorter(sorter);
     }
 
     /**
@@ -78,6 +93,9 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         confirmBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
         createUserBtn = new javax.swing.JButton();
+        userNavBtn = new javax.swing.JButton();
+        orderNavBtn1 = new javax.swing.JButton();
+        invoiceNavBtn = new javax.swing.JButton();
         profileNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 700));
@@ -103,7 +121,7 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
             }
         });
 
-        resetBtn.setText("Reset");
+        resetBtn.setText("Refresh");
         resetBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetBtnActionPerformed(evt);
@@ -131,6 +149,27 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
             }
         });
 
+        userNavBtn.setText("User");
+        userNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userNavBtnActionPerformed(evt);
+            }
+        });
+
+        orderNavBtn1.setText("Order");
+        orderNavBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderNavBtn1ActionPerformed(evt);
+            }
+        });
+
+        invoiceNavBtn.setText("Invoice");
+        invoiceNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                invoiceNavBtnActionPerformed(evt);
+            }
+        });
+
         profileNavBtn.setText("Profile");
         profileNavBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,22 +187,28 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(companyIcon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(userNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(orderNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 510, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tableColumnBox, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
                         .addComponent(searchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(resetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(createUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tableScrollPane))
                 .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
@@ -172,7 +217,11 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(companyIcon)
-                    .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(orderNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(profileNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(userNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -239,6 +288,18 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
         new AddUserDialog(userManager);
     }//GEN-LAST:event_createUserBtnActionPerformed
 
+    private void userNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNavBtnActionPerformed
+        PanelManager.showPanel(ADMIN_USER_OVERVIEW_PANEL);
+    }//GEN-LAST:event_userNavBtnActionPerformed
+
+    private void orderNavBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderNavBtn1ActionPerformed
+        PanelManager.showPanel(ADMIN_ORDER_OVERVIEW_PANEL);
+    }//GEN-LAST:event_orderNavBtn1ActionPerformed
+
+    private void invoiceNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceNavBtnActionPerformed
+        PanelManager.showPanel(ADMIN_INVOICE_OVERVIEW_PANEL);
+    }//GEN-LAST:event_invoiceNavBtnActionPerformed
+
     private void profileNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileNavBtnActionPerformed
         PanelManager.showPanel(PROFILE_PANEL);
     }//GEN-LAST:event_profileNavBtnActionPerformed
@@ -249,12 +310,15 @@ public class AdminUserTablePanel extends javax.swing.JPanel {
     private javax.swing.JLabel companyIcon;
     private javax.swing.JButton confirmBtn;
     private javax.swing.JButton createUserBtn;
+    private javax.swing.JButton invoiceNavBtn;
+    private javax.swing.JButton orderNavBtn1;
     private javax.swing.JButton profileNavBtn;
     private javax.swing.JButton resetBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;
     private javax.swing.JComboBox<String> tableColumnBox;
     private javax.swing.JScrollPane tableScrollPane;
+    private javax.swing.JButton userNavBtn;
     private javax.swing.JTable userOverviewTable;
     // End of variables declaration//GEN-END:variables
 }

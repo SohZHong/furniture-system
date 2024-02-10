@@ -27,18 +27,23 @@
                   <Group type="102" attributes="0">
                       <Component id="companyIcon" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
+                      <Component id="userNavBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="orderNavBtn1" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="invoiceNavBtn" min="-2" pref="200" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="profileNavBtn" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="searchInput" min="-2" pref="510" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="tableColumnBox" min="-2" pref="191" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="189" max="32767" attributes="0"/>
                       <Component id="searchBtn" min="-2" pref="200" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="resetBtn" min="-2" pref="200" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="tableScrollPane" alignment="0" min="-2" pref="1314" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="createUserBtn" min="-2" pref="350" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -46,6 +51,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cancelBtn" min="-2" pref="280" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="tableScrollPane" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
@@ -57,7 +63,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="companyIcon" min="-2" max="-2" attributes="0"/>
-                  <Component id="profileNavBtn" min="-2" pref="68" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="invoiceNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="orderNavBtn1" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="profileNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="userNavBtn" alignment="3" min="-2" pref="68" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -137,7 +148,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="resetBtn">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Reset"/>
+        <Property name="text" type="java.lang.String" value="Refresh"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetBtnActionPerformed"/>
@@ -165,6 +176,30 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createUserBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="userNavBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="User"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userNavBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="orderNavBtn1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Order"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderNavBtn1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="invoiceNavBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Invoice"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="invoiceNavBtnActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="profileNavBtn">

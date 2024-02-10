@@ -29,7 +29,7 @@ public class UserRoleCellEditor extends AbstractCellEditor implements TableCellE
         // Clear existing items in the JComboBox
         roleField.removeAllItems();
 
-        // Populate the JComboBox with item codes from furnitures
+        // Populate the JComboBox with user roles
         rolesList = userManager.getRoles();
         roleField.setModel(new DefaultComboBoxModel<>(rolesList.toArray(new String[rolesList.size()])));
         

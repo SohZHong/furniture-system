@@ -6,39 +6,29 @@ import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.OFFICER_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
-import com.yoyo.system.model.OfficerInvoiceTableModel;
-import com.yoyo.system.model.editor.DeleteButtonEditor;
-import com.yoyo.system.model.renderer.RedButtonRenderer;
+import com.yoyo.system.model.InvoiceTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
+public class OfficerInvoiceOverviewPanel extends javax.swing.JPanel {
 
     private InvoiceManager invoiceManager;
     private ArrayList<Invoice> invoices;
-    private OfficerInvoiceTableModel tableModel;
+    private InvoiceTableModel tableModel;
     
-    public OfficerAdminInvoiceOverviewPanel() {
+    public OfficerInvoiceOverviewPanel() {
         // Initialize managers
         invoiceManager = new InvoiceManager();
         // Load orders
         try {
             invoiceManager.loadInvoices();
             invoices = invoiceManager.getInvoices();
-            tableModel = new OfficerInvoiceTableModel(invoices);
+            tableModel = new InvoiceTableModel(invoices);
         } catch (IOException ex) {
             System.err.println("Error loading invoices file");
         }
         
         initComponents();
-        
-        // Setting custom cell renderer for table        
-        orderOverviewTable.getColumnModel().getColumn(5).setCellRenderer(new RedButtonRenderer("Delete"));
-        
-        // Setting custom cell editor for table
-        orderOverviewTable.getColumnModel().getColumn(5).setCellEditor(new DeleteButtonEditor(tableModel, orderOverviewTable));
     }
 
     /**
@@ -61,8 +51,6 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
         orderNavBtn = new javax.swing.JButton();
         invoiceNavBtn = new javax.swing.JButton();
         profileNavBtn = new javax.swing.JButton();
-        confirmBtn = new javax.swing.JButton();
-        cancelBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 960));
 
@@ -117,20 +105,6 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
             }
         });
 
-        confirmBtn.setText("Save Changes");
-        confirmBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmBtnActionPerformed(evt);
-            }
-        });
-
-        cancelBtn.setText("Reset Changes");
-        cancelBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,12 +113,7 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(companyIcon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,10 +153,7 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(generateReportBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(generateReportBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(265, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -219,32 +185,9 @@ public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
         PanelManager.showPanel(PROFILE_PANEL);
     }//GEN-LAST:event_profileNavBtnActionPerformed
 
-    private void confirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmBtnActionPerformed
-
-        try {
-            invoiceManager.saveInvoices();
-            invoiceManager.loadInvoices();
-            tableModel.resetFilter();
-        } catch (IOException ex) {
-            Logger.getLogger(OfficerAdminInvoiceOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_confirmBtnActionPerformed
-
-    private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-
-        try {
-            invoiceManager.loadInvoices();
-            tableModel.resetFilter();
-        } catch (IOException ex) {
-            Logger.getLogger(OfficerAdminInvoiceOverviewPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cancelBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelBtn;
     private javax.swing.JLabel companyIcon;
-    private javax.swing.JButton confirmBtn;
     private javax.swing.JButton generateReportBtn;
     private javax.swing.JButton invoiceNavBtn;
     private javax.swing.JButton orderNavBtn;

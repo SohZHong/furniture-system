@@ -2,19 +2,18 @@ package com.yoyo.system.model;
 
 import com.yoyo.services.entity.Invoice;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
-public class OfficerInvoiceTableModel extends AbstractTableModel implements CustomTableModel{
+public class InvoiceTableModel extends AbstractTableModel implements CustomTableModel{
     private final ArrayList<Invoice> invoices;
     private final ArrayList<Invoice> filteredInvoices;
     private Invoice invoice;
     
     private final boolean[] canEdit = new boolean[]{
-            false, false, false, false, false, true
+            false, false, false, false, false
     };
     
-    public OfficerInvoiceTableModel(ArrayList<Invoice> invoices) {
+    public InvoiceTableModel(ArrayList<Invoice> invoices) {
         this.invoices = invoices;
         this.filteredInvoices = new ArrayList<>(invoices);
     }
@@ -27,7 +26,7 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
     @Override
     public int getColumnCount() {
         // invoiceNo, totalPrice, salesPersonName, customerName, status
-        return 6;
+        return 5;
     }
 
     @Override
@@ -38,7 +37,6 @@ public class OfficerInvoiceTableModel extends AbstractTableModel implements Cust
             case 2: return String.class;
             case 3: return String.class;
             case 4: return String.class;
-            case 5: return JButton.class;
         }
         return Object.class;
     }

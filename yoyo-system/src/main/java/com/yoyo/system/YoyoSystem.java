@@ -14,11 +14,7 @@ public class YoyoSystem {
         SwingUtilities.invokeLater(() -> {
             try {
                 new SystemProgram();
-            } catch (ParseException ex) {
-                Logger.getLogger(SystemProgram.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(SystemProgram.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
+            } catch (ParseException | InterruptedException | IOException ex) {
                 Logger.getLogger(SystemProgram.class.getName()).log(Level.SEVERE, null, ex);
             }
         });

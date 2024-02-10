@@ -35,7 +35,7 @@ public class DeclineOrderButtonEditor extends DefaultCellEditor{
             if (confirmed == JOptionPane.YES_OPTION) {
                 stopCellEditing();
                 try {
-                    tableModel.acceptOrder(table.getSelectedRow());
+                    tableModel.acceptOrder(table.getRowSorter().convertRowIndexToModel(table.getSelectedRow()));
                 } catch (IOException ex) {
                     Logger.getLogger(DeclineOrderButtonEditor.class.getName()).log(Level.SEVERE, null, ex);
                 }
