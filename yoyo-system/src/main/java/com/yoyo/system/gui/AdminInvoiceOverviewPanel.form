@@ -24,7 +24,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="generateReportBtn" alignment="0" min="-2" pref="350" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="generateReportBtn" min="-2" pref="350" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="cancelBtn1" min="-2" pref="281" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="companyIcon" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
@@ -78,7 +82,10 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="tableScrollPane" min="-2" pref="437" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="generateReportBtn" min="-2" pref="68" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="generateReportBtn" pref="68" max="32767" attributes="0"/>
+                  <Component id="cancelBtn1" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace pref="265" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -179,6 +186,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="userNavBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cancelBtn1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Retrieve Data"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelBtn1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

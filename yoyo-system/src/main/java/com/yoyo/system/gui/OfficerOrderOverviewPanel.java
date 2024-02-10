@@ -1,7 +1,7 @@
 package com.yoyo.system.gui;
 import com.yoyo.common.constant.StatusConstants;
-import com.yoyo.common.utils.ReportUtils;
 import com.yoyo.services.entity.Order;
+import com.yoyo.services.entity.OrderReport;
 import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.services.manager.OrderManager;
 import com.yoyo.services.manager.PanelManager;
@@ -31,7 +31,6 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     private ArrayList<Order> orders;
     private OfficerOrderTableModel tableModel;
     private InvoiceManager invoiceManager;
-    private ReportUtils reportUtils; 
     
     public OfficerOrderOverviewPanel() {
         // Initialize managers
@@ -211,7 +210,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(cancelBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,8 +237,8 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed
-        reportUtils = new ReportUtils();
-        reportUtils.OrderOverview(orderOverviewTable);
+        OrderReport report = new OrderReport(orderOverviewTable);
+        report.generateReport();
     }//GEN-LAST:event_generateReportBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
