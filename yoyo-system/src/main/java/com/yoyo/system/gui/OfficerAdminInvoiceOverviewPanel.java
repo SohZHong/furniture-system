@@ -8,19 +8,12 @@ import static com.yoyo.system.SystemPanel.OFFICER_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.OFFICER_ORDER_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import com.yoyo.system.model.OfficerInvoiceTableModel;
-<<<<<<< HEAD
-import java.awt.print.PrinterException;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.swing.JOptionPane;
-=======
 import com.yoyo.system.model.editor.DeleteButtonEditor;
 import com.yoyo.system.model.renderer.RedButtonRenderer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
->>>>>>> 30e3a5b6b9b9ae4a54c2f8e3bd92991ecf5a326b
 
 public class OfficerAdminInvoiceOverviewPanel extends javax.swing.JPanel {
 
