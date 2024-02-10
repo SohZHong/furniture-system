@@ -7,6 +7,7 @@ import java.text.ParseException;
 public class SystemProgram {
 
     private final UI ui;
+    private final SystemWindow systemWindow;
     
     public SystemProgram() throws ParseException, InterruptedException, IOException {
         
@@ -14,8 +15,7 @@ public class SystemProgram {
         
         ui.loadUI();
         
-        new SystemPanel();
-        new SystemWindow();
+        systemWindow = new SystemWindow();
         
     }
 

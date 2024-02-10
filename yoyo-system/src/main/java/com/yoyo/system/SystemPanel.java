@@ -26,7 +26,7 @@ public class SystemPanel extends JPanel{
     
     //Initialize all needed panels
     private final LoginPanel loginPanel = new LoginPanel();
-    private UserForgetPasswordPanel userForgetPasswordPanel = new UserForgetPasswordPanel();;
+    private final UserForgetPasswordPanel userForgetPasswordPanel = new UserForgetPasswordPanel();
     private UserProfileSettingsPanel userProfileSettingsPanel;
     private OfficerOrderOverviewPanel officerOrderOverviewPanel;
     private OfficerInvoiceOverviewPanel officerInvoiceOverviewPanel;

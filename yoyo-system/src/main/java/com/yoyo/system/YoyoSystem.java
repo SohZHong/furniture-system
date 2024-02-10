@@ -8,12 +8,14 @@ import javax.swing.SwingUtilities;
 
 public class YoyoSystem {
 
+    private static SystemProgram systemProgram;
+    
     public static void main(String[] args) {
         //Schedule a job for the event dispatch thread:
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(() -> {
             try {
-                new SystemProgram();
+                systemProgram = new SystemProgram();
             } catch (ParseException | InterruptedException | IOException ex) {
                 Logger.getLogger(SystemProgram.class.getName()).log(Level.SEVERE, null, ex);
             }
