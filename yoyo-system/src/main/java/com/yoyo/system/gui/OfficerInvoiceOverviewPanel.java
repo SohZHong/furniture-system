@@ -1,5 +1,6 @@
 package com.yoyo.system.gui;
 
+import com.yoyo.common.utils.ReportUtils;
 import com.yoyo.services.entity.Invoice;
 import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.services.manager.PanelManager;
@@ -15,6 +16,7 @@ public class OfficerInvoiceOverviewPanel extends javax.swing.JPanel {
     private InvoiceManager invoiceManager;
     private ArrayList<Invoice> invoices;
     private InvoiceTableModel tableModel;
+    private ReportUtils reportUtils;
     
     public OfficerInvoiceOverviewPanel() {
         // Initialize managers
@@ -159,6 +161,8 @@ public class OfficerInvoiceOverviewPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed
+        reportUtils = new ReportUtils();
+        reportUtils.InvoiceOverview(orderOverviewTable);
         // Add excel function to read model or whatever
     }//GEN-LAST:event_generateReportBtnActionPerformed
 
