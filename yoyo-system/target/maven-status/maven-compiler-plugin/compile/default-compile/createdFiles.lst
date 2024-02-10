@@ -6,72 +6,62 @@ com\yoyo\system\gui\LoginPanel$2.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$4.class
 com\yoyo\system\gui\AdminUserTablePanel.class
 com\yoyo\system\gui\CreateSaleOrderPanel$2.class
+com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$6.class
 com\yoyo\system\model\editor\UserRoleCellEditor.class
 com\yoyo\system\SystemProgram.class
+com\yoyo\system\gui\SalesPersonOrderOverviewPanel$8.class
 com\yoyo\system\model\editor\AcceptOrderButtonEditor.class
 com\yoyo\system\gui\AdminUserTablePanel$5.class
 com\yoyo\system\gui\CreateSaleOrderPanel$6.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$5.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$2.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$3.class
+com\yoyo\system\gui\CreateSaleOrderPanel$9.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$2.class
 com\yoyo\system\model\CustomTableModel.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$5.class
-<<<<<<< HEAD
-=======
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$7.class
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb
 com\yoyo\system\YoyoSystem.class
 com\yoyo\system\gui\AdminUserTablePanel$1.class
+com\yoyo\system\gui\AdminUserTablePanel$8.class
 com\yoyo\system\model\editor\CustomTableCellEditor.class
+com\yoyo\system\gui\UserProfileSettingsPanel$4.class
 com\yoyo\system\gui\LoginPanel$1.class
+com\yoyo\system\gui\OfficerOrderOverviewPanel$8.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$3.class
-<<<<<<< HEAD
-com\yoyo\system\gui\CreateSaleOrderPanel.class
-com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$4.class
-com\yoyo\system\gui\OfficerOrderOverviewPanel$1.class
-=======
+com\yoyo\system\gui\UserProfileSettingsPanel$1.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$4.class
 com\yoyo\system\gui\CreateSaleOrderPanel.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$4.class
+com\yoyo\system\gui\UserProfileSettingsPanel.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$1.class
 com\yoyo\system\gui\CreateSaleOrderPanel$8.class
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb
 com\yoyo\system\gui\CreateSaleOrderPanel$5.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$1.class
 com\yoyo\system\gui\CreateSaleOrderPanel$4.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$1.class
 com\yoyo\system\model\renderer\AcceptOrderButtonRenderer.class
-<<<<<<< HEAD
-=======
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$6.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$8.class
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb
 com\yoyo\system\dialog\AddUserDialog.class
 com\yoyo\system\gui\AdminUserTablePanel$4.class
 com\yoyo\system\model\OfficerOrderTableModel.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel.class
-<<<<<<< HEAD
-=======
 com\yoyo\system\gui\CreateSaleOrderPanel$7.class
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb
 com\yoyo\system\gui\OfficerOrderOverviewPanel$4.class
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$2.class
 com\yoyo\system\gui\CreateSaleOrderPanel$1.class
 com\yoyo\system\model\SalesPersonInvoiceTableModel.class
 com\yoyo\system\gui\LoginPanel.class
-<<<<<<< HEAD
-com\yoyo\system\gui\AdminUserTablePanel$7.class
-=======
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$5.class
 com\yoyo\system\gui\AdminUserTablePanel$7.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$7.class
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$5.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel.class
 com\yoyo\system\model\FurnitureTableModel.class
+com\yoyo\system\gui\UserProfileSettingsPanel$3.class
 com\yoyo\system\gui\CreateSaleOrderPanel$3.class
 com\yoyo\system\gui\OfficerAdminInvoiceOverviewPanel$2.class
 com\yoyo\system\gui\AdminUserTablePanel$3.class
@@ -79,11 +69,9 @@ com\yoyo\system\gui\OfficerOrderOverviewPanel$3.class
 com\yoyo\system\model\renderer\DeleteButtonRenderer.class
 com\yoyo\system\model\AdminUserTableModel.class
 com\yoyo\system\model\SalesPersonOrderTableModel.class
-<<<<<<< HEAD
-=======
 com\yoyo\system\gui\SalesPersonOrderOverviewPanel$7.class
 com\yoyo\system\gui\OfficerOrderOverviewPanel$6.class
->>>>>>> 729d86f3cdbaf3f00f5eaebf2b25674bf69323fb
+com\yoyo\system\gui\UserProfileSettingsPanel$2.class
 com\yoyo\system\gui\SalesPersonInvoiceOverviewPanel$3.class
 com\yoyo\system\gui\AdminUserTablePanel$6.class
 com\yoyo\system\model\editor\DeleteButtonEditor.class

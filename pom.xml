@@ -12,6 +12,7 @@
     </modules>
     <properties>
         <opencsv.version>5.9</opencsv.version>
+        <itextpdf.version>8.0.2</itextpdf.version>
         <java.version>19</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -21,6 +22,11 @@
                 <groupId>com.opencsv</groupId>
                 <artifactId>opencsv</artifactId>
                 <version>${opencsv.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.itextpdf</groupId>
+                <artifactId>layout</artifactId>
+                <version>${itextpdf.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

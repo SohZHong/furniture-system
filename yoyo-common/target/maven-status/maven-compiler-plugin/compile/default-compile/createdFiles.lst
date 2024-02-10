@@ -12,6 +12,6 @@ com\yoyo\common\constant\StatusConstants.class
 com\yoyo\common\constant\SystemConstants.class
 com\yoyo\common\utils\ExcelUtils.class
 com\yoyo\common\constant\DateConstants.class
-com\yoyo\common\utils\ImageUtils.class
+com\yoyo\common\utils\PDFHeaderFooterUtils.class
 com\yoyo\common\constant\DataConstants.class
 com\yoyo\common\utils\IdUtils.class

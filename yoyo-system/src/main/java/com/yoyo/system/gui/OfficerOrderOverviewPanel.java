@@ -1,6 +1,6 @@
 package com.yoyo.system.gui;
-
 import com.yoyo.common.constant.StatusConstants;
+import com.yoyo.common.utils.ReportUtils;
 import com.yoyo.services.entity.Order;
 import com.yoyo.services.manager.InvoiceManager;
 import com.yoyo.services.manager.OrderManager;
@@ -30,6 +30,7 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     private ArrayList<Order> orders;
     private OfficerOrderTableModel tableModel;
     private InvoiceManager invoiceManager;
+    private ReportUtils reportUtils; 
     
     public OfficerOrderOverviewPanel() {
         // Initialize managers
@@ -232,7 +233,8 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_confirmBtnActionPerformed
 
     private void generateReportBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportBtnActionPerformed
-        // Add excel function to read model or whatever
+        reportUtils = new ReportUtils();
+        reportUtils.OrderOverview(orderOverviewTable);
     }//GEN-LAST:event_generateReportBtnActionPerformed
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
