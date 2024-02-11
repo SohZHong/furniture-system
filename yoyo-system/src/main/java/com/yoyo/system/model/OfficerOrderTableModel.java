@@ -14,9 +14,9 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
-            false, false, false, false, false, false, true, true
+            true, false, true, true, false, false, true, true
     };
-    
+
     public OfficerOrderTableModel(ArrayList<Order> orders) {
         this.orders = orders;
         this.filteredOrders = new ArrayList<>(orders);
@@ -37,14 +37,30 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     @Override
     public Class<?> getColumnClass(int columnIndex){
         switch (columnIndex) {
-            case 0: return Integer.class;
-            case 1: return Long.class;
-            case 2: return String.class;
-            case 3: return Double.class;
-            case 4: return Double.class;
-            case 5: return String.class;
-            case 6: return JButton.class;
-            case 7: return JButton.class;
+            case 0 -> {
+                return Integer.class;
+            }
+            case 1 -> {
+                return Long.class;
+            }
+            case 2 -> {
+                return String.class;
+            }
+            case 3 -> {
+                return Double.class;
+            }
+            case 4 -> {
+                return Double.class;
+            }
+            case 5 -> {
+                return String.class;
+            }
+            case 6 -> {
+                return JButton.class;
+            }
+            case 7 -> {
+                return JButton.class;
+            }
         }
         return Object.class;
     }
@@ -87,11 +103,17 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     public void setValueAt(Object value, int rowIndex, int columnIndex) {
         order = filteredOrders.get(rowIndex);
         switch (columnIndex){
+            case 0:
+                order.setQuantity((Integer) value);
+            case 2:
+                order.setSalesPersonName((String) value);
+            case 3:
+                order.setCustomerName((String) value);
             case 6, 7:
                 order.setStatus( (String) value );
                 break;
         }
-        
+       
         // Now, find the corresponding order in the original 'orders' list and update it
         for (Order originalOrder : orders) {
             if (originalOrder.equals(order)) {
