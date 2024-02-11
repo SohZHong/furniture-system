@@ -10,13 +10,11 @@ import com.yoyo.services.manager.PanelManager;
 import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_ORDER_OVERVIEW_PANEL;
-import static com.yoyo.system.SystemPanel.SALES_TOTAL_SALES_OVERVIEW_PANEL;
 import com.yoyo.system.model.FurnitureTableModel;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.text.AbstractDocument;
 
 public class CreateSaleOrderPanel extends javax.swing.JPanel {
 
