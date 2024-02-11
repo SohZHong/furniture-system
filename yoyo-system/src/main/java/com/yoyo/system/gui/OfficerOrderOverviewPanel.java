@@ -49,16 +49,16 @@ public class OfficerOrderOverviewPanel extends javax.swing.JPanel {
         
         // Apply row filter for pending status
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(tableModel);
-        sorter.setRowFilter(RowFilter.regexFilter(StatusConstants.PENDING_ORDER, 6));
+        sorter.setRowFilter(RowFilter.regexFilter(StatusConstants.PENDING_ORDER, 7));
         orderOverviewTable.setRowSorter(sorter);
         
         // Setting custom cell renderer for table        
-        orderOverviewTable.getColumnModel().getColumn(6).setCellRenderer(new GreenButtonRenderer("Accept"));
-        orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new RedButtonRenderer("Decline"));
+        orderOverviewTable.getColumnModel().getColumn(7).setCellRenderer(new GreenButtonRenderer("Accept"));
+        orderOverviewTable.getColumnModel().getColumn(8).setCellRenderer(new RedButtonRenderer("Decline"));
         
         // Setting custom cell editor for table
-        orderOverviewTable.getColumnModel().getColumn(6).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
-        orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new DeclineOrderButtonEditor(tableModel, orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(7).setCellEditor(new AcceptOrderButtonEditor(tableModel, orderOverviewTable));
+        orderOverviewTable.getColumnModel().getColumn(8).setCellEditor(new DeclineOrderButtonEditor(tableModel, orderOverviewTable));
     }
 
     /**

@@ -14,7 +14,7 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
     private Order order;
     
     private final boolean[] canEdit = new boolean[]{
-            true, false, true, true, false, false, true, true
+            true, false, true, true, false, false, false, true, true
     };
 
     public OfficerOrderTableModel(ArrayList<Order> orders) {
@@ -30,8 +30,8 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
 
     @Override
     public int getColumnCount() {
-        // Quantity, Item Code, SalesPerson, Unit Price, Total Price, Creation Date, Status
-        return 8;
+        // Quantity, Item Code, SalesPerson, Customer Name, Unit Price, Total Price, Creation Date, Status
+        return 9;
     }
 
     @Override
@@ -47,18 +47,21 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
                 return String.class;
             }
             case 3 -> {
-                return Double.class;
+                return String.class;
             }
             case 4 -> {
                 return Double.class;
             }
             case 5 -> {
-                return String.class;
+                return Double.class;
             }
             case 6 -> {
-                return JButton.class;
+                return String.class;
             }
             case 7 -> {
+                return JButton.class;
+            }
+            case 8 -> {
                 return JButton.class;
             }
         }
@@ -71,10 +74,11 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
             case 0: return "Quantity";
             case 1: return "Item Code";
             case 2: return "SalesPerson";
-            case 3: return "Unit Price";
-            case 4: return "Total Price";
-            case 5: return "Creation Date";
-            case 6: return "Status";
+            case 3: return "Customer Name";
+            case 4: return "Unit Price";
+            case 5: return "Total Price";
+            case 6: return "Creation Date";
+            case 7: return "Status";
         }
         return null;
     }
@@ -86,10 +90,11 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
             case 0: return order.getQuantity();
             case 1: return order.getItemCode();
             case 2: return order.getSalesPersonName();
-            case 3: return order.getUnitPrice();
-            case 4: return order.getQuantity() * order.getUnitPrice();
-            case 5: return order.getCreationDate();
-            case 6: return order.getStatus();
+            case 3: return order.getCustomerName();
+            case 4: return order.getUnitPrice();
+            case 5: return order.getQuantity() * order.getUnitPrice();
+            case 6: return order.getCreationDate();
+            case 7: return order.getStatus();
         }
         return null;
     }
@@ -136,10 +141,11 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
                 case 0 -> String.valueOf(order.getQuantity());
                 case 1 -> String.valueOf(order.getItemCode());
                 case 2 -> order.getSalesPersonName();
-                case 3 -> String.valueOf(order.getUnitPrice());
-                case 4 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
-                case 5 -> order.getCreationDate();
-                case 6 -> order.getStatus();
+                case 3 -> order.getCustomerName();
+                case 4 -> String.valueOf(order.getUnitPrice());
+                case 5 -> String.valueOf(order.getUnitPrice() * order.getQuantity());
+                case 6 -> order.getCreationDate();
+                case 7 -> order.getStatus();
                 default -> null;
             };
             if (query!= null && query.toLowerCase().contains(searchString.toLowerCase())) {
@@ -152,12 +158,12 @@ public class OfficerOrderTableModel extends AbstractTableModel implements Custom
 
     @Override
     public String[] getColumnNames() {
-        return new String[]{"Quantity", "Item Code", "SalesPerson", "Unit Price", "Total Price", "Creation Date", "Status"};
+        return new String[]{"Quantity", "Item Code", "SalesPerson", "Customer Name", "Unit Price", "Total Price", "Creation Date", "Status"};
     }
 
     @Override
     public int[] getColumnIndices() {
-        return new int[]{0, 1, 2, 3, 4, 5, 6, 7};
+        return new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     }
     
     @Override
