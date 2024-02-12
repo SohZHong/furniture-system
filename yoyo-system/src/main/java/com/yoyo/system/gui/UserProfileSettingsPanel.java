@@ -7,20 +7,10 @@ import com.yoyo.services.manager.ApplicationContext;
 import com.yoyo.services.manager.PanelManager;
 import com.yoyo.services.manager.UserManager;
 import com.yoyo.system.SystemPanel;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
-
-/**
- *
- * @author user
- */
 public class UserProfileSettingsPanel extends javax.swing.JPanel {
     private String username, password;
     private String newName, newPasswrd;

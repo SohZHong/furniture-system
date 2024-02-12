@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.yoyo.common.utils;
 
 import java.nio.charset.StandardCharsets;
@@ -9,10 +5,6 @@ import java.util.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- *
- * @author user
- */
 public class SecurityUtils {
     
     public static String encodeAESAndBase64Format(String value, String secretKey) throws Exception{

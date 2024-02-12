@@ -1,10 +1,7 @@
 package com.yoyo.system.model;
 
-import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.services.entity.Order;
-import java.io.IOException;
 import java.util.ArrayList;
-import javax.swing.JButton;
 import javax.swing.table.AbstractTableModel;
 
 public class AdminOrderTableModel extends AbstractTableModel implements CustomTableModel{

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.yoyo.system.gui;
 
 import com.yoyo.common.utils.FilterUtils;
@@ -26,10 +22,6 @@ import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-/**
- *
- * @author User
- */
 public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
 
     private OrderManager orderManager;
