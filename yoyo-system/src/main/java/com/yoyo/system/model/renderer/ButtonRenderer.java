@@ -16,7 +16,7 @@ public abstract class ButtonRenderer extends DefaultTableCellRenderer{
         initializeButton();
     }
 
-    protected void initializeButton() {
+    protected final void initializeButton() {
         button.setOpaque(true);
         button.setText(btnText);
     }
