@@ -11,6 +11,8 @@ import com.yoyo.system.gui.OfficerInvoiceOverviewPanel;
 import com.yoyo.system.gui.OfficerOrderOverviewPanel;
 import com.yoyo.system.gui.SalesPersonInvoiceOverviewPanel;
 import com.yoyo.system.gui.SalesPersonOrderOverviewPanel;
+import com.yoyo.system.gui.SalesPersonSalesOverviewPanel;
+import com.yoyo.system.gui.SalesPersonSalesOverviewPanel;
 import com.yoyo.system.gui.UserForgetPasswordPanel;
 import com.yoyo.system.gui.UserProfileSettingsPanel;
 import java.awt.Dimension;
@@ -36,6 +38,7 @@ public class SystemPanel extends JPanel{
     private SalesPersonOrderOverviewPanel salesOrderOverviewPanel;
     private CreateSaleOrderPanel createSaleOrderPanel;
     private SalesPersonInvoiceOverviewPanel salesPersonInvoiceOverviewPanel;
+    private SalesPersonSalesOverviewPanel salesPersonSalesOverviewPanel;
     // General Panel
     public static final String LOGIN_PANEL = "Login";
     public static final String PROFILE_PANEL = "Profile"; 
@@ -117,12 +120,15 @@ public class SystemPanel extends JPanel{
         createSaleOrderPanel = new CreateSaleOrderPanel();
         salesPersonInvoiceOverviewPanel = new SalesPersonInvoiceOverviewPanel();
         userProfileSettingsPanel = new UserProfileSettingsPanel();
+        salesPersonSalesOverviewPanel = new SalesPersonSalesOverviewPanel();
         
+        subPanels.put(SALES_TOTAL_SALES_OVERVIEW_PANEL, salesPersonSalesOverviewPanel);
         subPanels.put(PROFILE_PANEL, userProfileSettingsPanel);
         subPanels.put(SALES_ORDER_OVERVIEW_PANEL, salesOrderOverviewPanel);
         subPanels.put(CREATE_SALE_ORDER_PANEL, createSaleOrderPanel);
         subPanels.put(SALES_INVOICE_OVERVIEW_PANEL, salesPersonInvoiceOverviewPanel);
+        
         panelManager.updateSubPanels(subPanels);
-        PanelManager.showPanel(SALES_ORDER_OVERVIEW_PANEL);
+        PanelManager.showPanel(SALES_INVOICE_OVERVIEW_PANEL);
     }
 }

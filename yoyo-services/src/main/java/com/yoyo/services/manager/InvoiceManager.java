@@ -5,6 +5,7 @@ import com.yoyo.common.constant.StatusConstants;
 import com.yoyo.common.utils.IdUtils;
 import com.yoyo.services.entity.Invoice;
 import com.yoyo.services.entity.Order;
+import com.yoyo.services.entity.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -106,4 +107,25 @@ public class InvoiceManager {
         this.invoices = newInvoices;
     }
     
+     public Object[] totalSalesforSalesPerson(){
+       int count = 0;
+       int sales = 0;
+       int commission = 0;
+       User loginUser = ApplicationContext.getLoginUser();
+       String username = loginUser.getName();
+       for(Invoice invoice: invoices){
+           if(username.equals(invoice.getSalesPersonName()) && invoice.getStatus().equals(StatusConstants.INVOICE_WORK_DONE)){
+               count += 1;
+               sales += invoice.getTotalPrice();
+               commission += invoice.getTotalPrice() * 0.2;
+           }
+       }
+       
+       Object [] result = new Object[3];
+       result[0] = String.valueOf(count);
+       result[1] = String.valueOf(sales);
+       result[2] = String.valueOf(commission);
+       return result;
+    }
+
 }
