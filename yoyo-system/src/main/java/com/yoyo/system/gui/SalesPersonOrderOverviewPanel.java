@@ -9,6 +9,7 @@ import static com.yoyo.system.SystemPanel.CREATE_SALE_ORDER_PANEL;
 import static com.yoyo.system.SystemPanel.PROFILE_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_INVOICE_OVERVIEW_PANEL;
 import static com.yoyo.system.SystemPanel.SALES_ORDER_OVERVIEW_PANEL;
+import static com.yoyo.system.SystemPanel.SALES_TOTAL_SALES_OVERVIEW_PANEL;
 import com.yoyo.system.model.SalesPersonOrderTableModel;
 import com.yoyo.system.model.editor.CustomTableCellEditor;
 import com.yoyo.system.model.editor.DeleteButtonEditor;
@@ -77,6 +78,7 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         orderNavBtn = new javax.swing.JButton();
         invoiceNavBtn = new javax.swing.JButton();
         profileNavBtn1 = new javax.swing.JButton();
+        salesNavBtn = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1440, 700));
 
@@ -145,6 +147,13 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
             }
         });
 
+        salesNavBtn.setText("Sales");
+        salesNavBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salesNavBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,13 +179,15 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
                             .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(companyIcon)
-                        .addGap(440, 440, 440)
+                        .addGap(222, 222, 222)
+                        .addComponent(salesNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(profileNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(424, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +198,8 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(profileNavBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(invoiceNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(orderNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(salesNavBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchInput, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,7 +213,7 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
                     .addComponent(createOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(264, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -255,6 +267,10 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
         PanelManager.showPanel(PROFILE_PANEL);
     }//GEN-LAST:event_profileNavBtn1ActionPerformed
 
+    private void salesNavBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salesNavBtnActionPerformed
+        PanelManager.showPanel(SALES_TOTAL_SALES_OVERVIEW_PANEL);
+    }//GEN-LAST:event_salesNavBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelBtn;
@@ -266,6 +282,7 @@ public class SalesPersonOrderOverviewPanel extends javax.swing.JPanel {
     private javax.swing.JTable orderOverviewTable;
     private javax.swing.JButton profileNavBtn1;
     private javax.swing.JButton refreshBtn;
+    private javax.swing.JButton salesNavBtn;
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchInput;
     private javax.swing.JComboBox<String> tableColumnBox;
