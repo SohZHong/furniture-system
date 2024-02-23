@@ -8,32 +8,30 @@ public class InvoiceReport extends Report{
         super(table);
     }
 
-@Override
-protected PdfPTable createPdfTable() {
-    
-    
-    PdfPTable pdfTable = new PdfPTable(5);
-        pdfTable.addCell("Invoice ID");
-        pdfTable.addCell("Total Price");
-        pdfTable.addCell("SalesPerson");
-        pdfTable.addCell("Customer Name");
-        pdfTable.addCell("Status");
+    @Override
+    protected PdfPTable createPdfTable() {
+        PdfPTable pdfTable = new PdfPTable(5);
+            pdfTable.addCell("Invoice ID");
+            pdfTable.addCell("Total Price");
+            pdfTable.addCell("SalesPerson");
+            pdfTable.addCell("Customer Name");
+            pdfTable.addCell("Status");
 
-    int iteration = super.hasRowSorter ?
-            super.table.getRowSorter().getModelRowCount() :
-            super.table.getRowCount();
+        int iteration = super.hasRowSorter ?
+                super.table.getRowSorter().getModelRowCount() :
+                super.table.getRowCount();
 
-    for (int i = 0; i < iteration; i++) {
-        for (int z = 0; z < super.table.getColumnCount(); z++) {
-            pdfTable.addCell(
-                    super.hasRowSorter ?
-                            super.table.getRowSorter().getModel().getValueAt(i, z).toString() :
-                            super.table.getValueAt(i, z).toString()
-            );
+        for (int i = 0; i < iteration; i++) {
+            for (int z = 0; z < super.table.getColumnCount(); z++) {
+                pdfTable.addCell(
+                        super.hasRowSorter ?
+                                super.table.getRowSorter().getModel().getValueAt(i, z).toString() :
+                                super.table.getValueAt(i, z).toString()
+                );
+            }
         }
+        return pdfTable;
     }
-    return pdfTable;
-}
     
     public void generateReport(){
         generatePDFOverview("Invoice Report");
